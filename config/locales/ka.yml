@@ -1,5 +1,66 @@
 # encoding: utf-8
 ka:
+  activerecord:
+    models:
+      user: მომხმარებელი
+      category: Category
+      idea: Idea
+      organization: Organization
+    attributes:
+      user:
+        email: ელ.ფოსტა
+        password: პაროლი
+        password_confirmation: გაიმეორეთ პაროლი
+        role: როლი
+        remember_me: დამიმახსოვრე
+      category:
+        picture: Picture
+        icon: Icon
+      category_translation:
+        name: Name
+      idea:
+        user_id: User
+        explaination: Explaination
+        created_at: Date
+        individual_votes: Individual Votes
+        overall_votes: Overall Votes
+        is_duplicate: Duplicate?
+        is_inappropriate: Inappropriate?
+      idea_category:
+        idea_id: Idea
+        category_id: Category
+      idea_progress:
+        idea_id: Idea
+        organization_id: Organization
+        is_completed: Completed?
+        url: URL
+        progress_date: Date
+        explaination: Explaination
+      organization:
+        logo: Logo
+      organization_translation:
+        name: Name
+      organization_user:
+        is_active: Active?
+        user_id: User
+        organization_id: Organization
+      user_favorites:
+        user_id: User
+        idea_id: Idea
+  helpers:
+    actions: აირჩიეთ
+    links:
+      admin: ადმინისტრატორის განყოფილება
+      edit: შეცვლა
+      confirm: დარწმუნებული ხართ?
+      destroy: წაშლა
+      new: ახალი
+      list: იხილეთ სრულად
+      cancel: გაუქმება
+      reset: საწყის კონფიგურაციაზე დაბრუნება
+    titles:
+      new: "ახალი %{model}"
+      edit: "შეცვლა %{model}"
   app:
     language:
       en: English
@@ -44,9 +105,9 @@ ka:
   admin:
     index:
       title: ადმინისტრატორის განყოფილება
-      users_header: მომხმარებლები
-      new_users: მომხმარებლის დამატება
-      view_users: მომხმარებლების ნახვა
+      organizations: Organizations
+      categories: Categories
+      users: მომხმარებლების
     users:
       edit:
         title: ცვლილებების შეტანა მომხმარებლის გვერდზე

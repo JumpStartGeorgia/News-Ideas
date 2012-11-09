@@ -1,6 +1,12 @@
-<h1>Editing idea</h1>
+<%- model_class = Idea -%>
+<% title t '.title', :default => t('helpers.titles.edit', :model => model_class.model_name.human,
+                                 :default => "New #{model_class.model_name.human}") %>
 
-<%= render 'form' %>
+<%= render :partial => 'form' %>
 
-<%= link_to 'Show', @idea %> |
-<%= link_to 'Back', ideas_path %>
+<div class="form-actions">
+	<%= link_to t('helpers.links.list'), ideas_path,
+  :class => 'btn' %>
+	<%= link_to t('helpers.links.admin'), admin_path,
+  :class => 'btn' %>
+</div>

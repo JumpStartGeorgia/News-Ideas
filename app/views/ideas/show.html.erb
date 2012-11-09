@@ -1,35 +1,31 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = Idea -%>
+<% title t '.title', :default => model_class.model_name.human %>
 
-<p>
-  <b>User:</b>
-  <%= @idea.user_id %>
-</p>
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:user_id) %>:</strong></dt>
+  <dd><%= @idea.user_id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:explaination) %>:</strong></dt>
+  <dd><%= @idea.explaination %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:individual_votes) %>:</strong></dt>
+  <dd><%= @idea.individual_votes %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:overall_votes) %>:</strong></dt>
+  <dd><%= @idea.overall_votes %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:is_inappropriate) %>:</strong></dt>
+  <dd><%= @idea.is_inappropriate %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:is_duplicate) %>:</strong></dt>
+  <dd><%= @idea.is_duplicate %></dd>
+</dl>
 
-<p>
-  <b>Explaination:</b>
-  <%= @idea.explaination %>
-</p>
-
-<p>
-  <b>Individual votes:</b>
-  <%= @idea.individual_votes %>
-</p>
-
-<p>
-  <b>Overall votes:</b>
-  <%= @idea.overall_votes %>
-</p>
-
-<p>
-  <b>Is inappropriate:</b>
-  <%= @idea.is_inappropriate %>
-</p>
-
-<p>
-  <b>Is duplicate:</b>
-  <%= @idea.is_duplicate %>
-</p>
-
-
-<%= link_to 'Edit', edit_idea_path(@idea) %> |
-<%= link_to 'Back', ideas_path %>
+<div class="form-actions">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              ideas_path, :class => 'btn'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_idea_path(@idea), :class => 'btn' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              idea_path(@idea),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm") },
+              :class => 'btn btn-danger' %>
+	<%= link_to t('helpers.links.admin'), admin_path,
+  :class => 'btn' %>
+</div>

@@ -1,5 +1,66 @@
 # encoding: utf-8
 en:
+  activerecord:
+    models:
+      user: User
+      category: Category
+      idea: Idea
+      organization: Organization
+    attributes:
+      user:
+        email: Email Address
+        password: Password
+        password_confirmation: Password Confirmation
+        role: Role
+        remember_me: Remeber Me
+      category:
+        picture: Picture
+        icon: Icon
+      category_translation:
+        name: Name
+      idea:
+        user_id: User
+        explaination: Explaination
+        created_at: Date
+        individual_votes: Individual Votes
+        overall_votes: Overall Votes
+        is_duplicate: Duplicate?
+        is_inappropriate: Inappropriate?
+      idea_category:
+        idea_id: Idea
+        category_id: Category
+      idea_progress:
+        idea_id: Idea
+        organization_id: Organization
+        is_completed: Completed?
+        url: URL
+        progress_date: Date
+        explaination: Explaination
+      organization:
+        logo: Logo
+      organization_translation:
+        name: Name
+      organization_user:
+        is_active: Active?
+        user_id: User
+        organization_id: Organization
+      user_favorites:
+        user_id: User
+        idea_id: Idea
+  helpers:
+    actions: Actions
+    links:
+      admin: Admin Section
+      edit: Edit
+      confirm: Are you sure?
+      destroy: Delete
+      new: New
+      list: View All
+      cancel: Cancel
+      reset: Reset
+    titles:
+      new: "New %{model}"
+      edit: "Edit %{model}"
   app:
     language:
       en: English
@@ -18,7 +79,6 @@ en:
       reset: Reset
       remove: Remove
       confirm: Are you sure?
-      new: New
     common:
       app_name: News Ideas
   layouts:
@@ -43,9 +103,9 @@ en:
   admin:
     index:
       title: Administration Section
-      users_header: Users
-      new_users: Add User
-      view_users: View Users
+      organizations: Organizations
+      categories: Categories
+      users: Users
     users:
       edit:
         title: Editing User
