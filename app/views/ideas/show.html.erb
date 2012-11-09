@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @idea.user_id %>
+</p>
+
+<p>
+  <b>Explaination:</b>
+  <%= @idea.explaination %>
+</p>
+
+<p>
+  <b>Individual votes:</b>
+  <%= @idea.individual_votes %>
+</p>
+
+<p>
+  <b>Overall votes:</b>
+  <%= @idea.overall_votes %>
+</p>
+
+<p>
+  <b>Is inappropriate:</b>
+  <%= @idea.is_inappropriate %>
+</p>
+
+<p>
+  <b>Is duplicate:</b>
+  <%= @idea.is_duplicate %>
+</p>
+
+
+<%= link_to 'Edit', edit_idea_path(@idea) %> |
+<%= link_to 'Back', ideas_path %>

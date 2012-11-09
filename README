@@ -1,3 +1,5 @@
-== JumpStart Bootstrap Starter Project
+== JumpStart's News Ideas Project
 
-This app is a rails bootstrap skeleten project that can be used to quickly start a new project and get everything up and running.
+This rails application allows users to submit and vote on ideas that they would like to see reported in the news.
+
+Organizations can then take ownership of an idea, give updates, and provide link to news story.

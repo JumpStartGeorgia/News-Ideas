@@ -20,7 +20,7 @@ ka:
       confirm: დარწმუნებული ხართ?
       new: ახალი
     common:
-      app_name: Bootstrap Starter Project
+      app_name: News Ideas
   layouts:
     application:
       admin: ადმინისტრატო

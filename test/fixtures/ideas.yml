@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: 1
+  explaination: MyText
+  individual_votes: MyString
+  overall_votes: 1
+  is_inappropriate: false
+  is_duplicate: false
+
+two:
+  user_id: 1
+  explaination: MyText
+  individual_votes: MyString
+  overall_votes: 1
+  is_inappropriate: false
+  is_duplicate: false

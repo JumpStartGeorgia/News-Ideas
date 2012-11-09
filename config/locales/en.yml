@@ -20,7 +20,7 @@ en:
       confirm: Are you sure?
       new: New
     common:
-      app_name: Bootstrap Starter Project
+      app_name: News Ideas
   layouts:
     application:
       admin: Admin

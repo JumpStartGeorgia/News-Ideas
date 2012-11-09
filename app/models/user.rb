@@ -1,8 +1,11 @@
 class User < ActiveRecord::Base
+	has_many :user_favorites, :dependent => :destroy
+	has_many :ideas
+	has_many :organization_users, :dependent => :destroy
+
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
-	# :registerable, :recoverable,
-  devise :database_authenticatable,
+  devise :database_authenticatable,:registerable, :recoverable,
          :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
@@ -16,7 +19,7 @@ class User < ActiveRecord::Base
 
 
   # use role inheritence
-  ROLES = %w[author user_manager admin]
+  ROLES = %w[author organization admin]
   def role?(base_role)
     if base_role && ROLES.index(base_role.to_s)
       return ROLES.index(base_role.to_s) <= ROLES.index(role)

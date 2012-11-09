@@ -1,0 +1,33 @@
+<h1>Listing ideas</h1>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Explaination</th>
+    <th>Individual votes</th>
+    <th>Overall votes</th>
+    <th>Is inappropriate</th>
+    <th>Is duplicate</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @ideas.each do |idea| %>
+  <tr>
+    <td><%= idea.user_id %></td>
+    <td><%= idea.explaination %></td>
+    <td><%= idea.individual_votes %></td>
+    <td><%= idea.overall_votes %></td>
+    <td><%= idea.is_inappropriate %></td>
+    <td><%= idea.is_duplicate %></td>
+    <td><%= link_to 'Show', idea %></td>
+    <td><%= link_to 'Edit', edit_idea_path(idea) %></td>
+    <td><%= link_to 'Destroy', idea, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Idea', new_idea_path %>

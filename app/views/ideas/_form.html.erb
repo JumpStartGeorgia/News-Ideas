@@ -1,0 +1,14 @@
+<%= semantic_form_for @idea do |f| %>
+  <%= f.inputs do %>
+    <%= f.input :user_id %>
+    <%= f.input :explaination %>
+    <%= f.input :individual_votes %>
+    <%= f.input :overall_votes %>
+    <%= f.input :is_inappropriate %>
+    <%= f.input :is_duplicate %>
+  <% end %>
+
+  <%= f.actions do %>
+    <%= f.action :submit, :as => :input %>
+  <% end %>
+<% end %>

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  idea_id: 1
+  organization_id: 1
+  progress_date: 2012-11-09
+  explaination: MyText
+  is_completed: false
+
+two:
+  idea_id: 1
+  organization_id: 1
+  progress_date: 2012-11-09
+  explaination: MyText
+  is_completed: false
