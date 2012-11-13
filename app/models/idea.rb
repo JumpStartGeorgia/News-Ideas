@@ -11,6 +11,9 @@ class Idea < ActiveRecord::Base
       :is_inappropriate,
       :is_duplicate
 
+  require 'split_votes'
+  include SplitVotes
+
 	def self.top_ideas
 		order("overall_votes desc")
 	end

@@ -2,6 +2,7 @@ class RootController < ApplicationController
 
   def index
     @idea = Idea.new
+		@ideas = Idea.new_ideas
   end
 
   def create

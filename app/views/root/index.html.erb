@@ -1,21 +1,31 @@
-<%= semantic_form_for @idea, :url => :create_idea do |f| %>
-	<h3><%= t('.form_header') %></h3>
-	<%= f.error_messages %>
-	<%= f.inputs do %>
-		<% if user_signed_in? %>
-			<%= current_user.email %>
-			<%= f.hidden_field :user_id, :value => current_user.id %>
-		<% else %>
-			<%= link_to t('helpers.links.sign_in'), :new_user_session %>
+<div class="row">
+	<div class="span5">
+		blah blah blah
+	</div>
+	<div class="span1">&nbsp;</div>
+	<div class="span5" style="border: solid 2px #ccc; padding: 5px;">
+		<%= semantic_form_for @idea, :url => :create_idea do |f| %>
+			<h3><%= t('.form_header') %></h3>
+			<%= f.error_messages %>
+			<%= f.inputs do %>
+				<% if user_signed_in? %>
+					<%= current_user.email %>
+					<%= f.hidden_field :user_id, :value => current_user.id %>
+				<% else %>
+					<%= link_to t('helpers.links.sign_in'), :new_user_session %>
+				<% end %>
+
+				<%= f.fields_for :idea_categories do |cat| %>
+						<%= cat.input :category, :as => :select, :collection => Category.all %>
+				<% end %>
+
+				<%= f.input :explaination, :as => :text, :input_html => {:rows => 5, :cols => 50} %>
+
+			<% end %>
+
+			<%= f.submit nil, :class => 'btn btn-primary' %>
 		<% end %>
+	</div>
+</div>
 
-		<%= f.fields_for :idea_categories do |cat| %>
-				<%= cat.input :category, :as => :select, :collection => Category.all %>
-		<% end %>
-
-		<%= f.input :explaination, :as => :text, :input_html => {:rows => 5, :cols => 50} %>
-
-	<% end %>
-
-  <%= f.submit nil, :class => 'btn btn-primary' %>
-<% end %>
+<%= render :partial => "shared/ideas_list", :object => @ideas %>

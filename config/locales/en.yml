@@ -83,6 +83,9 @@ en:
       confirm: Are you sure?
     common:
       app_name: News Ideas
+      comments: Comments
+      author: Author
+      rating: Rating
   layouts:
     application:
       admin: Admin
