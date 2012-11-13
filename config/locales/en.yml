@@ -58,6 +58,8 @@ en:
       list: View All
       cancel: Cancel
       reset: Reset
+      sign_in: Sign In
+      sign_out: Sign Out
     titles:
       new: "New %{model}"
       edit: "Edit %{model}"
@@ -115,3 +117,6 @@ en:
         title: New User
       show:
         title: User Details
+  root:
+    index:
+      :form_header: Post Your Idea

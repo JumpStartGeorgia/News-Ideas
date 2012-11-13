@@ -11,6 +11,8 @@ class Category < ActiveRecord::Base
     :path => ":rails_root/public/system/category/:attachment/:id/:filename"
 
   accepts_nested_attributes_for :category_translations
-  attr_accessible :picture, :icon, :category_translations_attributes
+  attr_accessible :id, :picture, :icon, :category_translations_attributes
+
+
 
 end

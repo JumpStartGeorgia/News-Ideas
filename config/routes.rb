@@ -14,6 +14,7 @@ BootstrapStarter::Application.routes.draw do
 			resources :categories
 		end
 
+		match '/create', :to => 'root#create', :as => :create_idea, :via => :post
 
 		root :to => 'root#index'
 	  match "*path", :to => redirect("/#{I18n.default_locale}") # handles /en/fake/path/whatever

@@ -58,6 +58,8 @@ ka:
       list: იხილეთ სრულად
       cancel: გაუქმება
       reset: საწყის კონფიგურაციაზე დაბრუნება
+      sign_in: Sign In
+      sign_out: გასვლა
     titles:
       new: "ახალი %{model}"
       edit: "შეცვლა %{model}"
@@ -117,3 +119,6 @@ ka:
         title: ახალი მომხმარებელი
       show:
         title: მომხმარებლის დეტალები
+  root:
+    index:
+      :form_header: Post Your Idea
