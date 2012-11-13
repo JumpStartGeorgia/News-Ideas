@@ -4,18 +4,36 @@ class Idea < ActiveRecord::Base
 	has_many :user_favorites, :dependent => :destroy
 	belongs_to :user
 
+  accepts_nested_attributes_for :idea_categories
+
 	attr_accessible :user_id,
       :explaination,
       :individual_votes,
       :overall_votes,
       :is_inappropriate,
-      :is_duplicate
+      :is_duplicate,
+			:idea_categories_attributes
 
   require 'split_votes'
   include SplitVotes
 
+	def self.explore(type)
+		if type
+			case type.downcase
+			when 'top'
+				top_ideas
+			when 'new'
+				new_ideas
+			when 'in_progress'
+				in_progress_ideas
+			when 'realized'
+				realized_ideas
+			end
+		end
+	end
+
 	def self.top_ideas
-		order("overall_votes desc")
+		order("overall_votes desc, created_at desc")
 	end
 
 	def self.new_ideas

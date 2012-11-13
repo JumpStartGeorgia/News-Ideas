@@ -86,12 +86,18 @@ en:
       comments: Comments
       author: Author
       rating: Rating
+      top_ideas: Top Ideas
+      new_ideas: New Ideas
+      in_progress: In Progress
+      realized: Realized Ideas
   layouts:
     application:
       admin: Admin
       sign_out: Sign Out
       js_link_title: "Visit JumpStart Georgia's website"
       js_link_text: Built by
+      explore_ideas: Explore Ideas
+      categories: Categories
     unsupported_browser:
       title: Unsupported Browser
       p1: We are sorry to report that your browser is out of date and will not properly render the content from this website.
@@ -122,4 +128,11 @@ en:
         title: User Details
   root:
     index:
-      :form_header: Post Your Idea
+      form_header: Post Your Idea
+    category:
+      title: "Category: %{name}"
+    explore:
+      title: "%{name} Ideas"
+  shared:
+    ideas_list:
+      no_ideas: No Idea records were found.

@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
 	before_filter :set_locale
 #	before_filter :is_browser_supported?
 	before_filter :initialize_gon
+	before_filter :load_categories
 
 	unless Rails.application.config.consider_all_requests_local
 		rescue_from Exception,
@@ -58,6 +59,10 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 	def initialize_gon
 		gon.set = true
 		gon.highlight_first_form_field = true
+	end
+
+	def load_categories
+		@categories = Category.all
 	end
 
 	# after user logs in, go to admin page

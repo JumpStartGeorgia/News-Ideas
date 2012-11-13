@@ -2,7 +2,29 @@ class RootController < ApplicationController
 
   def index
     @idea = Idea.new
+		@idea.idea_categories.build
 		@ideas = Idea.new_ideas
+  end
+
+	def explore
+		@explore = params[:id].humanize
+		@ideas = Idea.explore(params[:id])
+	end
+
+	def category
+		@category = @categories.select{|x| x.id.to_s == params[:id]}
+		@category = @category.first if @category.kind_of?(Array)
+
+		@ideas = Idea.new_ideas.categorized_ideas(params[:id])
+	end
+
+  def idea
+    @idea = Idea.find(params[:id])
+
+    respond_to do |format|
+      format.html # idea.html.erb
+      format.json { render json: @idea }
+    end
   end
 
   def create

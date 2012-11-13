@@ -1,4 +1,10 @@
 <div class="idea_list" style="margin-top: 20px; border: solid 2px #ccc; padding: 5px;">
+
+<% if !ideas_list || ideas_list.empty? %>
+	<p>
+		<%= t('.no_ideas') %>
+	</p>
+<% else %>
 	<% ideas_list.each do |idea| %>
 
 		<div class="idea_list_item" style="margin-bottom: 5px;">
@@ -37,4 +43,5 @@
 		</div>
 
 	<% end %>
+<% end %>
 </div>

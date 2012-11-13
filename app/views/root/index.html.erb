@@ -16,7 +16,7 @@
 				<% end %>
 
 				<%= f.fields_for :idea_categories do |cat| %>
-						<%= cat.input :category, :as => :select, :collection => Category.all %>
+						<%= cat.input :category_id, :as => :select, :collection => @categories %>
 				<% end %>
 
 				<%= f.input :explaination, :as => :text, :input_html => {:rows => 5, :cols => 50} %>

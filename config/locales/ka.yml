@@ -87,12 +87,18 @@ ka:
       comments: Comments
       author: Author
       rating: Rating
+      top_ideas: Top Ideas
+      new_ideas: New Ideas
+      in_progress: In Progress
+      realized: Realized Ideas
   layouts:
     application:
       admin: ადმინისტრატო
       sign_out: გასვლა
       js_link_title: "ეწვიეთ ჯამპსტარტ ჯორჯიას ვებ-გვერდს"
       js_link_text: აგებულია
+      explore_ideas: Explore Ideas
+      categories: Categories
     unsupported_browser:
       title: არასათანადო ბრაუზერი
       p1: სამწუხაროდ თქვენი ინტერნეტ ბრაუზერის მოხმარების ვადა გასულია და ვერ მოხდება ვებ-გვერდთან სრულად დაკავშირება.
@@ -124,4 +130,11 @@ ka:
         title: მომხმარებლის დეტალები
   root:
     index:
-      :form_header: Post Your Idea
+      form_header: Post Your Idea
+    category:
+      title: "Category: %{name}"
+    explore:
+      title: "%{name} Ideas"
+  shared:
+    ideas_list:
+      no_ideas: No Idea records were found.

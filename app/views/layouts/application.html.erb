@@ -35,9 +35,44 @@
           <%= link_to(t('app.common.app_name'), root_path(:locale => I18n.locale),:class=>"brand font")%>
           <div class="container nav-collapse">
             <ul class="nav">
-              <li><%= link_to "Link1", "/path1"  %></li>
-              <li><%= link_to "Link2", "/path2"  %></li>
-              <li><%= link_to "Link3", "/path3"  %></li>
+			        <li class="dropdown">
+			          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+			                <%= t('.explore_ideas') %>
+			                <b class="caret"></b>
+			          </a>
+			          <ul class="dropdown-menu">
+					        <li>
+			 		         <%= link_to t('app.common.top_ideas'), explore_path("top") %>
+									</li>
+					        <li>
+			 		         <%= link_to t('app.common.new_ideas'), explore_path("new") %>
+									</li>
+					        <li>
+			 		         <%= link_to t('app.common.in_progress'), explore_path("in_progress") %>
+									</li>
+					        <li>
+			 		         <%= link_to t('app.common.realized'), explore_path("realized") %>
+									</li>
+			          </ul>
+			        </li>
+							<% if @categories && !@categories.empty? %>
+					      <li class="dropdown">
+					        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+					              <%= t('.categories') %>
+					              <b class="caret"></b>
+					        </a>
+					        <ul class="dropdown-menu">
+										<% @categories.each do |category| %>
+									    <li>
+					 		         <%= link_to category.name, category_path(category) %>
+											</li>
+										<% end %>
+				          </ul>
+								<% end %>
+			        </li>
+            </ul>
+
+	          <ul class="nav pull-right">
 		          <% if user_signed_in? %>
 				        <li class="dropdown">
 				          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -46,17 +81,11 @@
 				          </a>
 				          <ul class="dropdown-menu">
 						        <li>
-				 		         <%= link_to t('.admin'), admin_path %>
-										</li>
-						        <li>
 				 		         <%= link_to t('.sign_out'), destroy_user_session_path, :method => :delete %>
 										</li>
 				          </ul>
 				        </li>
 		          <% end %>
-            </ul>
-
-	          <ul class="nav pull-right">
 							<% I18n.available_locales.each do |locale| %>
 								<% if locale != I18n.locale %>
 									<li><%= link_to t("app.language.#{locale}"), params.merge(:locale => locale) %></li>

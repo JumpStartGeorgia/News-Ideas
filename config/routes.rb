@@ -12,11 +12,13 @@ BootstrapStarter::Application.routes.draw do
 			resources :categories
 		end
 
-		match '/ideas/:id', :to => 'ideas#show', :as => :idea, :via => :get
+		match '/idea/:id', :to => 'root#idea', :as => :idea, :via => :get
+		match '/explore/:id', :to => 'root#explore', :as => :explore, :via => :get
+		match '/category/:id', :to => 'root#category', :as => :category, :via => :get
 		match '/create', :to => 'root#create', :as => :create_idea, :via => :post
 
 		root :to => 'root#index'
-	  match "*path", :to => redirect("/#{I18n.default_locale}") # handles /en/fake/path/whatever
+	  match "*path", :to => redirect("/#{I18n.locale}") # handles /en/fake/path/whatever
 	end
 
 	match '', :to => redirect("/#{I18n.default_locale}") # handles /
