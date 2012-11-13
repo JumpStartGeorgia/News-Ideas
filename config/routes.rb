@@ -4,8 +4,6 @@ BootstrapStarter::Application.routes.draw do
 	#--------------------------------
 	scope ":locale", locale: /#{I18n.available_locales.join("|")}/ do
 
-		resources :ideas
-
 		match '/admin', :to => 'admin#index', :as => :admin, :via => :get
 		devise_for :users
 		namespace :admin do
@@ -14,6 +12,7 @@ BootstrapStarter::Application.routes.draw do
 			resources :categories
 		end
 
+		match '/ideas/:id', :to => 'ideas#show', :as => :idea, :via => :get
 		match '/create', :to => 'root#create', :as => :create_idea, :via => :post
 
 		root :to => 'root#index'
