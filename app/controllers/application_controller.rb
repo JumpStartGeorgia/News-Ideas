@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
 #	before_filter :is_browser_supported?
 	before_filter :initialize_gon
 	before_filter :load_categories
+	before_filter :initialize_new_idea
 
 	unless Rails.application.config.consider_all_requests_local
 		rescue_from Exception,
@@ -63,6 +64,11 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 
 	def load_categories
 		@categories = Category.all
+	end
+
+	def initialize_new_idea
+    @idea = Idea.new
+		@idea.idea_categories.build
 	end
 
 	# after user logs in, go to admin page

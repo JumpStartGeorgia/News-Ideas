@@ -1,18 +1,18 @@
-<div class="idea_list" style="margin-top: 20px; border: solid 2px #ccc; padding: 5px;">
+<div id="idea_list" style="margin-top: 20px; border: solid 2px #ccc; padding: 5px 0;">
 
 <% if !ideas_list || ideas_list.empty? %>
 	<p>
 		<%= t('.no_ideas') %>
 	</p>
 <% else %>
-	<% ideas_list.each do |idea| %>
+	<% ideas_list.each_with_index do |idea,index| %>
 
-		<div class="idea_list_item" style="margin-bottom: 5px;">
+		<div class="idea_list_item" style="padding: 5px;">
 			<div class="row">
-				<div class="span6">
+				<div class="span5">
 					<%= link_to l(idea.created_at, :format => :long), idea_path(idea) %>
 				</div>
-				<div class="span4">
+				<div class="span3">
 					<%= "#{t('app.common.author')}: #{idea.user.email}" %>
 				</div>
 			</div>
@@ -27,7 +27,7 @@
 		      <span style="margin: 0 5px; color: <%= diff[:color] %>;"><%= diff[:number] %></span>
 		      <%= image_tag('thumbs-down-grey.png') %>
 				</div>
-				<div class="span3">
+				<div class="span2">
 					<%= "#{t('app.common.comments')}:" %>
 					0
 				</div>

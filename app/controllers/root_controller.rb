@@ -1,9 +1,9 @@
 class RootController < ApplicationController
 
   def index
-    @idea = Idea.new
-		@idea.idea_categories.build
 		@ideas = Idea.new_ideas
+
+		render :layout => 'application_home'
   end
 
 	def explore
