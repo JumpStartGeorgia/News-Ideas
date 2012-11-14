@@ -144,6 +144,17 @@ div#form-ka {
     color: #B94A48;
 }
 
+/* idea form in header */
+#navbar-idea-form {
+	text-align: center;
+	background-color: #ddd;
+	font-size: 11px !important;
+	padding: 3px;
+}
+#navbar-idea-form select, #navbar-idea-form textarea, #navbar-idea-form input {
+	font-size: 11px !important;
+}
+
 /* footer */
 footer {
 	margin-top: -54px; /* negative value of footer height */

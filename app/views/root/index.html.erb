@@ -23,7 +23,9 @@
 
 			<% end %>
 
-			<%= f.submit nil, :class => 'btn btn-primary' %>
+			<% if user_signed_in? %>
+				<%= f.submit nil, :class => 'btn btn-primary' %>
+			<% end %>
 		<% end %>
 	</div>
 </div>

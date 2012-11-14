@@ -60,6 +60,7 @@ ka:
       reset: საწყის კონფიგურაციაზე დაბრუნება
       sign_in: Sign In
       sign_out: გასვლა
+      post_idea: Post Idea
     titles:
       new: "ახალი %{model}"
       edit: "შეცვლა %{model}"

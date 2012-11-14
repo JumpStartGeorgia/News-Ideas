@@ -60,6 +60,7 @@ en:
       reset: Reset
       sign_in: Sign In
       sign_out: Sign Out
+      post_idea: Post Idea
     titles:
       new: "New %{model}"
       edit: "Edit %{model}"

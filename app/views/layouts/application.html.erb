@@ -95,8 +95,31 @@
           </div><!--/.nav-collapse -->
         </div>
       </div><!--/.navbar-inner -->
-      <div class="navbar-outer">
-				form fields go here
+      <div id="navbar-idea-form">
+				<%= form_tag create_idea_path, :method => :post, :class => "form-inline" do %>
+
+					<% if user_signed_in? %>
+						<%= current_user.email %>
+						<%= hidden_field_tag 'idea_user_id', current_user.id, :name => 'idea[user_id]' %>
+					<% else %>
+						<%= link_to t('helpers.links.sign_in'), :new_user_session %>
+					<% end %>
+
+					<label class="control-label" for="inputPassword">
+						<%= t('activerecord.attributes.idea_category.category_id') %>
+					</label>
+					<%= select_tag 'idea_idea_categories_attributes_0_category_id', options_from_collection_for_select(@categories, "id", "name"), :name => 'idea[idea_categories_attributes][0][category_id]' %>
+
+					<label class="control-label" for="idea_explaination">
+						<%= t('activerecord.attributes.idea.explaination') %>
+					</label>
+					<%= text_area_tag 'idea_explaination', nil, :rows => 2, :class => 'span5', :name => 'idea[explaination]' %>
+
+					<% if user_signed_in? %>
+						<%= submit_tag t('helpers.links.post_idea'), :class => 'btn btn-primary' %>
+					<% end %>
+
+				<% end %>
       </div><!--/.navbar-outer -->
     </div>
 
