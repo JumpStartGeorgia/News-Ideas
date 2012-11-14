@@ -13,9 +13,44 @@
 //= require vendor
 //= require_tree .
 
-// set focus to first text box on page
 $(document).ready(function(){
+	// set focus to first text box on page
 	if (gon.highlight_first_form_field){
 	  $(":input:visible:enabled:first").focus();
 	}
+
+
+	// if ideas tabs are on page, highlight the correct block when the page loads
+	if (gon.initial_tab_id){
+console.log("initial tab id is set");
+		$("ul#ideas_tabs li#" + gon.initial_tab_id).addClass('active'); // turn on correct one
+		$("div#" + gon.initial_tab_id).show();
+	} else {
+console.log("initial tab id is NOT set");
+		// highlight the first tab
+		$("ul#ideas_tabs li:first").addClass('active');
+		$("div#idea_list div.idea_list_block:first").show();
+	}
+
+
+	// if ideas tabs are on page, register click event
+	// when clicked, show appropriate idea block
+	$("ul#ideas_tabs a").click(function(event) {
+		id = $(this).parent().attr('id');
+		// activate the correct tab
+		$("ul#ideas_tabs li").removeClass('active'); // turn off all tabs
+		$("ul#ideas_tabs li#" + id).addClass('active'); // turn on correct one
+
+		// hide all item blocks
+		$("div#" + gon.id_new).hide();
+		$("div#" + gon.id_top).hide();
+		$("div#" + gon.id_in_progress).hide();
+		$("div#" + gon.id_realized).hide();
+
+		// turn on the correct block
+		$("div#" + id).slideDown('300');
+
+		return false;
+	});
+
 });

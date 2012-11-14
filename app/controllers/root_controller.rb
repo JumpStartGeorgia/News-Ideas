@@ -1,21 +1,44 @@
 class RootController < ApplicationController
 
   def index
-		@ideas = Idea.new_ideas
+		new_ideas = Idea.new_ideas
+		top_ideas = Idea.top_ideas
+		in_progress_ideas = Idea.in_progress_ideas
+		realized_ideas = Idea.realized_ideas
+		@ideas = {:new => new_ideas, :top => top_ideas, :in_progress => in_progress_ideas, :realized => realized_ideas}
 
 		render :layout => 'application_home'
   end
 
 	def explore
 		@explore = params[:id].humanize
-		@ideas = Idea.explore(params[:id])
+		gon.initial_tab_id = case params[:id]
+			when 'top'
+				gon.id_top
+			when 'new'
+				gon.id_new
+			when 'in_progress'
+				gon.id_in_progress
+			when 'realized'
+				gon.id_realized
+		end
+
+		new_ideas = Idea.new_ideas
+		top_ideas = Idea.top_ideas
+		in_progress_ideas = Idea.in_progress_ideas
+		realized_ideas = Idea.realized_ideas
+		@ideas = {:new => new_ideas, :top => top_ideas, :in_progress => in_progress_ideas, :realized => realized_ideas}
 	end
 
 	def category
 		@category = @categories.select{|x| x.id.to_s == params[:id]}
 		@category = @category.first if @category.kind_of?(Array)
 
-		@ideas = Idea.new_ideas.categorized_ideas(params[:id])
+		new_ideas = Idea.new_ideas.categorized_ideas(params[:id])
+		top_ideas = Idea.top_ideas.categorized_ideas(params[:id])
+		in_progress_ideas = Idea.in_progress_ideas.categorized_ideas(params[:id])
+		realized_ideas = Idea.realized_ideas.categorized_ideas(params[:id])
+		@ideas = {:new => new_ideas, :top => top_ideas, :in_progress => in_progress_ideas, :realized => realized_ideas}
 	end
 
   def idea

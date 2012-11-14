@@ -134,7 +134,7 @@ ka:
     category:
       title: "Category: %{name}"
     explore:
-      title: "%{name} Ideas"
+      title: "Explore Ideas"
   shared:
     ideas_list:
       no_ideas: No Idea records were found.

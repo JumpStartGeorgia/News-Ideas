@@ -227,5 +227,9 @@ footer, footer ul li, footer div#right ul li {
   padding: 0.5em 1em;
 }
 
-#idea_list .idea_list_item:nth-child(even) {background: #eee;}
-#idea_list .idea_list_item:nth-child(odd) {background: #fff;}
+/* idea list styles */
+#idea_list .idea_list_item{
+	padding: 5px;
+}
+#idea_list .idea_list_item:nth-child(even) {background-color: #eee;}
+#idea_list .idea_list_item:nth-child(odd) {background-color: #fff;}
