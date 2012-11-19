@@ -29,10 +29,10 @@ module SplitVotes
     {:number => number, :color => color}
   end
 
-#  def voted (ip, status)
-#    record = Voter_ip.where(:ip => ip, :votable_type => self.class.name.downcase, :votable_id => self.id, :status => status)
-#    return !(record.nil? || record.empty?)
-#  end
+  def voted (ip, status)
+    record = VoterIp.where(:ip => ip, :votable_type => self.class.name.downcase, :votable_id => self.id, :status => status)
+    return !(record.nil? || record.empty?)
+  end
 
   module ClassMethods
   end

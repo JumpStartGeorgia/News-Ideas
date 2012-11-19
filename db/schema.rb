@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121109073901) do
+ActiveRecord::Schema.define(:version => 20121119085206) do
 
   create_table "categories", :force => true do |t|
     t.datetime "created_at"
@@ -136,5 +136,16 @@ ActiveRecord::Schema.define(:version => 20121109073901) do
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+
+  create_table "voter_ips", :force => true do |t|
+    t.string   "ip",           :limit => 50, :default => ""
+    t.string   "votable_type"
+    t.integer  "votable_id"
+    t.string   "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "voter_ips", ["ip", "votable_type", "votable_id", "status"], :name => "idx_voter_ip"
 
 end

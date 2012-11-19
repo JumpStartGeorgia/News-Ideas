@@ -88,6 +88,7 @@ ka:
       comments: Comments
       author: Author
       rating: Rating
+      rate_it: Rate It!
       top_ideas: Top Ideas
       new_ideas: New Ideas
       in_progress: In Progress
@@ -136,6 +137,8 @@ ka:
       title: "Category: %{name}"
     explore:
       title: "Explore Ideas"
+    idea:
+      idea_by: "Idea by %{name}"
   shared:
     ideas_list:
       no_ideas: No Idea records were found.
