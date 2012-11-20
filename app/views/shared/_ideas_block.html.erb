@@ -21,10 +21,10 @@
 		</li>
 	</ul>
 
-	<%= render :partial => "shared/ideas_list", :object => ideas_block[:new],
-		:locals => {:id => id_new} %>
 	<%= render :partial => "shared/ideas_list", :object => ideas_block[:top],
 		:locals => {:id => id_top} %>
+	<%= render :partial => "shared/ideas_list", :object => ideas_block[:new],
+		:locals => {:id => id_new} %>
 	<%= render :partial => "shared/ideas_list", :object => ideas_block[:in_progress],
 		:locals => {:id => id_in_progress} %>
 	<%= render :partial => "shared/ideas_list", :object => ideas_block[:realized],
