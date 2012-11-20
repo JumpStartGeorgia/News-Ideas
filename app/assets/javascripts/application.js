@@ -53,4 +53,38 @@ console.log("initial tab id is NOT set");
 		return false;
 	});
 
+
+	// facebook api
+	window.fbAsyncInit = function() {
+		FB.init({
+		  appId      : '542104115818446', // App ID
+		  channelUrl : '//0.0.0.0:3000/channel.html', // Channel File
+		  status     : true, // check login status
+		  cookie     : true, // enable cookies to allow the server to access the session
+		  xfbml      : true  // parse XFBML
+		});
+
+		FB.getLoginStatus(function(response) {
+			if (response.status === 'connected') {
+				// connected
+				console.log("logged into facebook and gave app permission");
+			} else if (response.status === 'not_authorized') {
+				// not_authorized
+				console.log("logged into facebook, but app does not have permission");
+			} else {
+				// not_logged_in
+				console.log("not logged into facebook");
+			}
+		 });
+	};
+
+	// Load the facebook SDK Asynchronously
+	(function(d){
+		 var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+		 if (d.getElementById(id)) {return;}
+		 js = d.createElement('script'); js.id = id; js.async = true;
+		 js.src = "//connect.facebook.net/en_US/all.js";
+		 ref.parentNode.insertBefore(js, ref);
+	 }(document));
+
 });
