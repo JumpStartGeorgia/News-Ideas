@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
          :rememberable, :trackable, :validatable, :omniauthable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :role, :provider, :uid
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :role, :provider, :uid, :nickname, :avatar
 
   validates :role, :presence => true
 
@@ -33,7 +33,10 @@ class User < ActiveRecord::Base
 	def self.from_omniauth(auth)
 		x = where(auth.slice(:provider, :uid)).first
 		if x.nil?
-			x = User.create(:provider => auth.provider, :uid => auth.uid, :role => User::ROLES[0])
+			x = User.create(:provider => auth.provider, :uid => auth.uid,
+											:email => auth.info.email,
+											:nickname => auth.info.nickname, :avatar => auth.info.image,
+											:role => User::ROLES[0])
 		end
 		return x
 	end

@@ -13,6 +13,7 @@ ka:
         password_confirmation: გაიმეორეთ პაროლი
         role: როლი
         remember_me: დამიმახსოვრე
+        nickname: Nickname (viewable to public)
       category:
         picture: Picture
         icon: Icon
@@ -93,6 +94,7 @@ ka:
       new_ideas: New Ideas
       in_progress: In Progress
       realized: Realized Ideas
+      post_idea: Post Your Idea
   layouts:
     application:
       admin: ადმინისტრატო
@@ -138,8 +140,6 @@ ka:
       show:
         title: მომხმარებლის დეტალები
   root:
-    index:
-      form_header: Post Your Idea
     category:
       title: "Category: %{name}"
     explore:

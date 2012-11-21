@@ -13,6 +13,7 @@ en:
         password_confirmation: Password Confirmation
         role: Role
         remember_me: Remeber Me
+        nickname: Nickname (viewable to public)
       category:
         picture: Picture
         icon: Icon
@@ -92,6 +93,7 @@ en:
       new_ideas: New Ideas
       in_progress: In Progress
       realized: Realized Ideas
+      post_idea: Post Your Idea
   layouts:
     application:
       admin: Admin
@@ -136,8 +138,6 @@ en:
       show:
         title: User Details
   root:
-    index:
-      form_header: Post Your Idea
     category:
       title: "Category: %{name}"
     explore:

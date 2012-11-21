@@ -5,11 +5,11 @@
 	<div class="span1">&nbsp;</div>
 	<div class="span5" style="border: solid 2px #ccc; padding: 5px;">
 		<%= semantic_form_for @idea, :url => :create_idea do |f| %>
-			<h3><%= t('.form_header') %></h3>
+			<h3><%= t('app.common.post_idea') %></h3>
 			<%= f.error_messages %>
 			<%= f.inputs do %>
 				<% if user_signed_in? %>
-					<%= current_user.email %>
+					<%= current_user.nickname %>
 					<%= f.hidden_field :user_id, :value => current_user.id %>
 				<% else %>
 					<%= link_to t('helpers.links.sign_in'), :new_user_session %>
