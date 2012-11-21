@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :role, :provider, :uid, :nickname, :avatar
 
-  validates :role, :presence => true
+  validates :role, :email, :nickname, :presence => true
 
   def self.no_admins
     where("role != ?", ROLES[2])
