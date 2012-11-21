@@ -27,7 +27,7 @@
 					</div>
 					<div class="span2">
 						<%= "#{t('app.common.comments')}:" %>
-						0
+						<fb:comments-count href="<%= full_url(idea_path(idea)) %>"></fb:comments-count>
 					</div>
 					<div class="span3">
 						<%= link_to(image_tag("fb_share.jpg", :height => "20"),
