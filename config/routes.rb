@@ -4,8 +4,10 @@ BootstrapStarter::Application.routes.draw do
 	#--------------------------------
 	scope ":locale", locale: /#{I18n.available_locales.join("|")}/ do
 
+		devise_for :users, :path_names => {:sign_in => 'login', :sign_out => 'logout'},
+											 :controllers => {:omniauth_callbacks => "omniauth_callbacks"}
+
 		match '/admin', :to => 'admin#index', :as => :admin, :via => :get
-		devise_for :users
 		namespace :admin do
 			resources :users
 			resources :organizations
