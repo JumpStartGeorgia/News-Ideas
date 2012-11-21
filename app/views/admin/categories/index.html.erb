@@ -14,9 +14,9 @@
   <tbody>
     <% @categories.each do |category| %>
       <tr>
-        <td><%= link_to admin_category.name, admin_category_path(category) %></td>
-        <td><%= image_tag category.icon.url if category.icon.icon_file_name %></td>
-        <td><%= image_tag category.picture.url if category.icon.picture_file_name %></td>
+        <td><%= link_to category.name, admin_category_path(category) %></td>
+        <td><%= image_tag category.icon.url if category.icon_file_name %></td>
+        <td><%= image_tag category.picture.url if category.picture_file_name %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_admin_category_path(category), :class => 'btn btn-mini' %>
