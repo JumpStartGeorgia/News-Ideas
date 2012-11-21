@@ -1,4 +1,18 @@
 <% title @user.nickname %>
 <% title_image @user.avatar if @user.avatar %>
 
+<% if !@user.organization_users.empty? %>
+	<h2><%= OrganizationUser.human_attribute_name(:organization) %></h2>
+	<div style="display: inline-block;">
+		<% if @user.organization_users.first.organization.logo_file_name %>
+			<%= image_tag @user.organization_users.first.organization.logo.url %>
+		<% else %>
+			<%= @user.organization_users.first.organization.name %>
+		<% end %>
+	</div>
+	<div style="display: inline-block;">
+		<%= link_to t('helpers.links.website'), @user.organization_users.first.organization.url if @user.organization_users.first.organization.url %>
+	</div>
+<% end %>
+
 <%= render :partial => "shared/ideas_block", :object => @ideas %>

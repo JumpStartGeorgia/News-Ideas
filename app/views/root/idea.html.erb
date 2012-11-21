@@ -2,12 +2,21 @@
 <% title t '.title', :default => model_class.model_name.human %>
 
 <div id="idea_user_block" class="row" style="margin-bottom: 10px; border-bottom: solid 1px #ddd;">
-	<div class="span5">
+	<div class="span4">
 		<%= image_tag @idea.user.avatar, :style => 'float:left; padding-right: 5px;' if @idea.user.avatar %>
 		<h2><%= link_to t('.idea_by', :name => @idea.user.nickname), user_path(@idea.user_id)%></h2>
+		<% if !@idea.user.organization_users.empty? %>
+			<% if @idea.user.organization_users.first.organization.logo_file_name %>
+				<%= image_tag @idea.user.organization_users.first.organization.logo.url %>
+			<% else %>
+				<%= @idea.user.organization_users.first.organization.name %>
+			<% end %>
+		<% end %>
+	</div>
+	<div class="span3">
 		<%= l @idea.created_at, :format => :long %>
 	</div>
-	<div class="span3" style="text-align: right;">
+	<div class="span1" style="text-align: right;">
 		<%= "#{t('app.common.rate_it')}:" %>
     <%= votes_cont(@idea) %>
 	</div>
