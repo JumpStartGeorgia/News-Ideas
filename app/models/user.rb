@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
 	has_many :user_favorites, :dependent => :destroy
 	has_many :ideas
 	has_many :organization_users, :dependent => :destroy
+  accepts_nested_attributes_for :organization_users
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
@@ -9,7 +10,8 @@ class User < ActiveRecord::Base
          :rememberable, :trackable, :validatable, :omniauthable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :role, :provider, :uid, :nickname, :avatar
+  attr_accessible :email, :password, :password_confirmation, :remember_me,
+		:role, :provider, :uid, :nickname, :avatar, :organization_users_attributes
 
   validates :email, :nickname, :presence => true
 	before_save :check_for_role

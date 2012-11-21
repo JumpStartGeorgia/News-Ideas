@@ -14,6 +14,7 @@ en:
         role: Role
         remember_me: Remeber Me
         nickname: Nickname (viewable to public)
+        provider: Provider
       category:
         picture: Picture
         icon: Icon

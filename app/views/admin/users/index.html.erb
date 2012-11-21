@@ -1,4 +1,5 @@
 <%- model_class = User -%>
+<%- model_class_org = OrganizationUser -%>
 <% title t '.title', :default => model_class.model_name.human.pluralize %>
 
 <div class="form-actions">
@@ -12,21 +13,31 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= model_class_trans.human_attribute_name(:email) %></th>
-      <th><%= model_class_trans.human_attribute_name(:role) %></th>
+      <th><%= model_class.human_attribute_name(:nickname) %></th>
+      <th><%= model_class.human_attribute_name(:email) %></th>
+      <th><%= model_class.human_attribute_name(:role) %></th>
+      <th><%= model_class.human_attribute_name(:provider) %></th>
+      <th><%= model_class_org.human_attribute_name(:organization) %></th>
       <th><%=	t('app.common.actions') %></th>
     </tr>
   </thead>
   <tbody>
     <% @users.each do |user| %>
       <tr>
+        <td><%= link_to user.nickname, admin_user_path(user) %></td>
         <td><%= user.email %></td>
         <td><%= user.role.humanize %></td>
+        <td><%= user.provider.humanize if user.provider %></td>
+        <td>
+					<% user.organization_users.each do |org| %>
+						<%= org.organization.name %>
+					<% end %>
+				</td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_admin_user_path(user), :class => 'btn btn-mini' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      user_path(user),
+                      admin_user_path(user),
                       :method => :delete,
 											:data => { :confirm => t('.confirm', :default => t("helpers.links.confirm")) },
                       :class => 'btn btn-mini btn-danger' %>

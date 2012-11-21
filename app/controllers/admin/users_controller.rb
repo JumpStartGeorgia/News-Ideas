@@ -34,6 +34,7 @@ class Admin::UsersController < ApplicationController
   # GET /admin/users/new.json
   def new
     @user = User.new
+		@user.organization_users.build()
 
     respond_to do |format|
       format.html # new.html.erb
@@ -44,6 +45,10 @@ class Admin::UsersController < ApplicationController
   # GET /admin/users/1/edit
   def edit
     @user = User.find(params[:id])
+		# if user is not assigned to org, create placeholder
+		if @user.organization_users.empty?
+			@user.organization_users.build()
+		end
     if @user.role == User::ROLES[2] && current_user.role != User::ROLES[2]
       redirect_to admin_users_path
     end
@@ -68,6 +73,12 @@ class Admin::UsersController < ApplicationController
   # PUT /admin/users/1
   # PUT /admin/users/1.json
   def update
+		# if password was not entered, remove the fields so validation still works
+		if params[:user][:password].blank? && params[:user][:password_confirmation].blank?
+				params[:user].delete(:password)
+				params[:user].delete(:password_confirmation)
+		end
+
     @user = User.find(params[:id])
 
     respond_to do |format|

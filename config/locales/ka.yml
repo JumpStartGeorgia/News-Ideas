@@ -14,6 +14,7 @@ ka:
         role: როლი
         remember_me: დამიმახსოვრე
         nickname: Nickname (viewable to public)
+        provider: Provider
       category:
         picture: Picture
         icon: Icon
