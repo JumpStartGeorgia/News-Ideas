@@ -43,6 +43,7 @@ class RootController < ApplicationController
 
   def idea
     @idea = Idea.find(params[:id])
+		gon.show_fb_comments = true
 
     respond_to do |format|
       format.html # idea.html.erb
