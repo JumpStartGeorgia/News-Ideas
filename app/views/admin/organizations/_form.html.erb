@@ -15,6 +15,7 @@
 	<% end %>
 
 	<%= f.inputs do %>
+		<%= f.input :url %>
 		<%= f.input :logo, :as => :file %>
 		<%= image_tag @organization.logo.url if @organization.logo_file_name %>
 	<% end %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121121075502) do
+ActiveRecord::Schema.define(:version => 20121121123639) do
 
   create_table "categories", :force => true do |t|
     t.datetime "created_at"
@@ -107,6 +107,7 @@ ActiveRecord::Schema.define(:version => 20121121075502) do
     t.string   "logo_content_type"
     t.integer  "logo_file_size"
     t.datetime "logo_updated_at"
+    t.string   "url"
   end
 
   create_table "user_favorites", :force => true do |t|

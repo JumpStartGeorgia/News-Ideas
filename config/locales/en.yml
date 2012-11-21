@@ -39,6 +39,7 @@ en:
         explaination: Explaination
       organization:
         logo: Logo
+        url: Website
       organization_translation:
         name: Name
       organization_user:
@@ -56,12 +57,13 @@ en:
       confirm: Are you sure?
       destroy: Delete
       new: New
-      list: View All
+      back: View All
       cancel: Cancel
       reset: Reset
       sign_in: Sign In
       sign_out: Sign Out
       post_idea: Post Idea
+      website: View Website
     titles:
       new: "New %{model}"
       edit: "Edit %{model}"

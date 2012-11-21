@@ -91,6 +91,11 @@
 						        <li>
 				 		         <%= link_to t('.user_profile'), user_path(current_user.id) %>
 										</li>
+										<% if current_user.role?(:admin) %>
+						          <li>
+					 		         <%= link_to t('.admin'), admin_path %>
+											</li>
+										<% end %>
 						        <li>
 				 		         <%= link_to t('.sign_out'), destroy_user_session_path, :method => :delete %>
 										</li>

@@ -39,6 +39,7 @@ ka:
         explaination: Explaination
       organization:
         logo: Logo
+        url: Website
       organization_translation:
         name: Name
       organization_user:
@@ -56,12 +57,13 @@ ka:
       confirm: დარწმუნებული ხართ?
       destroy: წაშლა
       new: ახალი
-      list: იხილეთ სრულად
+      back: იხილეთ სრულად
       cancel: გაუქმება
       reset: საწყის კონფიგურაციაზე დაბრუნება
       sign_in: Sign In
       sign_out: გასვლა
       post_idea: Post Idea
+      website: View Website
     titles:
       new: "ახალი %{model}"
       edit: "შეცვლა %{model}"

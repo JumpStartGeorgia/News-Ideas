@@ -9,5 +9,6 @@ class Organization < ActiveRecord::Base
     :path => ":rails_root/public/system/organization/:attachment/:id/:filename"
 
   accepts_nested_attributes_for :organization_translations
-  attr_accessible :logo, :organization_translations_attributes
+  attr_accessible :logo, :organization_translations_attributes, :url, :id,
+		:logo_file_name, :logo_content_type, :logo_file_size, :logo_updated_at
 end
