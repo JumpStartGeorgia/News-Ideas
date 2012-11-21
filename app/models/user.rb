@@ -11,7 +11,8 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :role, :provider, :uid, :nickname, :avatar
 
-  validates :role, :email, :nickname, :presence => true
+  validates :email, :nickname, :presence => true
+	before_save :check_for_role
 
   def self.no_admins
     where("role != ?", ROLES[2])
@@ -26,6 +27,11 @@ class User < ActiveRecord::Base
     return false
   end
 
+	# if no role is supplied, default to the basic author role
+	def check_for_role
+		self.role = User::ROLES[0] if self.role.nil?
+	end
+
 	##############################
 	## omniauth methods
 	##############################
@@ -35,8 +41,7 @@ class User < ActiveRecord::Base
 		if x.nil?
 			x = User.create(:provider => auth.provider, :uid => auth.uid,
 											:email => auth.info.email,
-											:nickname => auth.info.nickname, :avatar => auth.info.image,
-											:role => User::ROLES[0])
+											:nickname => auth.info.nickname, :avatar => auth.info.image)
 		end
 		return x
 	end
