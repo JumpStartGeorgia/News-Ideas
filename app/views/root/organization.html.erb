@@ -1,0 +1,4 @@
+<% title @organization.name %>
+<% title_image @organization.logo.url if @organization.logo_file_name %>
+
+<%= render :partial => "shared/ideas_block", :object => @ideas %>

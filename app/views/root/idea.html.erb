@@ -7,9 +7,11 @@
 		<h2><%= link_to t('.idea_by', :name => @idea.user.nickname), user_path(@idea.user_id)%></h2>
 		<% if !@idea.user.organization_users.empty? %>
 			<% if @idea.user.organization_users.first.organization.logo_file_name %>
-				<%= image_tag @idea.user.organization_users.first.organization.logo.url %>
+				<%= link_to(image_tag(@idea.user.organization_users.first.organization.logo.url),
+						organization_path(@idea.user.organization_users.first.organization_id)) %>
 			<% else %>
-				<%= @idea.user.organization_users.first.organization.name %>
+				<%= link_to @idea.user.organization_users.first.organization.name,
+							organization_path(@idea.user.organization_users.first.organization_id) %>
 			<% end %>
 		<% end %>
 	</div>
