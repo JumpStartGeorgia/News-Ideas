@@ -51,6 +51,16 @@ class RootController < ApplicationController
 		@ideas = {:new => new_ideas, :top => top_ideas, :in_progress => in_progress_ideas, :realized => realized_ideas}
 	end
 
+	def search
+		if params[:q]
+			new_ideas = Idea.new_ideas.search_by(params[:q])
+			top_ideas = Idea.top_ideas.search_by(params[:q])
+			in_progress_ideas = Idea.in_progress_ideas.search_by(params[:q])
+			realized_ideas = Idea.realized_ideas.search_by(params[:q])
+			@ideas = {:new => new_ideas, :top => top_ideas, :in_progress => in_progress_ideas, :realized => realized_ideas}
+		end
+	end
+
   def idea
     @idea = Idea.find(params[:id])
 		gon.show_fb_comments = true

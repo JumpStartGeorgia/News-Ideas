@@ -107,6 +107,23 @@ ol.standard li {
 	line-height: 2;
 }
 
+/* add search icon into search field */
+.navbar-search {
+    position: relative;
+}
+.navbar-search-no-float {
+	float: none;
+}
+.navbar-search .search-query {
+    padding-left: 29px;
+}
+
+.navbar-search .icon-search {
+    position: absolute;
+    top: 4px;
+    left: 11px;
+}​
+
 /* multilanguage form styles */
 div#form-en {
 	background-color:#ddd;

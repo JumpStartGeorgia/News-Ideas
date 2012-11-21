@@ -54,6 +54,12 @@ class Idea < ActiveRecord::Base
 		end
 	end
 
+	def self.search_by(query)
+		if query
+			where("ideas.explaination like ?", "%#{query}%")
+		end
+	end
+
 	def self.user_ideas(user_id)
 		if user_id
 			where(:user_id => user_id)

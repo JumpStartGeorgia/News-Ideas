@@ -19,6 +19,8 @@ BootstrapStarter::Application.routes.draw do
 		match '/category/:id', :to => 'root#category', :as => :category, :via => :get
 		match '/user/:id', :to => 'root#user', :as => :user, :via => :get
 		match '/create', :to => 'root#create', :as => :create_idea, :via => :post
+		match '/search', :to => 'root#search', :as => :search, :via => :get
+		match '/search', :to => 'root#search', :as => :search, :via => :post
 		match '/vote/:type/:votable_id/:status', :to => 'root#vote', :as => :vote, :via => :get
 
 		root :to => 'root#index'

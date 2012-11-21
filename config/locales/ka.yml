@@ -95,6 +95,7 @@ ka:
       in_progress: In Progress
       realized: Realized Ideas
       post_idea: Post Your Idea
+      search: Search
   layouts:
     application:
       admin: ადმინისტრატო
@@ -150,6 +151,8 @@ ka:
       title: "Explore Ideas"
     idea:
       idea_by: "Idea by %{name}"
+    search:
+      title: "Search: %{q}"
   shared:
     ideas_list:
       no_ideas: No Idea records were found.
