@@ -56,6 +56,12 @@ class Idea < ActiveRecord::Base
 
 	def self.user_ideas(user_id)
 		if user_id
+			where(:user_id => user_id)
+		end
+	end
+
+	def self.user_favorite_ideas(user_id)
+		if user_id
 			joins(:user_favories).where(:user_favorites => {:user_id => user_id})
 		end
 	end

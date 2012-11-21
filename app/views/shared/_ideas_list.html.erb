@@ -11,7 +11,8 @@
 						<%= link_to l(idea.created_at, :format => :long), idea_path(idea) %>
 					</div>
 					<div class="span3">
-						<%= "#{t('app.common.author')}: #{idea.user.nickname}" %>
+						<%= "#{t('app.common.author')}: "%>
+						<%= link_to idea.user.nickname, user_path(idea.user_id) %>
 					</div>
 				</div>
 				<div>

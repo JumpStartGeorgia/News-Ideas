@@ -83,6 +83,9 @@
 				          </a>
 				          <ul class="dropdown-menu">
 						        <li>
+				 		         <%= link_to t('.user_profile'), user_path(current_user.id) %>
+										</li>
+						        <li>
 				 		         <%= link_to t('.sign_out'), destroy_user_session_path, :method => :delete %>
 										</li>
 				          </ul>
@@ -119,6 +122,7 @@
 								<div class="page-header">
 								  <div class="block">
 			              <h1>
+											<%= image_tag(yield(:title_image), :style => 'vertical-align: middle;') if content_for?(:title_image) %>
 										  <%= yield(:title) %>
 									  </h1>
 									</div>

@@ -97,6 +97,7 @@ en:
   layouts:
     application:
       admin: Admin
+      user_profile: Your Profile
       sign_out: Sign Out
       js_link_title: "Visit JumpStart Georgia's website"
       js_link_text: Built by
@@ -104,6 +105,7 @@ en:
       categories: Categories
     application_home:
       admin: Admin
+      user_profile: Your Profile
       sign_out: Sign Out
       js_link_title: "Visit JumpStart Georgia's website"
       js_link_text: Built by
@@ -138,6 +140,8 @@ en:
       show:
         title: User Details
   root:
+    user:
+      title: "User: %{name}"
     category:
       title: "Category: %{name}"
     explore:

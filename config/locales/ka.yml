@@ -98,6 +98,7 @@ ka:
   layouts:
     application:
       admin: ადმინისტრატო
+      user_profile: Your Profile
       sign_out: გასვლა
       js_link_title: "ეწვიეთ ჯამპსტარტ ჯორჯიას ვებ-გვერდს"
       js_link_text: აგებულია
@@ -105,6 +106,7 @@ ka:
       categories: Categories
     application_home:
       admin: ადმინისტრატო
+      user_profile: Your Profile
       sign_out: გასვლა
       js_link_title: "ეწვიეთ ჯამპსტარტ ჯორჯიას ვებ-გვერდს"
       js_link_text: აგებულია
@@ -140,6 +142,8 @@ ka:
       show:
         title: მომხმარებლის დეტალები
   root:
+    user:
+      title: "User: %{name}"
     category:
       title: "Category: %{name}"
     explore:

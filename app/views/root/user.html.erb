@@ -1,0 +1,4 @@
+<% title @user.nickname %>
+<% title_image @user.avatar if @user.avatar %>
+
+<%= render :partial => "shared/ideas_block", :object => @ideas %>
