@@ -26,8 +26,10 @@ BootstrapStarter::Application.routes.draw do
 
 		# progress
 		match '/progress/claim/:idea_id/:organization_id', :to => 'progress#claim', :as => :claim_idea, :via => :get
-		match '/progress/progress_update/:idea_id/:organization_id', :to => 'progress#progress_update', :as => :progress_update, :via => :get
-		match '/progress/save', :to => 'progress#save', :as => :save_progress, :via => :post
+		match '/progress/new/:idea_id/:organization_id', :to => 'progress#new', :as => :progress_update, :via => :get
+		match '/progress/edit/:id', :to => 'progress#edit', :as => :edit_progress, :via => :get
+		match '/progress/create', :to => 'progress#create', :as => :create_progress, :via => :post
+		match '/progress/update/:id', :to => 'progress#update', :as => :update_progress, :via => :put
 
 
 		root :to => 'root#index'

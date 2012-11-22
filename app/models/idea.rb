@@ -14,6 +14,8 @@ class Idea < ActiveRecord::Base
       :is_duplicate,
 			:idea_categories_attributes
 
+  validates :user_id, :explaination, :presence => true
+
   require 'split_votes'
   include SplitVotes
 

@@ -102,6 +102,15 @@
 				<% progresses.each do |progress| %>
 					<div>
 						<strong><%= l progress.progress_date, :format => :long if progress.progress_date %></strong>
+						<% if !current_user.organization_users.empty? &&
+									org.id == current_user.organization_users.first.organization_id &&
+									@idea.organization_claimed_idea?(current_user.organization_users.first.organization_id) %>
+
+							<%= link_to t('.edit_progress'),
+									edit_progress_path(progress.id),
+									:class => 'btn btn-mini btn-primary fancybox' %>
+						<% end %>
+
 						<%= simple_format progress.explaination %>
 					</div>
 				<% end %>

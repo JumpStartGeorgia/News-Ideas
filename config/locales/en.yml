@@ -170,5 +170,6 @@ en:
     form:
       title_claim: Claim Idea
       title_progress_update: Progress Update
+      title_edit_progress: Edit Progress
       title_error: Error
       error: The requested Idea and/or Organization could not be found.

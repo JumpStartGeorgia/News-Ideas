@@ -8,4 +8,7 @@ class IdeaProgress < ActiveRecord::Base
       :explaination,
       :is_completed,
 			:url
+
+  validates :idea_id, :organization_id, :progress_date, :explaination, :presence => true
+
 end
