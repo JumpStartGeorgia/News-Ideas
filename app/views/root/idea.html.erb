@@ -47,7 +47,7 @@
 					:target => "_blank") %>
 	</div>
 	<div class="span3" style="text-align: right;">
-		<% if !current_user.organization_users.empty? &&
+		<% if current_user.organization_users && !current_user.organization_users.empty? &&
 					!@idea.organization_claimed_idea?(current_user.organization_users.first.organization_id) %>
 
 			<%= link_to t('.take_ownership', :org => current_user.organization_users.first.organization.name),
@@ -81,7 +81,7 @@
 						</h4>
 					</div>
 					<div class="span2">
-						<% if !current_user.organization_users.empty? &&
+						<% if current_user.organization_users && !current_user.organization_users.empty? &&
 									org.id == current_user.organization_users.first.organization_id &&
 									@idea.organization_claimed_idea?(current_user.organization_users.first.organization_id) %>
 
@@ -102,7 +102,7 @@
 				<% progresses.each do |progress| %>
 					<div>
 						<strong><%= l progress.progress_date, :format => :long if progress.progress_date %></strong>
-						<% if !current_user.organization_users.empty? &&
+						<% if current_user.organization_users && !current_user.organization_users.empty? &&
 									org.id == current_user.organization_users.first.organization_id &&
 									@idea.organization_claimed_idea?(current_user.organization_users.first.organization_id) %>
 
