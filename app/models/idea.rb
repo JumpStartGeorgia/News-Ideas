@@ -34,20 +34,45 @@ class Idea < ActiveRecord::Base
 		end
 	end
 
+	# get the top ideas based off of overall votes
 	def self.top_ideas
 		order("overall_votes desc, created_at desc")
 	end
 
+	# get the new ideas based off of the date the record was created
 	def self.new_ideas
 		order("created_at desc")
 	end
 
+	# get ideas that have been claimed and have not been completed
+	# - if > 1 or has claimed idea and one is not finished, still show idea
 	def self.in_progress_ideas
-		joins(:idea_progresses).where(:idea_progresses => {:is_completed => false}).order("idea_progresses.progress_date desc, ideas.created_at desc")
+		completed_ideas = IdeaProgress.select("distinct idea_id, organization_id").where(:is_completed => true)
+		if completed_ideas.nil? || completed_ideas.empty?
+			select("distinct ideas.*")
+			.joins(:idea_progresses)
+			.order("idea_progresses.progress_date desc, ideas.created_at desc")
+		else
+			select("distinct ideas.*")
+			.joins(:idea_progresses)
+			.where("idea_progresses.idea_id not in (?) or idea_progresses.organization_id not in (?)",
+				completed_ideas.map{|x| x.idea_id}, completed_ideas.map{|x| x.organization_id})
+			.order("idea_progresses.progress_date desc, ideas.created_at desc")
+		end
 	end
 
+	# get ideas that have only been completed
+	# - if > 1 or has claimed idea and one is not finished, still show idea
 	def self.realized_ideas
-		joins(:idea_progresses).where(:idea_progresses => {:is_completed => true}).order("idea_progresses.progress_date desc, ideas.created_at desc")
+		completed_ideas = IdeaProgress.select("distinct idea_id").where(:is_completed => true)
+
+		if completed_ideas && !completed_ideas.empty?
+			select("distinct ideas.*")
+			.joins(:idea_progresses)
+			.where("ideas.id in (?)",
+				completed_ideas.map{|x| x.idea_id})
+			.order("idea_progresses.progress_date desc, ideas.created_at desc")
+		end
 	end
 
 	def self.categorized_ideas(category_id)
