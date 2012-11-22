@@ -50,7 +50,7 @@
 		<% if !current_user.organization_users.empty? &&
 					!@idea.organization_claimed_idea?(current_user.organization_users.first.organization_id) %>
 
-			<%= link_to t('app.common.take_ownership', :org => current_user.organization_users.first.organization.name),
+			<%= link_to t('.take_ownership', :org => current_user.organization_users.first.organization.name),
 					claim_idea_path(:idea_id => @idea.id, :organization_id => current_user.organization_users.first.organization_id),
 					:class => 'btn btn-mini btn-primary fancybox' %>
 		<% else %>
@@ -62,11 +62,53 @@
 	</div>
 </div>
 
-<div id="idea_progress_block">
+<div id="idea_progress_block" style="margin-bottom: 10px;">
 	<% if !@idea.idea_progresses.empty? %>
+		<h3><%= t('.claimed_by') %></h3>
+		<% @idea.claimed_by_organizations.each do |org| %>
+			<div class="idea_progress_org" style="margin-left: 10px; margin-top: 10px; border: solid 1px #ddd; padding: 5px;">
+				<% progresses = @idea.organization_progress(org.id) %>
+				<div class="row" style="border-bottom: dashed 1px #ddd;">
+					<div class="span3">
+						<h4>
+							<% if org.logo_file_name %>
+								<%= link_to(image_tag(org.logo.url),
+										organization_path(org.id)) %>
+							<% else %>
+								<%= link_to org.name,
+											organization_path(org.id) %>
+							<% end %>
+						</h4>
+					</div>
+					<div class="span2">
+						<% if !current_user.organization_users.empty? &&
+									org.id == current_user.organization_users.first.organization_id &&
+									@idea.organization_claimed_idea?(current_user.organization_users.first.organization_id) %>
 
-
+							<%= link_to t('.progress_udpate'),
+									progress_update_path(:idea_id => @idea.id, :organization_id => current_user.organization_users.first.organization_id),
+									:class => 'btn btn-mini btn-primary fancybox' %>
+						<% else %>
+							&nbsp;
+						<% end %>
+					</div>
+					<div class="span3" style="text-align: right;">
+						<% if progresses.first.is_completed && !progresses.first.url.empty? %>
+							<strong><%= "#{t('.finished')}!" %></strong>
+							<%= link_to t('.news_url'), progresses.first.url, :target => :blank, :class => 'btn btn-mini' %>
+						<% end %>
+					</div>
+				</div>
+				<% progresses.each do |progress| %>
+					<div>
+						<strong><%= l progress.progress_date, :format => :long if progress.progress_date %></strong>
+						<%= simple_format progress.explaination %>
+					</div>
+				<% end %>
+			</div>
+		<% end %>
 	<% end %>
 </div>
 
+<h3><%= t('app.common.comments') %></h3>
 <div class="fb-comments" data-href="<%= current_url%>" data-num-posts="2" data-width="470"></div>

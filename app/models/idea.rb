@@ -78,9 +78,19 @@ class Idea < ActiveRecord::Base
 		end
 	end
 
+	def claimed_by_organizations
+		x = self.idea_progresses.map{|x| x.organization_id}.uniq
+		return Organization.where(:id => x)
+	end
+
+	def organization_progress(organization_id)
+		if organization_id
+			self.idea_progresses.select{|x| x.organization_id == organization_id}.sort{|a,b| b.progress_date <=> a.progress_date}
+		end
+	end
+
 	def organization_claimed_idea?(organization_id)
-		if organization_id && !self.idea_progresses.empty? &&
-				self.idea_progresses.select{|x| x.organization_id == organization_id}.length > 0
+		if organization_id && !self.claimed_by_organizations.index{|x| x.id == organization_id}.nil?
 			return true
 		end
 		return false

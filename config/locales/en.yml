@@ -101,7 +101,6 @@ en:
       realized: Realized Ideas
       post_idea: Post Your Idea
       search: Search
-      take_ownership: "Claim Idea for %{org}"
   layouts:
     application:
       admin: Admin
@@ -156,6 +155,12 @@ en:
       title: "Explore Ideas"
     idea:
       idea_by: "Idea by %{name}"
+      claimed_by: "Idea Being Worked On"
+      finished: Finished
+      news_url: View News Article
+      take_ownership: "Claim Idea for %{org}"
+      progress_udpate: Add Progress Update
+      edit_progress: Edit Progress
     search:
       title: "Search: %{q}"
   shared:
