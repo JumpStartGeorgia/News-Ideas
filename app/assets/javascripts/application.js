@@ -9,6 +9,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
+//= require fancybox
 //= require twitter/bootstrap
 //= require vendor
 //= require_tree .
@@ -19,6 +20,8 @@ $(document).ready(function(){
 	  $(":input:visible:enabled:first").focus();
 	}
 
+	// add fancybox to any link with class fancybox
+	$("a.fancybox").fancybox();
 
 	// if ideas tabs are on page, highlight the correct block when the page loads
 	if (gon.initial_tab_id){

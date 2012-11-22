@@ -77,4 +77,12 @@ class Idea < ActiveRecord::Base
 			joins(:idea_progresses).where(:idea_progresses => {:organization_id => organization_id})
 		end
 	end
+
+	def organization_claimed_idea?(organization_id)
+		if organization_id && !self.idea_progresses.empty? &&
+				self.idea_progresses.select{|x| x.organization_id == organization_id}.length > 0
+			return true
+		end
+		return false
+	end
 end

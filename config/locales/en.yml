@@ -34,8 +34,8 @@ en:
       idea_progress:
         idea_id: Idea
         organization_id: Organization
-        is_completed: Completed?
-        url: URL
+        is_completed: News Story Completed?
+        url: News Story URL
         progress_date: Date
         explaination: Explaination
       organization:
@@ -50,6 +50,9 @@ en:
       user_favorites:
         user_id: User
         idea_id: Idea
+    messages:
+      idea_progress:
+        success: "The record was successfully saved."
   helpers:
     actions: Actions
     links:
@@ -98,6 +101,7 @@ en:
       realized: Realized Ideas
       post_idea: Post Your Idea
       search: Search
+      take_ownership: "Claim Idea for %{org}"
   layouts:
     application:
       admin: Admin
@@ -157,3 +161,9 @@ en:
   shared:
     ideas_list:
       no_ideas: No Idea records were found.
+  progress:
+    form:
+      title_claim: Claim Idea
+      title_progress_update: Progress Update
+      title_error: Error
+      error: The requested Idea and/or Organization could not be found.

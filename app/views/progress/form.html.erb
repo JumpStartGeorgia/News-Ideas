@@ -1,0 +1,41 @@
+<% if @idea && @org %>
+	<% if params[:action].downcase == "claim" %>
+		<% title t('.title_claim') %>
+	<% else %>
+		<% title t('.title_progress_update') %>
+	<% end %>
+
+	<p>
+		<% if @org.logo_file_name %>
+			<%= image_tag @org.logo.url %>
+		<% else %>
+			<%= @org.name %>
+		<% end %>
+	</p>
+
+	<%= semantic_form_for @idea_progress, :url => :save_progress do |f| %>
+		<%= f.error_messages %>
+		<%= f.inputs do %>
+			<%= f.hidden_field :idea_id, :value => @idea.id %>
+			<%= f.hidden_field :organization_id, :value => @org.id %>
+
+			<%= f.input :progress_date, :as => :string, :input_html => {:size => 20} %>
+			<%= f.input :explaination, :as => :text, :input_html => {:rows => 4, :cols => 100} %>
+			<%= f.input :is_completed, :as => :radio %>
+			<%= f.input :url %>
+
+		<% end %>
+
+		<% if user_signed_in? %>
+			<%= f.submit nil, :class => 'btn btn-primary' %>
+		<% end %>
+	<% end %>
+
+<% else %>
+	<% title t('.title_error') %>
+
+	<p>
+		<%= t('.error') %>
+	</p>
+
+<% end %>

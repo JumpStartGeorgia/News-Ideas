@@ -5,6 +5,8 @@
 
  *= require formtastic
  *= require formtastic-bootstrap
+ *= require fancybox
+ *= require vendor
  *= require_tree .
  *= require_self
 */
@@ -101,6 +103,10 @@ ul.standard li {
 ol.standard li {
 	list-style-type:decimal;
 	line-height: 1.1;
+}
+
+div.radio label.control-label {
+	margin-left: -18px;
 }
 
 .well > ul > li {

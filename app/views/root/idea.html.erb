@@ -38,7 +38,7 @@
 </div>
 
 <div id="idea_social_block" class="row" style="margin-bottom: 10px;">
-	<div class="span5">
+	<div class="span3">
 		<%= link_to(image_tag("fb_share.jpg", :height => "20"),
 					"http://www.facebook.com/share.php?u=#{current_url}",
 					:title => "facebook",	:target => "_blank") %>
@@ -47,8 +47,26 @@
 					:target => "_blank") %>
 	</div>
 	<div class="span3" style="text-align: right;">
+		<% if !current_user.organization_users.empty? &&
+					!@idea.organization_claimed_idea?(current_user.organization_users.first.organization_id) %>
+
+			<%= link_to t('app.common.take_ownership', :org => current_user.organization_users.first.organization.name),
+					claim_idea_path(:idea_id => @idea.id, :organization_id => current_user.organization_users.first.organization_id),
+					:class => 'btn btn-mini btn-primary fancybox' %>
+		<% else %>
+			&nbsp;
+		<% end %>
+	</div>
+	<div class="span2" style="text-align: right;">
 		(report idea)
 	</div>
+</div>
+
+<div id="idea_progress_block">
+	<% if !@idea.idea_progresses.empty? %>
+
+
+	<% end %>
 </div>
 
 <div class="fb-comments" data-href="<%= current_url%>" data-num-posts="2" data-width="470"></div>

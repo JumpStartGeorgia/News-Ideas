@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121121123639) do
+ActiveRecord::Schema.define(:version => 20121122074014) do
 
   create_table "categories", :force => true do |t|
     t.datetime "created_at"
@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(:version => 20121121123639) do
     t.integer  "organization_id"
     t.date     "progress_date"
     t.text     "explaination"
-    t.boolean  "is_completed"
+    t.boolean  "is_completed",    :default => false
     t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"
