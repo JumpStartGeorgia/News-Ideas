@@ -16,7 +16,7 @@
       <tr>
         <td><%= link_to organization.name, admin_organization_path(organization) %></td>
         <td><%= image_tag organization.logo.url if organization.logo_file_name %></td>
-        <td><%= link_to t('helpers.links.website'), organization.url, :target => "blank" if organization.url %></td>
+        <td><%= link_to t('helpers.links.website'), organization.url, :target => "blank", :class => 'btn btn-mini' if organization.url %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_admin_organization_path(organization), :class => 'btn btn-mini' %>

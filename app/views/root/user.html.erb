@@ -13,7 +13,7 @@
 		<% end %>
 	</div>
 	<div style="display: inline-block;">
-		<%= link_to t('helpers.links.website'), @user.organization_users.first.organization.url if @user.organization_users.first.organization.url %>
+		<%= link_to t('helpers.links.website'), @user.organization_users.first.organization.url, :class => 'btn btn-mini' if @user.organization_users.first.organization.url %>
 	</div>
 <% end %>
 
