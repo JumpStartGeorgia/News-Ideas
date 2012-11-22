@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121122074014) do
+ActiveRecord::Schema.define(:version => 20121122141110) do
 
   create_table "categories", :force => true do |t|
     t.datetime "created_at"
@@ -66,7 +66,7 @@ ActiveRecord::Schema.define(:version => 20121122074014) do
     t.integer  "user_id"
     t.text     "explaination"
     t.string   "individual_votes"
-    t.integer  "overall_votes"
+    t.integer  "overall_votes",    :default => 0
     t.boolean  "is_inappropriate", :default => false
     t.boolean  "is_duplicate",     :default => false
     t.datetime "created_at"
