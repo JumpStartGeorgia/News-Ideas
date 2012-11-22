@@ -13,7 +13,6 @@ gem 'omniauth-facebook' # to login via facebook
 gem "cancan", "~> 1.6.8" # user authorization
 gem "formtastic", "2.1.1" # create forms easier
 gem "formtastic-bootstrap", :git => "https://github.com/cgunther/formtastic-bootstrap.git", :branch => "bootstrap-2"
-gem "nested_form", "~> 0.1.1", :git => "https://github.com/davidray/nested_form.git" # easily build nested model forms with ajax links
 gem "globalize3", "0.2.0" # internationalization
 gem "psych", "1.2.2" # yaml parser - default psych in rails has issues
 gem "will_paginate", "3.0.3" # add paging to long lists
@@ -24,6 +23,7 @@ gem "paperclip", "~> 3.0.4" # to upload files
 gem "capistrano", "~> 2.12.0" # to deploy to server
 gem "exception_notification", "2.5.2" # send an email when exception occurs
 gem "useragent", :git => "https://github.com/jilion/useragent.git" # browser detection
+#gem "nested_form", "~> 0.1.1", :git => "https://github.com/davidray/nested_form.git" # easily build nested model forms with ajax links
 #gem "has_permalink", "~> 0.1.4" # create permalink slugs for nice urls
 #gem "pdfkit", "~> 0.5.2" # generate pdfs
 #gem "use_tinymce", "~> 0.0.15" # wysiwyg
