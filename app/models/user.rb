@@ -31,7 +31,7 @@ class User < ActiveRecord::Base
 
 	# if no role is supplied, default to the basic author role
 	def check_for_role
-		self.role = User::ROLES[0] if self.role.nil?
+		self.role = User::ROLES[0] if self.role.nil? || self.role.empty?
 	end
 
 	##############################
