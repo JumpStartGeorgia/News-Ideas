@@ -68,6 +68,8 @@ ka:
       sign_out: გასვლა
       post_idea: Post Idea
       website: View Website
+      forgot_password: Forgot Password?
+      sign_in_provider: "Sign in with %{provider}"
     titles:
       new: "ახალი %{model}"
       edit: "შეცვლა %{model}"

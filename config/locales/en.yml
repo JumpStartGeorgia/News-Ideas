@@ -68,6 +68,8 @@ en:
       sign_out: Sign Out
       post_idea: Post Idea
       website: View Website
+      forgot_password: Forgot Password?
+      sign_in_provider: "Sign in with %{provider}"
     titles:
       new: "New %{model}"
       edit: "Edit %{model}"
