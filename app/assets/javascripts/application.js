@@ -20,8 +20,39 @@ $(document).ready(function(){
 	  $(":input:visible:enabled:first").focus();
 	}
 
+	// if a link with 'fancybox-nested' class is clicked, get the html and replace with current html
+	function fancybox_nested_links() {
+		$.get($(this).attr('href'), function(data){
+			// pull out the html starting with div class="content"
+			var x = $('div.content', data).html();
+			// insert the new html
+			$('#fancybox-content div.content').html(x);
+			// register any new fancybox-nested links
+			$('#fancybox-content a.fancybox-nested').click(fancybox_nested_links);
+		});
+
+		return false;
+	}
+
+	// register click function for 'fancybox-nested' class that should only be used on pages that are opened in fancybox
+	$('#fancybox-content a.fancybox-nested').click(fancybox_nested_links);
+
+
+/*
+	$('#fancybox-content a').live('hover', function(){
+console.log('adding fancybox to link');
+    $(this).fancybox();
+  });
+
+	// if click on link in fancybox, close fancybox window
+	$("#fancybox-content a").click(function(){
+console.log('closing fancybox');
+		parent.$.fancybox.close();
+	});
+*/
 	// add fancybox to any link with class fancybox
 	$("a.fancybox").fancybox();
+
 
 
 	// workaround to get logout link in navbar to work

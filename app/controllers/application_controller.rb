@@ -8,6 +8,8 @@ class ApplicationController < ActionController::Base
 	before_filter :load_categories
 	before_filter :initialize_new_idea
 
+	layout :layout_by_resource
+
 	unless Rails.application.config.consider_all_requests_local
 		rescue_from Exception,
 		            :with => :render_error
@@ -24,6 +26,8 @@ class ApplicationController < ActionController::Base
       redirect_to root_url, :alert => exception.message
     end
 	end
+
+	protected
 
 	Browser = Struct.new(:browser, :version)
 	SUPPORTED_BROWSERS = [
@@ -51,6 +55,7 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
     else
       I18n.locale = I18n.default_locale
     end
+logger.debug "-------------- controller = #{params[:controller]}"
 	end
 
   def default_url_options(options={})
@@ -85,6 +90,14 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
     redirect_to root_path, :notice => t('app.msgs.not_authorized') if !current_user || !current_user.role?(role)
   end
 
+	DEVISE_CONTROLLERS = ['devise/sessions', 'devise/registrations', 'devise/passwords']
+	def layout_by_resource
+    if DEVISE_CONTROLLERS.index(params[:controller]).nil?
+      "application"
+    else
+      "fancybox"
+    end
+  end
 
   #######################
 	def render_not_found(exception)
@@ -100,5 +113,7 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 		  .deliver
 		render :file => "#{Rails.root}/public/500.html", :status => 500
 	end
+
+
 
 end
