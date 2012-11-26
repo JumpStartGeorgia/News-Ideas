@@ -1,4 +1,6 @@
 class Idea < ActiveRecord::Base
+	require 'utf8_converter'
+
 	has_many :idea_categories, :dependent => :destroy
 	has_many :idea_progresses, :dependent => :destroy
 	has_many :user_favorites, :dependent => :destroy
@@ -32,6 +34,17 @@ class Idea < ActiveRecord::Base
 				realized_ideas
 			end
 		end
+	end
+
+	# determine if the explaination is written in the locale
+	def in_locale?(locale)
+		in_locale = false
+		if locale == :ka && Utf8Converter.is_geo?(self.explaination)
+			in_locale = true
+		elsif locale != :ka && !Utf8Converter.is_geo?(self.explaination)
+			in_locale = true
+		end
+		return in_locale
 	end
 
 	# get the top ideas based off of overall votes

@@ -101,6 +101,7 @@ en:
       realized: Realized Ideas
       post_idea: Post Your Idea
       search: Search
+      placeholder: placeholder
   layouts:
     application:
       admin: Admin
@@ -161,6 +162,8 @@ en:
       take_ownership: "Claim Idea for %{org}"
       progress_udpate: Add Progress Update
       edit_progress: Edit Progress
+      translate_idea: Translate the Idea
+      translate_org_progress: Translate the Text
     search:
       title: "Search: %{q}"
   shared:

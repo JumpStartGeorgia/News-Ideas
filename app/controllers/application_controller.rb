@@ -60,6 +60,7 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 	def initialize_gon
 		gon.set = true
 		gon.highlight_first_form_field = true
+		gon.placeholder = t('app.common.placeholder')
 		gon.id_top = t('app.common.top_ideas').gsub(" ", "_").downcase
 		gon.id_new = t('app.common.new_ideas').gsub(" ", "_").downcase
 		gon.id_in_progress = t('app.common.in_progress').gsub(" ", "_").downcase

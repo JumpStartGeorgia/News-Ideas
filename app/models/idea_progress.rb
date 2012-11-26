@@ -11,4 +11,16 @@ class IdeaProgress < ActiveRecord::Base
 
   validates :idea_id, :organization_id, :progress_date, :explaination, :presence => true
 
+	# determine if the explaination is written in the locale
+	def in_locale?(locale)
+		in_locale = false
+		if locale == :ka && Utf8Converter.is_geo?(self.explaination)
+			in_locale = true
+		elsif locale != :ka && !Utf8Converter.is_geo?(self.explaination)
+			in_locale = true
+		end
+		return in_locale
+	end
+
+
 end

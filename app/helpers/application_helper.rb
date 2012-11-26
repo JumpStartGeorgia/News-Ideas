@@ -15,6 +15,23 @@ module ApplicationHelper
 		"#{request.protocol}#{request.host_with_port}#{path}"
 	end
 
+	def google_translate_url(text)
+		index = I18n.available_locales.index(I18n.locale)
+		from_locale = :en
+		# locale found in first spot and there is only 1 locale
+		if index == 0 && I18n.available_locales.length == 1
+			from_locale = I18n.locale
+		# locale found in first spot, get locale in 2nd spot
+		elsif index == 0 && I18n.available_locales.length > 1
+			from_locale = I18n.available_locales[1]
+		# locale found not in first spot, get locale in first spot
+		elsif index > 0
+			from_locale = I18n.available_locales[0]
+		end
+
+		"http://translate.google.com/##{from_locale}/#{I18n.locale}/#{text.html_safe}"
+	end
+
 	def flash_translation(level)
     case level
     when :notice then "alert-info"

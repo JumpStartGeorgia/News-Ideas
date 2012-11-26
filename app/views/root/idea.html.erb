@@ -23,6 +23,20 @@
     <%= votes_cont(@idea) %>
 	</div>
 </div>
+
+<% if !@idea.in_locale?(I18n.locale) %>
+<div id="idea_translate_block" class="row" style="margin-bottom: 20px;">
+	<div class="span5">
+		<%= link_to t('.translate_idea'), google_translate_url(@idea.explaination),
+			:class => "btn btn-mini btn-warning", :target => :blank %>
+	</div>
+</div>
+<% end %>
+
+<div id="idea_description_block" style="margin-bottom: 20px">
+	<%= simple_format @idea.explaination %>
+</div>
+
 <div id="idea_category_block" class="row" style="margin-bottom: 20px;">
 	<div class="span5">
 		<% @idea.idea_categories.each do |idea| %>
@@ -32,9 +46,6 @@
 	<div class="span3" style="text-align: right;">
 		(idea flags)
 	</div>
-</div>
-<div id="idea_description_block" style="margin-bottom: 20px">
-	<%= simple_format @idea.explaination %>
 </div>
 
 <div id="idea_social_block" class="row" style="margin-bottom: 10px;">
@@ -65,7 +76,7 @@
 <div id="idea_progress_block" style="margin-bottom: 10px;">
 	<% if !@idea.idea_progresses.empty? %>
 		<h3><%= t('.claimed_by') %></h3>
-		<% @idea.claimed_by_organizations.each do |org| %>
+		<% @idea.claimed_by_organizations.each_with_index do |org, index| %>
 			<div class="idea_progress_org" style="margin-left: 10px; margin-top: 10px; border: solid 1px #ddd; padding: 5px;">
 				<% progresses = @idea.organization_progress(org.id) %>
 				<div class="row" style="border-bottom: dashed 1px #ddd;">
@@ -91,6 +102,22 @@
 						<% else %>
 							&nbsp;
 						<% end %>
+
+						<% progress_in_locale = true
+								progresses.each do |progress|
+									if !progress.in_locale?(I18n.locale)
+										progress_in_locale = false
+										break
+									end
+								end
+						%>
+
+						<% if !progress_in_locale %>
+							<%= link_to t('.translate_org_progress'), google_translate_url(t('app.common.placeholder')),
+								:class => "btn btn-mini btn-warning translate_org_progress", :target => :blank,
+								:"data-id" => index %>
+						<% end %>
+
 					</div>
 					<div class="span3" style="text-align: right;">
 						<% if progresses.first.is_completed && !progresses.first.url.empty? %>
@@ -99,21 +126,23 @@
 						<% end %>
 					</div>
 				</div>
-				<% progresses.each do |progress| %>
-					<div>
-						<strong><%= l progress.progress_date, :format => :long if progress.progress_date %></strong>
-						<% if user_signed_in? && current_user.organization_users && !current_user.organization_users.empty? &&
-									org.id == current_user.organization_users.first.organization_id &&
-									@idea.organization_claimed_idea?(current_user.organization_users.first.organization_id) %>
+				<div id="<%= "org_progress_#{index}" %>">
+					<% progresses.each do |progress| %>
+						<div>
+							<strong><%= l progress.progress_date, :format => :long if progress.progress_date %></strong>
+							<% if user_signed_in? && current_user.organization_users && !current_user.organization_users.empty? &&
+										org.id == current_user.organization_users.first.organization_id &&
+										@idea.organization_claimed_idea?(current_user.organization_users.first.organization_id) %>
 
-							<%= link_to t('.edit_progress'),
-									edit_progress_path(progress.id),
-									:class => 'btn btn-mini btn-primary fancybox' %>
-						<% end %>
+								<%= link_to t('.edit_progress'),
+										edit_progress_path(progress.id),
+										:class => 'btn btn-mini btn-primary fancybox' %>
+							<% end %>
 
-						<%= simple_format progress.explaination %>
-					</div>
-				<% end %>
+							<%= simple_format progress.explaination %>
+						</div>
+					<% end %>
+				</div>
 			</div>
 		<% end %>
 	<% end %>

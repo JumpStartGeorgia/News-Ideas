@@ -102,6 +102,7 @@ ka:
       realized: Realized Ideas
       post_idea: Post Your Idea
       search: Search
+      placeholder: placeholder # do not translate into georgian!
   layouts:
     application:
       admin: ადმინისტრატო
@@ -163,6 +164,8 @@ ka:
       take_ownership: "Claim Idea for %{org}"
       progress_udpate: Add Progress Update
       edit_progress: Edit Progress
+      translate_idea: Translate the Idea
+      translate_org_progress: Translate the Text
     search:
       title: "Search: %{q}"
   shared:
