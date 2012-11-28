@@ -9,9 +9,6 @@ Devise.setup do |config|
   # Configure the class responsible to send e-mails.
   config.mailer = "Devise::Mailer"
 
-  # Automatically apply schema changes in tableless databases
-  config.apply_schema = false
-
   # ==> ORM configuration
   # Load and configure the ORM. Supports :active_record (default) and
   # :mongoid (bson_ext recommended) by default. Other ORMs may be
@@ -85,7 +82,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 10
 
   # Setup a pepper to generate the encrypted password.
-  # config.pepper = "2d0010eba8490cf62bc6a520a4e5cdb41eff4dbfa9ce92e1d5a5663d39016ad6655b97391bfe98a5364df713482b2ef86065906524bff5f5fe872897bc715f8f"
+  # config.pepper = "30e38b60fad22e6cd9dc293924f379661d9bcec1a8f0b5bb969ed24afb0ecc4bf6c7a96578ec5fd46fe1877dd6d9d94b1b2b25eecea7796d4798aeee45180a8f"
 
   # ==> Configuration for :confirmable
   # A period that the user is allowed to access the website even without
@@ -95,7 +92,7 @@ Devise.setup do |config|
   # the user cannot access the website without confirming his account.
   # config.allow_unconfirmed_access_for = 2.days
 
-  # If true, requires any email changes to be confirmed (exctly the same way as
+  # If true, requires any email changes to be confirmed (exactly the same way as
   # initial account confirmation) to be applied. Requires additional unconfirmed_email
   # db field (see migrations). Until confirmed new email is stored in
   # unconfirmed email column, and copied to email column on successful confirmation.
@@ -111,13 +108,9 @@ Devise.setup do |config|
   # If true, extends the user's remember period when remembered via cookie.
   # config.extend_remember_period = false
 
-  # If true, uses the password salt as remember token. This should be turned
-  # to false if you are not using database authenticatable.
-  config.use_salt_as_remember_token = true
-
   # Options to be passed to the created cookie. For instance, you can set
   # :secure => true in order to force SSL only cookies.
-  # config.cookie_options = {}
+  # config.rememberable_options = {}
 
   # ==> Configuration for :validatable
   # Range for password length. Default is 6..128.
@@ -132,6 +125,9 @@ Devise.setup do |config|
   # The time you want to timeout the user session without activity. After this
   # time the user will be asked for credentials again. Default is 30 minutes.
   # config.timeout_in = 30.minutes
+
+  # If true, expires auth token on session timeout.
+  # config.expire_auth_token_on_timeout = false
 
   # ==> Configuration for :lockable
   # Defines which strategy will be used to lock an account.
@@ -188,9 +184,8 @@ Devise.setup do |config|
   # devise role declared in your routes (usually :user).
   # config.default_scope = :user
 
-  # Configure sign_out behavior.
-  # Sign_out action can be scoped (i.e. /users/sign_out affects only :user scope).
-  # The default is true, which means any logout action will sign out all active scopes.
+  # Set this configuration to false if you want /users/sign_out to sign out
+  # only the current scope. By default, Devise signs out all scopes.
   # config.sign_out_all_scopes = true
 
   # ==> Navigation configuration
@@ -212,7 +207,7 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'
 	require "omniauth-facebook"
-	config.omniauth :facebook, "542104115818446", "29cce822c189df8252c78840208a2b04"
+	config.omniauth :facebook, ENV['NEWS_IDEAS_FACEBOOK_APP_ID'], ENV['NEWS_IDEAS_FACEBOOK_APP_SECRET']
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
@@ -222,4 +217,18 @@ Devise.setup do |config|
   #   manager.intercept_401 = false
   #   manager.default_strategies(:scope => :user).unshift :some_external_strategy
   # end
+
+  # ==> Mountable engine configurations
+  # When using Devise inside an engine, let's call it `MyEngine`, and this engine
+  # is mountable, there are some extra configurations to be taken into account.
+  # The following options are available, assuming the engine is mounted as:
+  #
+  #     mount MyEngine, at: "/my_engine"
+  #
+  # The router that invoked `devise_for`, in the example above, would be:
+  # config.router_name = :my_engine
+  #
+  # When using omniauth, Devise cannot automatically set Omniauth path,
+  # so you need to do it manually. For the users scope, it would be:
+  # config.omniauth_path_prefix = "/my_engine/users/auth"
 end

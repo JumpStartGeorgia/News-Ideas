@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
 	before_filter :initialize_gon
 	before_filter :load_categories
 	before_filter :initialize_new_idea
+	after_filter :store_location
 
 	layout :layout_by_resource
 
@@ -73,6 +74,7 @@ logger.debug "-------------- controller = #{params[:controller]}"
 	end
 
 	def load_categories
+logger.debug session.inspect
 		@categories = Category.all
 	end
 
@@ -83,7 +85,15 @@ logger.debug "-------------- controller = #{params[:controller]}"
 
 	# after user logs in, go to admin page
 	def after_sign_in_path_for(resource)
-		root_path
+logger.debug "after sign stored loc = #{session[:previous_urls].last}"
+		request.env['omniauth.origin'] || session[:previous_urls].last || root_path
+	end
+
+	# store the current path so after login, can go back
+	def store_location
+		session[:previous_urls] ||= []
+		session[:previous_urls].unshift request.fullpath if session[:previous_urls].first != request.fullpath && request.fullpath.index("/users/").nil?
+		session[:previous_urls].pop if session[:previous_urls].count > 1
 	end
 
   def valid_role?(role)

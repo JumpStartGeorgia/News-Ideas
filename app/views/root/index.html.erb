@@ -12,7 +12,7 @@
 					<%= current_user.nickname %>
 					<%= f.hidden_field :user_id, :value => current_user.id %>
 				<% else %>
-					<%= link_to t('helpers.links.sign_in'), :new_user_session, :class => 'fancybox' %>
+					<%= link_to t('helpers.links.sign_in'), :new_user_session, :class => 'fancybox btn btn-mini' %>
 				<% end %>
 
 				<%= f.fields_for :idea_categories do |cat| %>
