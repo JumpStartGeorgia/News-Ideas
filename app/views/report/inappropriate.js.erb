@@ -1,0 +1,7 @@
+console.log("rendering page");
+$('form').html('<%= escape_javascript render("form") %>');
+$(".alert-info").html("<%= escape_javascript(flash[:notice]) %>");
+$(".alert-info").show(300);
+console.log("updating test");
+//$('#test').html(x);
+console.log("done");

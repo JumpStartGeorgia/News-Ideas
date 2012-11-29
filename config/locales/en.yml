@@ -6,6 +6,7 @@ en:
       category: Category
       idea: Idea
       organization: Organization
+      idea_inappropriate_report: Report
     attributes:
       user:
         email: Email Address
@@ -38,6 +39,10 @@ en:
         url: News Story URL
         progress_date: Date
         explaination: Explaination
+      idea_inappropriate_report:
+        user_id: User
+        idea_id: Idea
+        reason: Why is Idea Inappropriate?
       organization:
         logo: Logo
         url: Website
@@ -72,6 +77,7 @@ en:
       forgot_password: Forgot Password?
       password_reset: Send Password Reset Instructions
       sign_in_provider: "Sign in with %{provider}"
+      report_inappropriate: Report Inappropriate Idea
     titles:
       new: "New %{model}"
       edit: "Edit %{model}"
@@ -181,3 +187,7 @@ en:
       title_edit_progress: Edit Progress
       title_error: Error
       error: The requested Idea and/or Organization could not be found.
+  report:
+    inappropriate:
+      title: Report Inappropriate Idea
+      success: The Idea hs been reported.

@@ -74,7 +74,8 @@
 			<% end %>
 		</div>
 		<div class="span2" style="text-align: right;">
-			(report idea)
+			<%= link_to t('helpers.links.report_inappropriate'),
+					report_inappropriate_idea_path(@idea.id), :class => 'btn btn-mini fancybox' %>
 		</div>
 	</div>
 

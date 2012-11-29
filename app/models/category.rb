@@ -14,5 +14,4 @@ class Category < ActiveRecord::Base
   attr_accessible :id, :picture, :icon, :category_translations_attributes
 
 
-
 end

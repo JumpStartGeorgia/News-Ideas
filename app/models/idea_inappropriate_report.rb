@@ -4,6 +4,11 @@ class IdeaInappropriateReport < ActiveRecord::Base
 
 	after_save :mark_idea_as_inappropriate
 
+	attr_accessible :user_id, :idea_id, :reason
+
+  validates :idea_id, :reason, :presence => true
+
+
 	# if the idea has been reported > 2 times,
 	# mark idea as inappropriate
 	def mark_idea_as_inappropriate

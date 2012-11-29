@@ -31,6 +31,10 @@ BootstrapStarter::Application.routes.draw do
 		match '/progress/create', :to => 'progress#create', :as => :create_progress, :via => :post
 		match '/progress/update/:id', :to => 'progress#update', :as => :update_progress, :via => :put
 
+		# report idea
+		match '/report/inappropriate/:idea_id', :to => 'report#inappropriate', :as => :report_inappropriate_idea, :via => :get
+		match '/report/inappropriate/:idea_id', :to => 'report#inappropriate', :as => :report_inappropriate_idea, :via => :post
+
 
 		root :to => 'root#index'
 	  match "*path", :to => redirect("/#{I18n.locale}") # handles /en/fake/path/whatever
