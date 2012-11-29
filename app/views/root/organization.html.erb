@@ -1,4 +1,8 @@
 <% title @organization.name %>
 <% title_image @organization.logo.url if @organization.logo_file_name %>
 
+<div>
+	<%= link_to t('helpers.links.website'), @organization.url, :class => 'btn btn-mini' if @organization.url %>
+</div>
+
 <%= render :partial => "shared/ideas_block", :object => @ideas %>

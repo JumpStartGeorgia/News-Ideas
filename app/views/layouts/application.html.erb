@@ -118,7 +118,6 @@
 	    <div id="navbar-idea-form">
 				<%= form_tag create_idea_path, :method => :post, :class => "form-inline" do %>
 					<% if user_signed_in? %>
-						<%= current_user.nickname %>
 						<%= hidden_field_tag 'idea_user_id', current_user.id, :name => 'idea[user_id]' %>
 					<% else %>
 						<%= link_to t('helpers.links.sign_in'), :new_user_session, :class => 'fancybox btn btn-mini' %>
