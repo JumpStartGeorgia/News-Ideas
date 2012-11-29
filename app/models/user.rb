@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
 	has_many :user_favorites, :dependent => :destroy
 	has_many :ideas
 	has_many :organization_users, :dependent => :destroy
+	has_many :idea_inappropriate_reports
   accepts_nested_attributes_for :organization_users
 
   # Include default devise modules. Others available are:

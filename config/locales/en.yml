@@ -168,6 +168,7 @@ en:
       edit_progress: Edit Progress
       translate_idea: Translate the Idea
       translate_org_progress: Translate the Text
+      inappropriate_idea: "This idea has been reported as inappropriate and is no longer available."
     search:
       title: "Search: %{q}"
   shared:

@@ -4,6 +4,7 @@ class Idea < ActiveRecord::Base
 	has_many :idea_categories, :dependent => :destroy
 	has_many :idea_progresses, :dependent => :destroy
 	has_many :user_favorites, :dependent => :destroy
+	has_many :idea_inappropriate_reports, :dependent => :destroy
 	belongs_to :user
 
   accepts_nested_attributes_for :idea_categories
@@ -45,6 +46,11 @@ class Idea < ActiveRecord::Base
 			in_locale = true
 		end
 		return in_locale
+	end
+
+	# only get appropriate ideas
+	def self.appropriate
+		where(:is_inappropriate => false)
 	end
 
 	# get the top ideas based off of overall votes

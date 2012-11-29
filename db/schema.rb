@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121122141110) do
+ActiveRecord::Schema.define(:version => 20121129094743) do
 
   create_table "categories", :force => true do |t|
     t.datetime "created_at"
@@ -46,6 +46,17 @@ ActiveRecord::Schema.define(:version => 20121122141110) do
 
   add_index "idea_categories", ["category_id"], :name => "index_idea_categories_on_category_id"
   add_index "idea_categories", ["idea_id"], :name => "index_idea_categories_on_idea_id"
+
+  create_table "idea_inappropriate_reports", :force => true do |t|
+    t.integer  "idea_id"
+    t.integer  "user_id"
+    t.string   "reason"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "idea_inappropriate_reports", ["idea_id"], :name => "index_idea_inappropriate_reports_on_idea_id"
+  add_index "idea_inappropriate_reports", ["user_id"], :name => "index_idea_inappropriate_reports_on_user_id"
 
   create_table "idea_progresses", :force => true do |t|
     t.integer  "idea_id"
