@@ -56,7 +56,6 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
     else
       I18n.locale = I18n.default_locale
     end
-logger.debug "-------------- controller = #{params[:controller]}"
 	end
 
   def default_url_options(options={})
@@ -74,7 +73,6 @@ logger.debug "-------------- controller = #{params[:controller]}"
 	end
 
 	def load_categories
-logger.debug session.inspect
 		@categories = Category.all
 	end
 
@@ -85,7 +83,6 @@ logger.debug session.inspect
 
 	# after user logs in, go to admin page
 	def after_sign_in_path_for(resource)
-logger.debug "after sign stored loc = #{session[:previous_urls].last}"
 		request.env['omniauth.origin'] || session[:previous_urls].last || root_path
 	end
 
