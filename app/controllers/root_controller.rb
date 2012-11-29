@@ -54,11 +54,9 @@ class RootController < ApplicationController
 	def organization
 		@organization = Organization.find_by_id(params[:id])
 
-		new_ideas = Idea.new_ideas.organization_ideas(params[:id])
-		top_ideas = Idea.top_ideas.organization_ideas(params[:id])
 		in_progress_ideas = Idea.in_progress_ideas.organization_ideas(params[:id])
 		realized_ideas = Idea.realized_ideas.organization_ideas(params[:id])
-		@ideas = {:new => new_ideas, :top => top_ideas, :in_progress => in_progress_ideas, :realized => realized_ideas}
+		@ideas = {:new => nil, :top => nil, :in_progress => in_progress_ideas, :realized => realized_ideas}
 	end
 
 	def search
