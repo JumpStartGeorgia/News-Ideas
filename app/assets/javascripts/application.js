@@ -1,9 +1,3 @@
-// This is a manifest file that'll be compiled into including all the files listed below.
-// Add new JavaScript/Coffee code in separate files in this directory and they'll automatically
-// be included in the compiled file accessible from http://example.com/assets/application.js
-// It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
-// the compiled file.
-//
 //= require i18n
 //= require i18n/translations
 //= require jquery
@@ -38,19 +32,6 @@ $(document).ready(function(){
 	$('#fancybox-content a.fancybox-nested').click(fancybox_nested_links);
 
 
-/*
-	$('#fancybox-content a').live('hover', function(){
-console.log('adding fancybox to link');
-    $(this).fancybox();
-  });
-
-	// if click on link in fancybox, close fancybox window
-	$("#fancybox-content a").click(function(){
-console.log('closing fancybox');
-		parent.$.fancybox.close();
-	});
-*/
-	// add fancybox to any link with class fancybox
 	$("a.fancybox").fancybox();
 
 
@@ -71,6 +52,16 @@ console.log('closing fancybox');
 	}(document, 'script', 'facebook-jssdk'));
 
 
+	// register tab pagination links for ajax calls
+	$('div#idea_list .pagination a').attr('data-remote', 'true');
+	// register tab pagination links to know which tab they are in
+	$('div#idea_list .pagination a').each(function() {
+		var href = $(this).attr('href');
+		href += (href.indexOf('?') == -1 ? '?' : '&') + "tab=" + $(this).parent().parent().parent().parent().attr('id');
+		$(this).attr('href', href);
+	});
+
+
 	//////////////////////////////
 	// idea tabs
 	//////////////////////////////
@@ -88,7 +79,6 @@ console.log('closing fancybox');
 	// when clicked, show appropriate idea block
 	$("ul#ideas_tabs a").click(function(event) {
 		id = $(this).parent().attr('id');
-console.log("id = " + id);
 		// activate the correct tab
 		$("ul#ideas_tabs li").removeClass('active'); // turn off all tabs
 		$("ul#ideas_tabs li#" + id).addClass('active'); // turn on correct one

@@ -1,37 +1,38 @@
 <%
-	id_new = t('app.common.new_ideas').gsub(" ", "_").downcase
-	id_top = t('app.common.top_ideas').gsub(" ", "_").downcase
-	id_in_progress = t('app.common.in_progress').gsub(" ", "_").downcase
-	id_realized = t('app.common.realized').gsub(" ", "_").downcase
 	organization_only = false if !organization_only
 %>
 <div id="idea_list" style="margin-top: 20px; border: solid 2px #ccc; padding: 5px 0;">
 
 	<ul id="ideas_tabs" class="nav nav-tabs">
+
 		<% if !organization_only %>
-		<li id="<%= id_top %>">
+		<li id="<%= @id_top %>">
 		  <a href="#"><%= t('app.common.top_ideas') %></a>
 		</li>
-		<li id="<%= id_new %>">
+		<li id="<%= @id_new %>">
 		  <a href="#"><%= t('app.common.new_ideas') %></a>
 		</li>
 		<% end %>
-		<li id="<%= id_in_progress%>">
+		<li id="<%= @id_in_progress%>">
 		  <a href="#"><%= t('app.common.in_progress') %></a>
 		</li>
-		<li id="<%= id_realized%>">
+		<li id="<%= @id_realized %>">
 		  <a href="#"><%= t('app.common.realized') %></a>
 		</li>
 	</ul>
 
-	<%= render :partial => "shared/ideas_list", :object => ideas_block[:top],
-		:locals => {:id => id_top} %>
-	<%= render :partial => "shared/ideas_list", :object => ideas_block[:new],
-		:locals => {:id => id_new} %>
-	<%= render :partial => "shared/ideas_list", :object => ideas_block[:in_progress],
-		:locals => {:id => id_in_progress} %>
-	<%= render :partial => "shared/ideas_list", :object => ideas_block[:realized],
-		:locals => {:id => id_realized} %>
 
+	<div id="<%= @id_top %>" class="idea_list_block" style="display: none;">
+		<%= render :partial => "shared/ideas_list", :object => ideas_block[:top] %>
+	</div>
+	<div id="<%= @id_new %>" class="idea_list_block" style="display: none;">
+		<%= render :partial => "shared/ideas_list", :object => ideas_block[:new] %>
+	</div>
+	<div id="<%= @id_in_progress %>" class="idea_list_block" style="display: none;">
+		<%= render :partial => "shared/ideas_list", :object => ideas_block[:in_progress] %>
+	</div>
+	<div id="<%= @id_realized %>" class="idea_list_block" style="display: none;">
+		<%= render :partial => "shared/ideas_list", :object => ideas_block[:realized] %>
+	</div>
 
 </div>

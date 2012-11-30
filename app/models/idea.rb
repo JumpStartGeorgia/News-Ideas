@@ -22,6 +22,8 @@ class Idea < ActiveRecord::Base
   require 'split_votes'
   include SplitVotes
 
+	self.per_page = 10
+
 	def self.explore(type)
 		if type
 			case type.downcase

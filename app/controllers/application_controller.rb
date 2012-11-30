@@ -70,6 +70,10 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 		gon.id_new = t('app.common.new_ideas').gsub(" ", "_").downcase
 		gon.id_in_progress = t('app.common.in_progress').gsub(" ", "_").downcase
 		gon.id_realized = t('app.common.realized').gsub(" ", "_").downcase
+		@id_top = gon.id_top
+		@id_new = gon.id_new
+		@id_in_progress = gon.id_in_progress
+		@id_realized = gon.id_realized
 	end
 
 	def load_categories
