@@ -93,7 +93,10 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 	# store the current path so after login, can go back
 	def store_location
 		session[:previous_urls] ||= []
-		session[:previous_urls].unshift request.fullpath if session[:previous_urls].first != request.fullpath && request.fullpath.index("/users/").nil?
+		# only record path if page is not for users (sign in, sign up, etc) and not for reporting problems
+		if session[:previous_urls].first != request.fullpath && request.fullpath.index("/users/").nil? && request.fullpath.index("/report/").nil?
+			session[:previous_urls].unshift request.fullpath
+		end
 		session[:previous_urls].pop if session[:previous_urls].count > 1
 	end
 

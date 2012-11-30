@@ -21,4 +21,19 @@ class IdeaInappropriateReport < ActiveRecord::Base
 				end
 		end
 	end
+
+	# form is double reporting so check if record already exists
+	def save
+		record = IdeaInappropriateReport.where("idea_id = ? and user_id = ? and created_at > ?",
+				self.idea_id, self.user_id, Time.now-1.minute
+		)
+
+		if record && !record.empty?
+logger.debug "IdeaInappropriateReport record was just saved, so skip"
+			# already exists
+			return true
+		else
+			super
+		end
+	end
 end

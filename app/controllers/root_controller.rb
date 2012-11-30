@@ -8,6 +8,7 @@ class RootController < ApplicationController
 				in_progress_ideas = Idea.in_progress_ideas.appropriate.paginate(:page => params[:page])
 				realized_ideas = Idea.realized_ideas.appropriate.paginate(:page => params[:page])
 				@ideas = {:new => new_ideas, :top => top_ideas, :in_progress => in_progress_ideas, :realized => realized_ideas}
+				render :layout => 'application_home'
       }
       format.js {
 				# test which tab to get data for
