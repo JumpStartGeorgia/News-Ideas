@@ -42,10 +42,10 @@ class RootController < ApplicationController
 				gon.id_realized
 		end
 
-		new_ideas = Idea.new_ideas.appropriate
-		top_ideas = Idea.top_ideas.appropriate
-		in_progress_ideas = Idea.in_progress_ideas.appropriate
-		realized_ideas = Idea.realized_ideas.appropriate
+		new_ideas = Idea.new_ideas.appropriate.paginate(:page => params[:page])
+		top_ideas = Idea.top_ideas.appropriate.paginate(:page => params[:page])
+		in_progress_ideas = Idea.in_progress_ideas.appropriate.paginate(:page => params[:page])
+		realized_ideas = Idea.realized_ideas.appropriate.paginate(:page => params[:page])
 		@ideas = {:new => new_ideas, :top => top_ideas, :in_progress => in_progress_ideas, :realized => realized_ideas}
 	end
 
@@ -53,37 +53,37 @@ class RootController < ApplicationController
 		@category = @categories.select{|x| x.id.to_s == params[:id]}
 		@category = @category.first if @category.kind_of?(Array)
 
-		new_ideas = Idea.new_ideas.categorized_ideas(params[:id]).appropriate
-		top_ideas = Idea.top_ideas.categorized_ideas(params[:id]).appropriate
-		in_progress_ideas = Idea.in_progress_ideas.categorized_ideas(params[:id]).appropriate
-		realized_ideas = Idea.realized_ideas.categorized_ideas(params[:id]).appropriate
+		new_ideas = Idea.new_ideas.categorized_ideas(params[:id]).appropriate.paginate(:page => params[:page])
+		top_ideas = Idea.top_ideas.categorized_ideas(params[:id]).appropriate.paginate(:page => params[:page])
+		in_progress_ideas = Idea.in_progress_ideas.categorized_ideas(params[:id]).appropriate.paginate(:page => params[:page])
+		realized_ideas = Idea.realized_ideas.categorized_ideas(params[:id]).appropriate.paginate(:page => params[:page])
 		@ideas = {:new => new_ideas, :top => top_ideas, :in_progress => in_progress_ideas, :realized => realized_ideas}
 	end
 
 	def user
 		@user = User.find_by_id(params[:id])
 
-		new_ideas = Idea.new_ideas.user_ideas(params[:id]).appropriate
-		top_ideas = Idea.top_ideas.user_ideas(params[:id]).appropriate
-		in_progress_ideas = Idea.in_progress_ideas.user_ideas(params[:id]).appropriate
-		realized_ideas = Idea.realized_ideas.user_ideas(params[:id]).appropriate
+		new_ideas = Idea.new_ideas.user_ideas(params[:id]).appropriate.paginate(:page => params[:page])
+		top_ideas = Idea.top_ideas.user_ideas(params[:id]).appropriate.paginate(:page => params[:page])
+		in_progress_ideas = Idea.in_progress_ideas.user_ideas(params[:id]).appropriate.paginate(:page => params[:page])
+		realized_ideas = Idea.realized_ideas.user_ideas(params[:id]).appropriate.paginate(:page => params[:page])
 		@ideas = {:new => new_ideas, :top => top_ideas, :in_progress => in_progress_ideas, :realized => realized_ideas}
 	end
 
 	def organization
 		@organization = Organization.find_by_id(params[:id])
 
-		in_progress_ideas = Idea.in_progress_ideas.organization_ideas(params[:id]).appropriate
-		realized_ideas = Idea.realized_ideas.organization_ideas(params[:id]).appropriate
+		in_progress_ideas = Idea.in_progress_ideas.organization_ideas(params[:id]).appropriate.paginate(:page => params[:page])
+		realized_ideas = Idea.realized_ideas.organization_ideas(params[:id]).appropriate.paginate(:page => params[:page])
 		@ideas = {:new => nil, :top => nil, :in_progress => in_progress_ideas, :realized => realized_ideas}
 	end
 
 	def search
 		if params[:q]
-			new_ideas = Idea.new_ideas.search_by(params[:q]).appropriate
-			top_ideas = Idea.top_ideas.search_by(params[:q]).appropriate
-			in_progress_ideas = Idea.in_progress_ideas.search_by(params[:q]).appropriate
-			realized_ideas = Idea.realized_ideas.search_by(params[:q]).appropriate
+			new_ideas = Idea.new_ideas.search_by(params[:q]).appropriate.paginate(:page => params[:page])
+			top_ideas = Idea.top_ideas.search_by(params[:q]).appropriate.paginate(:page => params[:page])
+			in_progress_ideas = Idea.in_progress_ideas.search_by(params[:q]).appropriate.paginate(:page => params[:page])
+			realized_ideas = Idea.realized_ideas.search_by(params[:q]).appropriate.paginate(:page => params[:page])
 			@ideas = {:new => new_ideas, :top => top_ideas, :in_progress => in_progress_ideas, :realized => realized_ideas}
 		end
 	end
