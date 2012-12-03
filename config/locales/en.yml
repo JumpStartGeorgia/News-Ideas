@@ -68,6 +68,9 @@ en:
     idea_realized:
       subject: "%{organization} has completed their work on your idea!"
       message: "%{organization} has published a story about your idea.  This is what they wrote:"
+    new_comment:
+      subject: "Someone has commented on your idea"
+      message: "Please click on the link below to view the comment."
   helpers:
     actions: Actions
     links:

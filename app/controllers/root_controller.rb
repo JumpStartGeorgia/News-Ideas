@@ -195,4 +195,20 @@ class RootController < ApplicationController
 
     redirect_to redirect_path
   end
+
+	def comment_notification
+		idea = Idea.find_by_id(params[:idea_id])
+		if idea
+			message = Message.new
+			message.email = idea.user.email
+			message.subject = I18n.t('mailer.new_comment.subject')
+			message.message = I18n.t('mailer.new_comment.message')
+			message.url = idea_url(params[:idea_id])
+			CommentMailer.new_comment(message).deliver
+			render :text => "true"
+			return false
+		end
+		render :text => "false"
+		return false
+	end
 end

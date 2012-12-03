@@ -66,6 +66,8 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 		gon.set = true
 		gon.highlight_first_form_field = true
 		gon.placeholder = t('app.common.placeholder')
+		gon.comment_notification_url = comment_notification_path(gon.placeholder)
+		gon.fb_app_id = ENV['NEWS_IDEAS_FACEBOOK_APP_ID']
 		gon.id_top = t('app.common.top_ideas').gsub(" ", "_").downcase
 		gon.id_new = t('app.common.new_ideas').gsub(" ", "_").downcase
 		gon.id_in_progress = t('app.common.in_progress').gsub(" ", "_").downcase
