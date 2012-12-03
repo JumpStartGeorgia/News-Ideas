@@ -43,7 +43,6 @@ $(document).ready(function(){
 
 	// facebook comments
 	(function(d, s, id) {
-		console.log("fn fb comments");
 		var js, fjs = d.getElementsByTagName(s)[0];
 		if (d.getElementById(id)) return;
 		js = d.createElement(s); js.id = id;
@@ -54,18 +53,12 @@ $(document).ready(function(){
 	window.fbAsyncInit = function() {
 		// when a comment is submitted, notify the user of the idea
 		if (gon.show_fb_comments){
-			console.log("showing fb comments");
-
 			FB.Event.subscribe('comment.create', function(response){
-				console.log(response);
 				// get idea id
 				var url_ary = response.href.split("/");
 				// check for query string values
 				var idea_id = url_ary[url_ary.length-1].split("?")[0];
-				console.log("idead_id = " + idea_id);
-				$.get(gon.comment_notification_url.replace(gon.placeholder, idea_id), function(){
-					console.log("notification sent");
-				});
+				$.get(gon.comment_notification_url.replace(gon.placeholder, idea_id));
 			});
 		}
   };
