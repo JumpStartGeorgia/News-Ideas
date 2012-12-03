@@ -23,6 +23,7 @@ gem "paperclip", "~> 3.0.4" # to upload files
 gem "capistrano", "~> 2.12.0" # to deploy to server
 gem "exception_notification", "2.5.2" # send an email when exception occurs
 gem "useragent", :git => "https://github.com/jilion/useragent.git" # browser detection
+gem "active_attr", "~> 0.5.1" # to create tabless models; using for contact form
 #gem "nested_form", "~> 0.1.1", :git => "https://github.com/davidray/nested_form.git" # easily build nested model forms with ajax links
 #gem "has_permalink", "~> 0.1.4" # create permalink slugs for nice urls
 #gem "pdfkit", "~> 0.5.2" # generate pdfs
@@ -41,7 +42,7 @@ group :assets do
 end
 
 group :development do
-#	gem "mailcatcher", "0.5.5" # small smtp server for dev, http://mailcatcher.me/
+	gem "mailcatcher", "0.5.10" # small smtp server for dev, http://mailcatcher.me/
 #	gem "wkhtmltopdf-binary", "~> 0.9.5.3" # web kit that takes html and converts to pdf
 end
 

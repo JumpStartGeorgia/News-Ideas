@@ -58,6 +58,16 @@ ka:
     messages:
       idea_progress:
         success: "The record was successfully saved."
+  mailer:
+    idea_claimed:
+      subject: "%{organization} is interested in your idea!"
+      message: "%{organization} has expressed interest in writing a story about your idea.  This is what they wrote:"
+    idea_progress_update:
+      subject: "%{organization} has updated their progress on your idea"
+      message: "%{organization} has made an progress report on your idea.  This is what they wrote:"
+    idea_realized:
+      subject: "%{organization} has completed their work on your idea!"
+      message: "%{organization} has published a story about your idea.  This is what they wrote:"
   helpers:
     actions: აირჩიეთ
     links:
