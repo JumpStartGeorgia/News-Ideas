@@ -1,0 +1,32 @@
+<% title t('.title') %>
+
+<h3><%= t('.sub_title') %></h3>
+
+<%= form_tag(notifications_path) do %>
+	<div class="row">
+		<div class="span3">
+			<label for="all" class="checkbox">
+				<%= check_box_tag 'all', 'true', @all %>
+				<%= t('.all') %>
+			</label>
+		</div>
+		<div class="span3">
+			<label for="categories">
+				<%= t('.by_category') %>
+				<br />
+				<%= select_tag "categories",
+						options_from_collection_for_select(@categories, "id", "name", @notifications.map{|x| x.identifier}),
+						:multiple => true %>
+			</label>
+		</div>
+		<div class="span2">
+			<label for="none" class="checkbox">
+				<%= check_box_tag 'none', 'true', @none %>
+				<%= t('.none') %>
+			</label>
+		</div>
+	</div>
+	<div>
+		<%= submit_tag nil, :class => 'btn btn-mini' %>
+	</div>
+<% end %>

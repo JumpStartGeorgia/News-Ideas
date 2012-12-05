@@ -38,6 +38,9 @@ BootstrapStarter::Application.routes.draw do
 		match '/report/inappropriate/:idea_id', :to => 'report#inappropriate', :as => :report_inappropriate_idea, :via => :get
 		match '/report/inappropriate/:idea_id', :to => 'report#inappropriate', :as => :report_inappropriate_idea, :via => :post
 
+		# notifications
+		match '/notifications', :to => 'notifications#index', :as => :notifications, :via => :get
+		match '/notifications', :to => 'notifications#index', :as => :notifications, :via => :post
 
 		root :to => 'root#index'
 	  match "*path", :to => redirect("/#{I18n.locale}") # handles /en/fake/path/whatever

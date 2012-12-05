@@ -79,7 +79,7 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 	end
 
 	def load_categories
-		@categories = Category.all
+		@categories = Category.with_translations(I18n.locale)
 	end
 
 	def initialize_new_idea

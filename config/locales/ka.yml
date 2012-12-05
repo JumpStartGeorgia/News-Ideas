@@ -153,6 +153,7 @@ ka:
     application:
       admin: ადმინისტრატო
       user_profile: Your Profile
+      notifications: New Idea Notifications
       sign_out: გასვლა
       js_link_title: "ეწვიეთ ჯამპსტარტ ჯორჯიას ვებ-გვერდს"
       js_link_text: აგებულია
@@ -161,6 +162,7 @@ ka:
     application_home:
       admin: ადმინისტრატო
       user_profile: Your Profile
+      notifications: New Idea Notifications
       sign_out: გასვლა
       js_link_title: "ეწვიეთ ჯამპსტარტ ჯორჯიას ვებ-გვერდს"
       js_link_text: აგებულია
@@ -229,3 +231,13 @@ ka:
     inappropriate:
       title: Report Inappropriate Idea
       success: The Idea hs been reported.
+  notifications:
+    index:
+      title: New Idea Notifications
+      sub_title: What notifications would you like to receive?
+      all: When any idea is added.
+      none: I do not want to receive notifications.
+      by_category: "When idea is added to category:"
+      all_success: You will recieve a notification whenever a new idea is added.
+      none_success: You will not receive any notifications when ideas are added.
+      by_category_success: "You will receive a notification when these categories are selected: %{categories}."

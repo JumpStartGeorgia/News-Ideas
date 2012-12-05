@@ -91,6 +91,9 @@
 						        <li>
 				 		         <%= link_to t('.user_profile'), user_path(current_user.id) %>
 										</li>
+						        <li>
+				 		         <%= link_to t('.notifications'), notifications_path %>
+										</li>
 										<% if current_user.role?(:admin) %>
 						          <li>
 					 		         <%= link_to t('.admin'), admin_path %>
