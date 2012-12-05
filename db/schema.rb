@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121129094743) do
+ActiveRecord::Schema.define(:version => 20121205074621) do
 
   create_table "categories", :force => true do |t|
     t.datetime "created_at"
@@ -88,6 +88,17 @@ ActiveRecord::Schema.define(:version => 20121129094743) do
   add_index "ideas", ["overall_votes"], :name => "index_ideas_on_overall_votes"
   add_index "ideas", ["user_id"], :name => "index_ideas_on_user_id"
 
+  create_table "notifications", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "notification_type"
+    t.integer  "identifier"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "notifications", ["notification_type", "identifier"], :name => "idx_notif_type"
+  add_index "notifications", ["user_id"], :name => "index_notifications_on_user_id"
+
   create_table "organization_translations", :force => true do |t|
     t.integer  "organization_id"
     t.string   "locale"
@@ -120,15 +131,6 @@ ActiveRecord::Schema.define(:version => 20121129094743) do
     t.datetime "logo_updated_at"
     t.string   "url"
   end
-
-  create_table "user_favorites", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "idea_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "user_favorites", ["user_id"], :name => "index_user_favorites_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

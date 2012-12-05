@@ -199,12 +199,30 @@ class RootController < ApplicationController
 	def comment_notification
 		idea = Idea.find_by_id(params[:idea_id])
 		if idea
+			# notify owner
 			message = Message.new
 			message.email = idea.user.email
-			message.subject = I18n.t('mailer.new_comment.subject')
-			message.message = I18n.t('mailer.new_comment.message')
-			message.url = idea_url(params[:idea_id])
-			CommentMailer.new_comment(message).deliver
+			message.subject = I18n.t('mailer.owner.new_comment.subject')
+			message.message = I18n.t('mailer.owner.new_comment.message')
+			message.url_id = params[:idea_id]
+			NotificationOwnerMailer.new_comment(message).deliver
+
+			# notify subscribers
+			message = Message.new
+			message.bcc = Notification.follow_idea_users(idea.id)
+			if message.bcc && !message.bcc.empty?
+				# if the owner is a subscriber, remove from list
+				index = message.bcc.index(idea.user.email)
+				message.bcc.delete_at(index) if index
+				# only continue if owner was not only subscriber
+				if message.bcc.length > 0
+					message.subject = I18n.t('mailer.subscriber.new_comment.subject')
+					message.message = I18n.t('mailer.subscriber.new_comment.message')
+					message.url_id = params[:idea_id]
+					NotificationSubscriberMailer.new_comment(message).deliver
+				end
+			end
+
 			render :text => "true"
 			return false
 		end

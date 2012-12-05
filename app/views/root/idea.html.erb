@@ -100,7 +100,8 @@
 						<div class="span2">
 							<% if user_signed_in? && current_user.organization_users && !current_user.organization_users.empty? &&
 										org.id == current_user.organization_users.first.organization_id &&
-										@idea.organization_claimed_idea?(current_user.organization_users.first.organization_id) %>
+										@idea.organization_claimed_idea?(current_user.organization_users.first.organization_id)  &&
+										!@idea.organization_realized_idea?(current_user.organization_users.first.organization_id) %>
 
 								<%= link_to t('.progress_udpate'),
 										progress_update_path(:idea_id => @idea.id, :organization_id => current_user.organization_users.first.organization_id),

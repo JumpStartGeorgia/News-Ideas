@@ -1,4 +1,4 @@
-class IdeaProgressMailer < ActionMailer::Base
+class NotificationOwnerMailer < ActionMailer::Base
   default :from => ENV['APPLICATION_FEEDBACK_FROM_EMAIL']
 
   def idea_claimed(message)
@@ -12,6 +12,11 @@ class IdeaProgressMailer < ActionMailer::Base
   end
 
   def idea_realized(message)
+    @message = message
+    mail(:to => message.email, :subject => message.subject)
+  end
+
+  def new_comment(message)
     @message = message
     mail(:to => message.email, :subject => message.subject)
   end

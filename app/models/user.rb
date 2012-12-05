@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-	has_many :user_favorites, :dependent => :destroy
+	has_many :notifications, :dependent => :destroy
 	has_many :ideas
 	has_many :organization_users, :dependent => :destroy
 	has_many :idea_inappropriate_reports

@@ -143,4 +143,11 @@ class Idea < ActiveRecord::Base
 		end
 		return false
 	end
+
+	def organization_realized_idea?(organization_id)
+		if organization_id && !self.idea_progresses.index{|x| x.organization_id == organization_id && x.is_completed}.nil?
+			return true
+		end
+		return false
+	end
 end
