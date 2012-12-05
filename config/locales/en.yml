@@ -108,6 +108,8 @@ en:
       password_reset: Send Password Reset Instructions
       sign_in_provider: "Sign in with %{provider}"
       report_inappropriate: Report Inappropriate Idea
+      follow_idea: Follow Idea
+      unfollow_idea: Unfollow Idea
     titles:
       new: "New %{model}"
       edit: "Edit %{model}"
@@ -142,6 +144,10 @@ en:
       post_idea: Post Your Idea
       search: Search
       placeholder: placeholder
+      follow_idea: You will now be sent email notifications when updates occur to this idea.
+      follow_idea_bad: The idea could not be found to follow.
+      unfollow_idea: You will no longer be sent email notifications when updates occur to this idea.
+      unfollow_idea_bad: The idea could not be found to unfollow.
   layouts:
     application:
       admin: Admin

@@ -229,4 +229,33 @@ class RootController < ApplicationController
 		render :text => "false"
 		return false
 	end
+
+	def follow_idea
+		idea = Idea.find_by_id(params[:idea_id])
+		if idea
+			Notification.create(:user_id => current_user.id,
+													:identifier => idea.id,
+													:notification_type => Notification::TYPES[:follow_idea])
+			flash[:notice] = I18n.t('app.common.follow_idea')
+			redirect_to idea_path(idea.id)
+		else
+			flash[:alert] = I18n.t('app.common.follow_idea_bad')
+			redirect_to root_path
+		end
+	end
+
+	def unfollow_idea
+		idea = Idea.find_by_id(params[:idea_id])
+		if idea
+			Notification.where(:user_id => current_user.id,
+													:identifier => idea.id,
+													:notification_type => Notification::TYPES[:follow_idea]).delete_all
+
+			flash[:notice] = I18n.t('app.common.unfollow_idea')
+			redirect_to idea_path(idea.id)
+		else
+			flash[:alert] = I18n.t('app.common.unfollow_idea_bad')
+			redirect_to root_path
+		end
+	end
 end
