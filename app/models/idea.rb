@@ -16,6 +16,7 @@ class Idea < ActiveRecord::Base
       :is_inappropriate,
       :is_duplicate,
 			:idea_categories_attributes
+	attr_accessor :is_create
 
   validates :user_id, :explaination, :presence => true
 
