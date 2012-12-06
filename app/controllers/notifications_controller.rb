@@ -2,6 +2,8 @@ class NotificationsController < ApplicationController
   before_filter :authenticate_user!
 
 	def index
+		gon.notifications = true
+
 		if request.post?
 			if params[:none]
 				# delete all notifications
