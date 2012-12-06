@@ -54,7 +54,7 @@ class Admin::OrganizationsController < ApplicationController
 
     respond_to do |format|
       if @organization.save
-        format.html { redirect_to admin_organization_path(@organization), notice: 'Organization was successfully created.' }
+        format.html { redirect_to admin_organization_path(@organization), notice: t('app.msgs.success_created', :obj => t('activerecord.models.organization')) }
         format.json { render json: @organization, status: :created, location: @organization }
       else
         format.html { render action: "new" }
@@ -70,7 +70,7 @@ class Admin::OrganizationsController < ApplicationController
 
     respond_to do |format|
       if @organization.update_attributes(params[:organization])
-        format.html { redirect_to admin_organization_path(@organization), notice: 'Organization was successfully updated.' }
+        format.html { redirect_to admin_organization_path(@organization), notice: t('app.msgs.success_updated', :obj => t('activerecord.models.user')) }
         format.json { head :ok }
       else
         format.html { render action: "edit" }

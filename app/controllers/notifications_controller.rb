@@ -9,7 +9,7 @@ class NotificationsController < ApplicationController
 				# delete all notifications
 				Notification.where(:notification_type => Notification::TYPES[:new_idea],
 																				:user_id => current_user.id).delete_all
-				flash[:notice] = I18n.t('.none_success')
+				flash[:notice] = I18n.t('app.msgs.notification_none_success')
 			elsif params[:all]
 				# all notifications
 				# delete anything on file first
@@ -19,7 +19,7 @@ class NotificationsController < ApplicationController
 				Notification.create(:notification_type => Notification::TYPES[:new_idea],
 																				:user_id => current_user.id)
 
-				flash[:notice] = I18n.t('.all_success')
+				flash[:notice] = I18n.t('app.msgs.notification_all_success')
 			elsif params[:categories] && !params[:categories].empty?
 				# by category
 				# delete anything on file first
@@ -31,7 +31,7 @@ class NotificationsController < ApplicationController
 																					:user_id => current_user.id,
 																					:identifier => cat_id)
 				end
-				flash[:notice] = I18n.t('.by_category_success',
+				flash[:notice] = I18n.t('app.msgs.notification_by_category_success',
 					:categories => @categories.select{|x| params[:categories].index(x.id.to_s)}.map{|x| x.name}.join(","))
 
 			end
