@@ -29,11 +29,14 @@
 		</div>
 	</div>
 
-	<% if !@idea.in_locale?(I18n.locale) %>
 	<div id="idea_translate_block" class="row" style="margin-bottom: 20px;">
 		<div class="span3">
-			<%= link_to t('.translate_idea'), google_translate_url(@idea.explaination),
-				:class => "btn btn-mini", :target => :blank %>
+			<% if !@idea.in_locale?(I18n.locale) %>
+				<%= link_to t('.translate_idea'), google_translate_url(@idea.explaination),
+					:class => "btn btn-mini", :target => :blank %>
+			<% else %>
+				&nbsp;
+			<% end %>
 		</div>
 		<div class="span3">
 			<% if user_signed_in? %>
@@ -52,7 +55,6 @@
 			<% end %>
 		</div>
 	</div>
-	<% end %>
 
 	<div id="idea_description_block" style="margin-bottom: 20px">
 		<%= simple_format @idea.explaination %>
