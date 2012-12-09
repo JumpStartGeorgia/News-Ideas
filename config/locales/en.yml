@@ -59,6 +59,8 @@ en:
       idea_progress:
         success: "The record was successfully saved."
   mailer:
+    closing: "Sincerely,"
+    signature: The News Idea Site
     owner:
       idea_claimed:
         subject: "%{organization} is interested in your idea!"

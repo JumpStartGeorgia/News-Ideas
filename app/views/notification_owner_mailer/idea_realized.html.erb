@@ -3,3 +3,9 @@
 <%= simple_format @message.org_message %>
 
 <%= link_to @message.url, @message.url %>
+
+<p>
+	<%= t('mailer.closing') %>
+	<br />
+	<%= t('mailer.signature') %>
+</p>
