@@ -91,6 +91,10 @@ en:
       new_comment:
         subject: "Someone has commented on an idea you care about"
         message: "Please click on the link below to view the comment."
+    user:
+      new_user:
+        subject: "Welcome to News Ideas!"
+        message: "Thank you for becoming a member of News Ideas and contributing to our repository of ideas."
   helpers:
     actions: Actions
     links:
