@@ -61,6 +61,7 @@ ka:
   mailer:
     closing: "Sincerely,"
     signature: The News Idea Site
+    unsubscribe: Click here to unsubscribe
     owner:
       idea_claimed:
         subject: "%{organization} is interested in your idea!"

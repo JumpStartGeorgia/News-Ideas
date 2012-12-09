@@ -1,5 +1,6 @@
 class NotificationSubscriberMailer < ActionMailer::Base
   default :from => ENV['APPLICATION_FEEDBACK_FROM_EMAIL']
+	layout 'mailer'
 
   def new_idea(message)
     @message = message

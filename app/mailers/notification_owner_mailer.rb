@@ -1,5 +1,6 @@
 class NotificationOwnerMailer < ActionMailer::Base
   default :from => ENV['APPLICATION_FEEDBACK_FROM_EMAIL']
+	layout 'mailer'
 
   def idea_claimed(message)
     @message = message
