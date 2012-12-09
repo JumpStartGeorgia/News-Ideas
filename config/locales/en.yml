@@ -156,14 +156,16 @@ en:
       permalink_exists: already exists in the database
       success_created: "%{obj} was successfully created."
       success_updated: "%{obj} was successfully updated."
-      notification_all_success: You will recieve a notification whenever a new idea is added.
-      notification_none_success: You will not receive any notifications when ideas are added.
-      notification_by_category_success: "You will receive a notification when these categories are selected: %{categories}."
+      notification_yes: You will be sent notifications.
+      notification_no: You will not be sent notifications.
+      notification_new_idea_all_success: You will recieve a notification whenever an idea is added.
+      notification_new_idea_none_success: You will not receive any notifications when ideas are added.
+      notification_new_idea_by_category_success: "You will receive a notification when an idea is added to these categories: %{categories}."
   layouts:
     application:
       admin: Admin
       user_profile: Your Profile
-      notifications: New Idea Notifications
+      notifications: Notification Settings
       sign_out: Sign Out
       js_link_title: "Visit JumpStart Georgia's website"
       js_link_text: Built by
@@ -172,7 +174,7 @@ en:
     application_home:
       admin: Admin
       user_profile: Your Profile
-      notifications: New Idea Notifications
+      notifications: Notification Settings
       sign_out: Sign Out
       js_link_title: "Visit JumpStart Georgia's website"
       js_link_text: Built by
@@ -242,8 +244,12 @@ en:
       success: The Idea hs been reported.
   notifications:
     index:
-      title: New Idea Notifications
-      sub_title: What notifications would you like to receive?
-      all: When any idea is added.
-      none: I do not want to receive notifications.
-      by_category: "When idea is added to category:"
+      title: Notification Settings
+      all_sub_title: All Notifications
+      all_label: Do you want to recieve any notifications from this site?
+      all_no: "No, do not send me any notifications."
+      all_yes: "Yes, I want notifications sent to me."
+      new_ideas_sub_title: New Idea Notifications
+      new_ideas_all: Notify me when any idea is added.
+      new_ideas_none: I do not want to receive notifications when an new idea is added.
+      new_ideas_by_category: "Notify me when an idea is added to:"

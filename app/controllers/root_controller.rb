@@ -199,13 +199,15 @@ class RootController < ApplicationController
 	def comment_notification
 		idea = Idea.find_by_id(params[:idea_id])
 		if idea
-			# notify owner
-			message = Message.new
-			message.email = idea.user.email
-			message.subject = I18n.t('mailer.owner.new_comment.subject')
-			message.message = I18n.t('mailer.owner.new_comment.message')
-			message.url_id = params[:idea_id]
-			NotificationOwnerMailer.new_comment(message).deliver
+			# notify owner if wants notification
+			if idea.user.wants_notifications
+				message = Message.new
+				message.email = idea.user.email
+				message.subject = I18n.t('mailer.owner.new_comment.subject')
+				message.message = I18n.t('mailer.owner.new_comment.message')
+				message.url_id = params[:idea_id]
+				NotificationOwnerMailer.new_comment(message).deliver
+			end
 
 			# notify subscribers
 			message = Message.new

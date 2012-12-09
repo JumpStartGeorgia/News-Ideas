@@ -35,34 +35,10 @@ $(document).ready(function(){
 	$("a.fancybox").fancybox();
 
 
-
 	// workaround to get logout link in navbar to work
 	$('body')
 		.off('click.dropdown touchstart.dropdown.data-api', '.dropdown')
 		.on('click.dropdown touchstart.dropdown.data-api', '.dropdown form', function (e) { e.stopPropagation() });
-
-	// facebook comments
-	(function(d, s, id) {
-		var js, fjs = d.getElementsByTagName(s)[0];
-		if (d.getElementById(id)) return;
-		js = d.createElement(s); js.id = id;
-		js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=" + gon.fb_app_id;
-		fjs.parentNode.insertBefore(js, fjs);
-	}(document, 'script', 'facebook-jssdk'));
-
-	window.fbAsyncInit = function() {
-		// when a comment is submitted, notify the user of the idea
-		if (gon.show_fb_comments){
-			FB.Event.subscribe('comment.create', function(response){
-				// get idea id
-				var url_ary = response.href.split("/");
-				// check for query string values
-				var idea_id = url_ary[url_ary.length-1].split("?")[0];
-				$.get(gon.comment_notification_url.replace(gon.placeholder, idea_id));
-			});
-		}
-  };
-
 
 	// register tab pagination links for ajax calls
 	$('div#idea_list .pagination a').attr('data-remote', 'true');

@@ -14,16 +14,18 @@ class IdeaProgressObserver < ActiveRecord::Observer
 			if idea_progress.is_completed && idea_progress.url
 				# idea realized
 
-				# notify owner
-				message = Message.new
-				message.email = idea_progress.idea.user.email
-				message.subject = I18n.t("mailer.owner.idea_realized.subject",
-														:organization => idea_progress.organization.name)
-				message.message = I18n.t("mailer.owner.idea_realized.message",
-														:organization => idea_progress.organization.name)
-				message.org_message = idea_progress.explaination
-				message.url = idea_progress.url
-				NotificationOwnerMailer.idea_realized(message).deliver
+				# notify owner if wants notification
+				if idea_progress.idea.user.wants_notifications
+					message = Message.new
+					message.email = idea_progress.idea.user.email
+					message.subject = I18n.t("mailer.owner.idea_realized.subject",
+															:organization => idea_progress.organization.name)
+					message.message = I18n.t("mailer.owner.idea_realized.message",
+															:organization => idea_progress.organization.name)
+					message.org_message = idea_progress.explaination
+					message.url = idea_progress.url
+					NotificationOwnerMailer.idea_realized(message).deliver
+				end
 
 				# notify subscribers
 				message = Message.new
@@ -50,16 +52,18 @@ class IdeaProgressObserver < ActiveRecord::Observer
 
 				if ideas && !ideas.empty?
 					# org already claimed, just an update
-					# notify owner
-					message = Message.new
-					message.email = idea_progress.idea.user.email
-					message.subject = I18n.t("mailer.owner.idea_progress_update.subject",
-															:organization => idea_progress.organization.name)
-					message.message = I18n.t("mailer.owner.idea_progress_update.message",
-															:organization => idea_progress.organization.name)
-					message.org_message = idea_progress.explaination
-					message.url_id = idea_progress.idea_id
-					NotificationOwnerMailer.idea_progress_update(message).deliver
+					# notify owner if wants notification
+					if idea_progress.idea.user.wants_notifications
+						message = Message.new
+						message.email = idea_progress.idea.user.email
+						message.subject = I18n.t("mailer.owner.idea_progress_update.subject",
+																:organization => idea_progress.organization.name)
+						message.message = I18n.t("mailer.owner.idea_progress_update.message",
+																:organization => idea_progress.organization.name)
+						message.org_message = idea_progress.explaination
+						message.url_id = idea_progress.idea_id
+						NotificationOwnerMailer.idea_progress_update(message).deliver
+					end
 
 					# notify subscribers
 					message = Message.new
@@ -81,16 +85,18 @@ class IdeaProgressObserver < ActiveRecord::Observer
 					end
 				else
 					# org is claiming idea
-					# notify owner
-					message = Message.new
-					message.email = idea_progress.idea.user.email
-					message.subject = I18n.t("mailer.owner.idea_claimed.subject",
-															:organization => idea_progress.organization.name)
-					message.message = I18n.t("mailer.owner.idea_claimed.message",
-															:organization => idea_progress.organization.name)
-					message.org_message = idea_progress.explaination
-					message.url_id = idea_progress.idea_id
-					NotificationOwnerMailer.idea_claimed(message).deliver
+					# notify owner if wants notification
+					if idea_progress.idea.user.wants_notifications
+						message = Message.new
+						message.email = idea_progress.idea.user.email
+						message.subject = I18n.t("mailer.owner.idea_claimed.subject",
+																:organization => idea_progress.organization.name)
+						message.message = I18n.t("mailer.owner.idea_claimed.message",
+																:organization => idea_progress.organization.name)
+						message.org_message = idea_progress.explaination
+						message.url_id = idea_progress.idea_id
+						NotificationOwnerMailer.idea_claimed(message).deliver
+					end
 
 					# notify subscribers
 					message = Message.new

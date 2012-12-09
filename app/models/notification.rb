@@ -16,12 +16,12 @@ class Notification < ActiveRecord::Base
 				if !category_ids.empty?
 					# idea belongs to multiple categories
 					x = select("users.email").joins(:user)
-					.where("notification_type = ? and (identifier is null or identifier in (?))", TYPES[:new_idea], category_ids)
+					.where("users.wants_notifications = 1 and notification_type = ? and (identifier is null or identifier in (?))", TYPES[:new_idea], category_ids)
 				end
 			else
 				# idea belongs to one category
 				x = select("users.email").joins(:user)
-				.where("notification_type = ? and (identifier is null or identifier = ?)", TYPES[:new_idea], category_ids)
+				.where("users.wants_notifications = 1 and notification_type = ? and (identifier is null or identifier = ?)", TYPES[:new_idea], category_ids)
 			end
 
 			if x && !x.empty?
@@ -35,7 +35,7 @@ class Notification < ActiveRecord::Base
 		x = nil
 		if idea_id
 			x = select("users.email").joins(:user)
-			.where("notification_type = ? and identifier = ?", TYPES[:follow_idea], idea_id)
+			.where("users.wants_notifications = 1 and notification_type = ? and identifier = ?", TYPES[:follow_idea], idea_id)
 
 			if x && !x.empty?
 				x = x.map{|x| x.email}
