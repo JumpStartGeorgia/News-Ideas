@@ -21,7 +21,8 @@
 				<% end %>
 
 				<%= f.input :categories, :as => :select, :collection => @categories, :multiple => true,
-				    :input_html => { :size => 1, :style => 'display: none;' } %>
+				    :input_html => { :size => 1, :style => 'display: none;' },
+						:label => t('activerecord.attributes.idea_category.category_id') %>
 
 				<%= f.input :explaination, :as => :text, :input_html => {:rows => 5, :cols => 50} %>
 

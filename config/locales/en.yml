@@ -138,6 +138,7 @@ en:
       reset: Reset
       remove: Remove
       confirm: Are you sure?
+      new: New
     common:
       app_name: News Ideas
       comments: Comments
