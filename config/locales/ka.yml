@@ -6,7 +6,7 @@ ka:
       category: კატეგორია
       idea: იდეა
       organization: ორგანიზაცია
-      idea_inappropriate_report: Report
+      idea_inappropriate_report: რეპორტი
     attributes:
       user:
         email: ელ.ფოსტა
@@ -24,10 +24,10 @@ ka:
       idea:
         user_id: მომხმარებელი
         explaination: განმარტება
-        created_at: Date
+        created_at: თარიღი
         individual_votes: თითოეული ხმა
         overall_votes: ხმების სრული რაოდენობა
-        is_duplicate: Duplicate?
+        is_duplicate: დუბლირებული?
         is_inappropriate: არ შეესაბამება
       idea_category:
         idea_id: იდეა
@@ -45,7 +45,7 @@ ka:
         reason: რატომ არ შეესაბამება იდეა?
       organization:
         logo: ლოგო
-        url: Website
+        url: ვებ-გვერდი
       organization_translation:
         name: სახელი
       organization_user:
@@ -59,9 +59,9 @@ ka:
       idea_progress:
         success: "ჩანაწერები წარმატებით შეინახა."
   mailer:
-    closing: "Sincerely,"
+    closing: "პატივისცემით,"
     signature: The News Idea Site
-    unsubscribe: Click here to unsubscribe
+    unsubscribe: დააჭირეთ აქ გაუქმებისათვის
     owner:
       idea_claimed:
         subject: "%{organization} დაინტერესებულია თქვენი იდეით!"
@@ -93,8 +93,8 @@ ka:
         message: "ლინკის სანახავად მიყევით ბმულს."
     user:
       new_user:
-        subject: "Welcome to News Ideas!"
-        message: "Thank you for becoming a member of News Ideas and contributing to our repository of ideas."
+        subject: "კეთილი იყოს თქვენი მობრძანება ახალი ამბების იდეებში!"
+        message: "მადლობას გიხდით რომ გახდით ჩვენი გვერდის წევრი და ხელს უწყობთ ჩვენ ბაზაში იდეების დამატებას. "
   helpers:
     actions: აირჩიეთ
     links:
@@ -147,7 +147,7 @@ ka:
       rate_it: შეაფასე!
       top_ideas: ტოპ იდეები
       new_ideas: ახალი იდეები
-      in_progress: In Progress
+      in_progress: მიმდინარეობს
       realized: განხორციელებული იდეები
       post_idea: გამოაქვეყნე შენი იდეა
       search: ძებნა
@@ -162,8 +162,8 @@ ka:
       permalink_exists: უკვე არსებობს მონაცემთა ბაზაში
       success_created: "%{obj} შექმნილია."
       success_updated: "%{obj} განახლებულია."
-      notification_yes: You will be sent notifications.
-      notification_no: You will not be sent notifications.
+      notification_yes: თქვენ მიიღებთ შეტყობინებებს.
+      notification_no: თქვენ არ მიიღებთ შეტყობინებებს.
       notification_all_success: თქვენ მიიღებთ შეტყობინებას ყოველი  ახალ იდეის დამატებაზე.
       notification_none_success: თქვენ არ მიიღებთ შეტყობინებას ყოველი  ახალ იდეის დამატებაზე.
       notification_by_category_success: "თქვენ მიიღებთ შეტყობინებას ამ კატეგორიები ამორჩევის შემთხვევაში: %{categories}."
@@ -226,7 +226,7 @@ ka:
       claimed_by: "იდეა შეიმუშავა"
       finished: დასრულებული
       news_url: იხილე სიახლეები
-      take_ownership: "Claim Idea for %{org}"
+      take_ownership: "იდეაზე პასუხისმგებლობას იღებს %{org}"
       progress_udpate: დაამატე პროგრესი
       edit_progress: შეცვალე პროგრესი
       translate_idea: იდეის თარგმნა
@@ -243,7 +243,7 @@ ka:
       title_progress_update: პროგრესი
       title_edit_progress: პროგრესის ცვლილება
       title_error: შეცდომა
-      error: The არ მოიძებნა
+      error: იდეა/ორგანიზაცია არ მოიძებნა
   report:
     inappropriate:
       title: დაარეპორტე შეუსაბამო იდეა
@@ -251,11 +251,11 @@ ka:
   notifications:
     index:
       title: ახალი იდეის შეტყობინება
-      all_sub_title: All Notifications
-      all_label: Do you want to recieve any notifications from this site?
-      all_no: "No, do not send me any notifications."
-      all_yes: "Yes, I want notifications sent to me."
-      new_ideas_sub_title: New Idea Notifications
-      new_ideas_all: Notify me when any idea is added.
-      new_ideas_none: I do not want to receive notifications when an new idea is added.
-      new_ideas_by_category: "Notify me when an idea is added to:"
+      all_sub_title: ყველა შეტყობინება
+      all_label: გინდათ მიიღოთ შეტყობინება საიტიდან?
+      all_no: "არ გამომიგზავნო შეტყობინება."
+      all_yes: "დიახ, მინდა მივიღო შეტყობინებები."
+      new_ideas_sub_title: ახალი იდეის შეტყობინება
+      new_ideas_all: შემატყობინე ახალი იდეის დამატება
+      new_ideas_none: არ შემატყობინო ახალი იდეის დამატება.
+      new_ideas_by_category: "შემატყობინე როდესაც იდეა დაემატება:"
