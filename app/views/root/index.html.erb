@@ -1,6 +1,11 @@
 <div class="row">
 	<div class="span5">
-		blah blah blah
+		<p style="font-size: 16px !important; margin-bottom: 15px;">
+			Have an idea for a news story? Wish the media would report on an issue that is important to you? Don't have the time or skills to do it yourself? Post your idea here. If it is a good one, chances are, a journalist will claim it.
+		</p>
+		<p style="font-size: 16px !important;">
+			StoryBoard makes your stories social, allowing missed opportunities to become a treasure trove of journalistic brainstorming. Vote, share, and watch how ideas take shape and become the news.
+		</p>
 	</div>
 	<div class="span1">&nbsp;</div>
 	<div class="span5" style="border: solid 2px #ccc; padding: 5px;">
@@ -15,7 +20,7 @@
 					<%= link_to t('helpers.links.sign_in'), :new_user_session, :class => 'fancybox btn btn-mini' %>
 				<% end %>
 
-				<%= f.input :categories, :as => :select, :collection => @categories, :multiple => true, 
+				<%= f.input :categories, :as => :select, :collection => @categories, :multiple => true,
 				    :input_html => { :size => 1, :style => 'display: none;' } %>
 
 				<%= f.input :explaination, :as => :text, :input_html => {:rows => 5, :cols => 50} %>
