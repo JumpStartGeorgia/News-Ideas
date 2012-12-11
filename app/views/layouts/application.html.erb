@@ -128,10 +128,10 @@
 
 					<strong><%= t('app.common.post_idea') %></strong>
 
-					<label class="control-label" for="inputPassword">
+					<label class="control-label" for="idea_idea_categories_attributes_0_category_id">
 						<%= t('activerecord.attributes.idea_category.category_id') %>
 					</label>
-					<%= select_tag 'idea_idea_categories_attributes_0_category_id', options_from_collection_for_select(@categories, "id", "name"), :name => 'idea[idea_categories_attributes][0][category_id]' %>
+					<%= select_tag 'idea_category_ids', options_from_collection_for_select(@categories, "id", "name"), :name => 'idea[category_ids][]', :multiple => true, :size => 1, :style => 'display: none;' %>
 
 					<label class="control-label" for="idea_explaination">
 						<%= t('activerecord.attributes.idea.explaination') %>

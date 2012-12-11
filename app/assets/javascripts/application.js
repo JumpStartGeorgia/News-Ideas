@@ -14,32 +14,22 @@ $(document).ready(function(){
 	  $(":input:visible:enabled:first").focus();
 	}
 
-	// if a link with 'fancybox-nested' class is clicked, get the html and replace with current html
-	function fancybox_nested_links() {
-		$.get($(this).attr('href'), function(data){
-			// pull out the html starting with div class="content"
-			var x = $('div.content', data).html();
-			// insert the new html
-			$('#fancybox-content div.content').html(x);
-			// register any new fancybox-nested links
-			$('#fancybox-content a.fancybox-nested').click(fancybox_nested_links);
-		});
-
-		return false;
-	}
-
-	// register click function for 'fancybox-nested' class that should only be used on pages that are opened in fancybox
-	$('#fancybox-content a.fancybox-nested').click(fancybox_nested_links);
-
-
-	$("a.fancybox").fancybox();
-
-
+  // register jquery multi select for category list in new idea form
+  $('select#idea_category_ids').multiselect({
+    header: false,
+    noneSelectedText: ''
+  });
+  
 	// workaround to get logout link in navbar to work
 	$('body')
 		.off('click.dropdown touchstart.dropdown.data-api', '.dropdown')
 		.on('click.dropdown touchstart.dropdown.data-api', '.dropdown form', function (e) { e.stopPropagation() });
 
+
+
+	//////////////////////////////
+	// idea tabs
+	//////////////////////////////
 	// register tab pagination links for ajax calls
 	$('div#idea_list .pagination a').attr('data-remote', 'true');
 	// register tab pagination links to know which tab they are in
@@ -50,9 +40,6 @@ $(document).ready(function(){
 	});
 
 
-	//////////////////////////////
-	// idea tabs
-	//////////////////////////////
 	// if ideas tabs are on page, highlight the correct block when the page loads
 	if (gon.initial_tab_id){
 		$("ul#ideas_tabs li#" + gon.initial_tab_id).addClass('active'); // turn on correct one
@@ -82,6 +69,27 @@ $(document).ready(function(){
 
 		return false;
 	});
+
+	// if a link with 'fancybox-nested' class is clicked, get the html and replace with current html
+	function fancybox_nested_links() {
+		$.get($(this).attr('href'), function(data){
+			// pull out the html starting with div class="content"
+			var x = $('div.content', data).html();
+			// insert the new html
+			$('#fancybox-content div.content').html(x);
+			// register any new fancybox-nested links
+			$('#fancybox-content a.fancybox-nested').click(fancybox_nested_links);
+		});
+
+		return false;
+	}
+
+	// register click function for 'fancybox-nested' class that should only be used on pages that are opened in fancybox
+	$('#fancybox-content a.fancybox-nested').click(fancybox_nested_links);
+	$("a.fancybox").fancybox();
+
+
+
 
 
 });

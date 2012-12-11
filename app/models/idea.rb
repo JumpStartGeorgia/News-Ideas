@@ -2,12 +2,11 @@ class Idea < ActiveRecord::Base
 	require 'utf8_converter'
 
 	has_many :idea_categories, :dependent => :destroy
+	has_many :categories, :through => :idea_categories
 	has_many :idea_progresses, :dependent => :destroy
 	has_many :user_favorites, :dependent => :destroy
 	has_many :idea_inappropriate_reports, :dependent => :destroy
 	belongs_to :user
-
-  accepts_nested_attributes_for :idea_categories
 
 	attr_accessible :user_id,
       :explaination,
@@ -15,7 +14,7 @@ class Idea < ActiveRecord::Base
       :overall_votes,
       :is_inappropriate,
       :is_duplicate,
-			:idea_categories_attributes
+			:category_ids
 	attr_accessor :is_create
 
   validates :user_id, :explaination, :presence => true
@@ -88,13 +87,11 @@ class Idea < ActiveRecord::Base
 	def self.realized_ideas
 		completed_ideas = IdeaProgress.select("distinct idea_id").where(:is_completed => true)
 
-		if completed_ideas && !completed_ideas.empty?
-			select("distinct ideas.*")
-			.joins(:idea_progresses)
-			.where("ideas.id in (?)",
-				completed_ideas.map{|x| x.idea_id})
-			.order("idea_progresses.progress_date desc, ideas.created_at desc")
-		end
+		select("distinct ideas.*")
+		.joins(:idea_progresses)
+		.where("ideas.id in (?)",
+			completed_ideas.map{|x| x.idea_id})
+		.order("idea_progresses.progress_date desc, ideas.created_at desc")
 	end
 
 	def self.categorized_ideas(category_id)

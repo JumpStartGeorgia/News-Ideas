@@ -15,9 +15,8 @@
 					<%= link_to t('helpers.links.sign_in'), :new_user_session, :class => 'fancybox btn btn-mini' %>
 				<% end %>
 
-				<%= f.fields_for :idea_categories do |cat| %>
-						<%= cat.input :category_id, :as => :select, :collection => @categories %>
-				<% end %>
+				<%= f.input :categories, :as => :select, :collection => @categories, :multiple => true, 
+				    :input_html => { :size => 1, :style => 'display: none;' } %>
 
 				<%= f.input :explaination, :as => :text, :input_html => {:rows => 5, :cols => 50} %>
 
