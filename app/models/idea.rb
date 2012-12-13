@@ -97,6 +97,12 @@ class Idea < ActiveRecord::Base
 		.order("idea_progresses.progress_date desc, ideas.created_at desc")
 	end
 
+	# get last progress report
+	def last_progress_report
+		IdeaProgress.where(:idea_id => self.id).order("progress_date desc").limit(1).first
+	end
+
+
 	def self.categorized_ideas(category_id)
 		if category_id
 			joins(:idea_categories).where(:idea_categories => {:category_id => category_id})

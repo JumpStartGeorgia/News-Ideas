@@ -26,7 +26,7 @@
       <tr>
         <td><%= link_to user.nickname, admin_user_path(user) %></td>
         <td><%= user.email %></td>
-        <td><%= user.role.humanize %></td>
+        <td><%= user.role_name.humanize %></td>
         <td><%= user.provider.humanize if user.provider %></td>
         <td>
 					<% user.organization_users.each do |org| %>

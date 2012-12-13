@@ -160,6 +160,7 @@ en:
       unfollow_idea: You will no longer be sent email notifications when updates occur to this idea.
       unfollow_idea_bad: The idea could not be found to unfollow.
       is_private: PRIVATE
+      last_update: Last Update
     msgs:
       does_not_exist: You tried to access a page that does not exist.
       not_authorized: You are not authorized to view that page.

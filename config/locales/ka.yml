@@ -160,6 +160,7 @@ ka:
       unfollow_idea: თქვენ არ მიიღებთ ელექტრონულ შეტყობინებებს სიახლეებზე.
       unfollow_idea_bad: იდეა ვერ მოიძებნა.
       is_private: PRIVATE
+      last_update: Last Update
     msgs:
       does_not_exist: თქვენ ცდილობთ იხილოთ გვერდი, რომელიც არ არსებობს.
       not_authorized: თქვენ არ გაქვთ უფლება იხილოთ ეს გვერდი.

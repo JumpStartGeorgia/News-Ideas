@@ -33,6 +33,10 @@ class User < ActiveRecord::Base
     return false
   end
 
+  def role_name
+    ROLES.keys[ROLES.values.index(self.role)].to_s
+  end
+
 	# if no role is supplied, default to the basic user role
 	def check_for_role
 		self.role = User::ROLES[:user] if self.role.nil?
