@@ -20,7 +20,7 @@ class Idea < ActiveRecord::Base
 
   validates :user_id, :explaination, :presence => true
 
-  scope :public, where("is_private = '0'")
+  scope :public_only, where("is_private = '0'")
 
   require 'split_votes'
   include SplitVotes
@@ -56,6 +56,16 @@ class Idea < ActiveRecord::Base
 	# only get appropriate ideas
 	def self.appropriate
 		where(:is_inappropriate => false)
+	end
+	
+	def self.with_private(user=nil)
+	  if user && !user.organization_users.empty?
+      # only get private ideas if user is from the org that submitted the ideas
+      joins(:user => :organization_users)
+      .where("is_private = 0 or (is_private = 1 and organization_users.organization_id in (?))", user.organization_users.map{|x| x.organization_id})
+	  else
+	    public_only
+	  end
 	end
 
 	# get the top ideas based off of overall votes
