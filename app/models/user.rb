@@ -27,15 +27,15 @@ class User < ActiveRecord::Base
 #  ROLES = %w[author organization_admin admin]
   ROLES = {:user => 0, :org_admin => 50, :admin => 99}
   def role?(base_role)
-    if base_role && ROLES[base_role]
-      return ROLES[base_role] <= ROLES[rol]
+    if base_role && ROLES.values.index(base_role)
+      return base_role <= self.role
     end
     return false
   end
 
 	# if no role is supplied, default to the basic user role
 	def check_for_role
-		self.role = User::ROLES[:user] if self.role.nil? || self.role.empty?
+		self.role = User::ROLES[:user] if self.role.nil?
 	end
 
 	def is_following_idea?(idea_id)

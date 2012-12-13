@@ -26,6 +26,10 @@
 
 				<%= f.input :explaination, :as => :text, :input_html => {:rows => 5, :cols => 50} %>
 
+        <% if user_signed_in? && current_user.role?(User::ROLES[:org_admin])%>
+					<%= f.input :is_private, :as => :select, :include_blank => false  %>
+        <% end %>
+
 			<% end %>
 
 			<% if user_signed_in? %>

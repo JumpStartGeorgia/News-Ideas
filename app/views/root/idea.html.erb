@@ -10,6 +10,9 @@
 		<div class="span4">
 			<%= image_tag @idea.user.avatar, :style => 'float:left; padding-right: 5px;' if @idea.user.avatar %>
 			<h2><%= link_to t('.idea_by', :name => @idea.user.nickname), user_path(@idea.user_id)%></h2>
+      <% if user_signed_in? && current_user.role?(User::ROLES[:org_admin]) && @idea.is_private %>
+        <span id="private_idea" style="background-color: #f00; color: #fff;"><%= t('app.common.is_private')%></span>
+      <% end %>
 		</div>
 		<div class="span3">
 			<%= l @idea.created_at, :format => :long %>

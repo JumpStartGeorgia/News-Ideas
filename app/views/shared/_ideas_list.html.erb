@@ -8,6 +8,9 @@
 				<div class="row">
 					<div class="span5">
 						<%= link_to l(idea.created_at, :format => :long), idea_path(idea) %>
+            <% if user_signed_in? && current_user.role?(User::ROLES[:org_admin]) && idea.is_private %>
+              <span id="private_idea" style="background-color: #f00; color: #fff;"><%= t('app.common.is_private')%></span>
+            <% end %>						
 					</div>
 					<div class="span3">
 						<%= "#{t('app.common.author')}: "%>

@@ -14,10 +14,13 @@ class Idea < ActiveRecord::Base
       :overall_votes,
       :is_inappropriate,
       :is_duplicate,
-			:category_ids
+			:category_ids,
+			:is_private
 	attr_accessor :is_create
 
   validates :user_id, :explaination, :presence => true
+
+  scope :public, where("is_private = '0'")
 
   require 'split_votes'
   include SplitVotes
