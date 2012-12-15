@@ -29,6 +29,7 @@ en:
         overall_votes: Overall Votes
         is_duplicate: Duplicate?
         is_inappropriate: Inappropriate?
+        is_private: Is Private?
       idea_category:
         idea_id: Idea
         category_id: Category
@@ -141,6 +142,8 @@ en:
       new: New
     common:
       app_name: News Ideas
+      yes: Yes
+      no: No
       comments: Comments
       author: Author
       rating: Rating
@@ -156,6 +159,8 @@ en:
       follow_idea_bad: The idea could not be found to follow.
       unfollow_idea: You will no longer be sent email notifications when updates occur to this idea.
       unfollow_idea_bad: The idea could not be found to unfollow.
+      is_private: PRIVATE
+      last_update: Last Update
     msgs:
       does_not_exist: You tried to access a page that does not exist.
       not_authorized: You are not authorized to view that page.

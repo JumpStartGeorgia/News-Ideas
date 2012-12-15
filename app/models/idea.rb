@@ -14,15 +14,18 @@ class Idea < ActiveRecord::Base
       :overall_votes,
       :is_inappropriate,
       :is_duplicate,
-			:category_ids
+			:category_ids,
+			:is_private
 	attr_accessor :is_create
 
   validates :user_id, :explaination, :presence => true
 
+  scope :public_only, where("is_private = '0'")
+
   require 'split_votes'
   include SplitVotes
 
-	self.per_page = 10
+	self.per_page = 5
 
 	def self.explore(type)
 		if type
@@ -53,6 +56,16 @@ class Idea < ActiveRecord::Base
 	# only get appropriate ideas
 	def self.appropriate
 		where(:is_inappropriate => false)
+	end
+
+	def self.with_private(user=nil)
+	  if user && !user.organizations.empty?
+      # only get private ideas if user is from the org that submitted the ideas
+      joins(:user => :organization_users)
+      .where("is_private = 0 or (is_private = 1 and organization_users.organization_id in (?))", user.organization_users.map{|x| x.organization_id})
+	  else
+	    public_only
+	  end
 	end
 
 	# get the top ideas based off of overall votes
@@ -93,6 +106,12 @@ class Idea < ActiveRecord::Base
 			completed_ideas.map{|x| x.idea_id})
 		.order("idea_progresses.progress_date desc, ideas.created_at desc")
 	end
+
+	# get last progress report
+	def last_progress_report
+		IdeaProgress.where(:idea_id => self.id).order("progress_date desc").limit(1).first
+	end
+
 
 	def self.categorized_ideas(category_id)
 		if category_id

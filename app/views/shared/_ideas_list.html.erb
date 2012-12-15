@@ -8,6 +8,9 @@
 				<div class="row">
 					<div class="span5">
 						<%= link_to l(idea.created_at, :format => :long), idea_path(idea) %>
+            <% if user_signed_in? && current_user.role?(User::ROLES[:org_admin]) && idea.is_private %>
+              <span id="private_idea" style="background-color: #f00; color: #fff;"><%= t('app.common.is_private')%></span>
+            <% end %>
 					</div>
 					<div class="span3">
 						<%= "#{t('app.common.author')}: "%>
@@ -17,6 +20,11 @@
 				<div>
 					<%= auto_link(truncate(idea.explaination, :length => 150, :separator => ' '), :urls, :target => "_blank") %>
 				</div>
+				<% if idea.last_progress_report %>
+  				<div>
+  				  <%= "#{t('app.common.last_update')}: #{idea.last_progress_report.explaination} (#{l idea.last_progress_report.progress_date, :format => :default})" %>
+  				</div>
+				<% end %>
 				<div class="row">
 					<div class="span3">
 						<%= "#{t('app.common.rating')}:" %>
@@ -30,7 +38,6 @@
 						<fb:comments-count href="<%= full_url(idea_path(idea)) %>"></fb:comments-count>
 					</div>
 					<div class="span3">
-					&nbsp;
 					<!--
 						<%= link_to(image_tag("fb_share.jpg", :height => "20"),
 									"http://www.facebook.com/share.php?u=#{current_url}",

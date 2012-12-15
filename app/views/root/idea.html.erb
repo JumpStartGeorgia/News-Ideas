@@ -10,15 +10,9 @@
 		<div class="span4">
 			<%= image_tag @idea.user.avatar, :style => 'float:left; padding-right: 5px;' if @idea.user.avatar %>
 			<h2><%= link_to t('.idea_by', :name => @idea.user.nickname), user_path(@idea.user_id)%></h2>
-			<% if !@idea.user.organization_users.empty? %>
-				<% if @idea.user.organization_users.first.organization.logo_file_name %>
-					<%= link_to(image_tag(@idea.user.organization_users.first.organization.logo.url),
-							organization_path(@idea.user.organization_users.first.organization_id)) %>
-				<% else %>
-					<%= link_to @idea.user.organization_users.first.organization.name,
-								organization_path(@idea.user.organization_users.first.organization_id) %>
-				<% end %>
-			<% end %>
+      <% if user_signed_in? && current_user.role?(User::ROLES[:org_admin]) && @idea.is_private %>
+        <span id="private_idea" style="background-color: #f00; color: #fff;"><%= t('app.common.is_private')%></span>
+      <% end %>
 		</div>
 		<div class="span3">
 			<%= l @idea.created_at, :format => :long %>
@@ -70,7 +64,8 @@
 						:target => "_blank") %>
 		</div>
 		<div class="span3" style="text-align: right;">
-			<% if user_signed_in? && current_user.organization_users && !current_user.organization_users.empty? &&
+			<% if user_signed_in? && current_user.role?(User::ROLES[:org_admin]) && 
+			      current_user.organization_users && !current_user.organization_users.empty? &&
 						!@idea.organization_claimed_idea?(current_user.organization_users.first.organization_id) %>
 
 				<%= link_to t('.take_ownership', :org => current_user.organization_users.first.organization.name),
@@ -105,7 +100,8 @@
 							</h4>
 						</div>
 						<div class="span2">
-							<% if user_signed_in? && current_user.organization_users && !current_user.organization_users.empty? &&
+							<% if user_signed_in? && current_user.role?(User::ROLES[:org_admin]) && 
+							      current_user.organization_users && !current_user.organization_users.empty? &&
 										org.id == current_user.organization_users.first.organization_id &&
 										@idea.organization_claimed_idea?(current_user.organization_users.first.organization_id)  &&
 										!@idea.organization_realized_idea?(current_user.organization_users.first.organization_id) %>
@@ -144,7 +140,8 @@
 						<% progresses.each do |progress| %>
 							<div>
 								<strong><%= l progress.progress_date, :format => :long if progress.progress_date %></strong>
-								<% if user_signed_in? && current_user.organization_users && !current_user.organization_users.empty? &&
+								<% if user_signed_in? && current_user.role?(User::ROLES[:org_admin]) && 
+								      current_user.organization_users && !current_user.organization_users.empty? &&
 											org.id == current_user.organization_users.first.organization_id &&
 											@idea.organization_claimed_idea?(current_user.organization_users.first.organization_id) %>
 

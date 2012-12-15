@@ -100,7 +100,7 @@
 						        <li>
 				 		         <%= link_to t('.notifications'), notifications_path %>
 										</li>
-										<% if current_user.role?(:admin) %>
+										<% if current_user.role?(User::ROLES[:admin]) %>
 						          <li>
 					 		         <%= link_to t('.admin'), admin_path %>
 											</li>

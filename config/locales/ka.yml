@@ -29,6 +29,7 @@ ka:
         overall_votes: ხმების სრული რაოდენობა
         is_duplicate: დუბლირებული?
         is_inappropriate: არ შეესაბამება
+        is_private: Is Private?
       idea_category:
         idea_id: იდეა
         category_id: კატეგორია
@@ -141,6 +142,8 @@ ka:
       new: ახალი
     common:
       app_name: ახალი იდეები
+      yes: დიახ
+      no: არა
       comments: კომენტარები
       author: ავტორები
       rating: შეფასება
@@ -156,6 +159,8 @@ ka:
       follow_idea_bad: იდეა ვერ მოიძებნა
       unfollow_idea: თქვენ არ მიიღებთ ელექტრონულ შეტყობინებებს სიახლეებზე.
       unfollow_idea_bad: იდეა ვერ მოიძებნა.
+      is_private: PRIVATE
+      last_update: Last Update
     msgs:
       does_not_exist: თქვენ ცდილობთ იხილოთ გვერდი, რომელიც არ არსებობს.
       not_authorized: თქვენ არ გაქვთ უფლება იხილოთ ეს გვერდი.

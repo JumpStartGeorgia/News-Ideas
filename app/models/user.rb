@@ -22,21 +22,27 @@ class User < ActiveRecord::Base
 	default_scope includes(:organizations)
 
   def self.no_admins
-    where("role != ?", ROLES[2])
+    where("role != ?", ROLES[:admin])
   end
 
-  # use role inheritence
-  ROLES = %w[author organization admin]
+  # use role inheritence 
+  # - a role with a larger number can do everything that smaller numbers can do
+#  ROLES = %w[author organization_admin admin]
+  ROLES = {:user => 0, :org_admin => 50, :admin => 99}
   def role?(base_role)
-    if base_role && ROLES.index(base_role.to_s)
-      return ROLES.index(base_role.to_s) <= ROLES.index(role)
+    if base_role && ROLES.values.index(base_role)
+      return base_role <= self.role
     end
     return false
   end
 
-	# if no role is supplied, default to the basic author role
+  def role_name
+    ROLES.keys[ROLES.values.index(self.role)].to_s
+  end
+
+	# if no role is supplied, default to the basic user role
 	def check_for_role
-		self.role = User::ROLES[0] if self.role.nil? || self.role.empty?
+		self.role = User::ROLES[:user] if self.role.nil?
 	end
 
 	def is_following_idea?(idea_id)

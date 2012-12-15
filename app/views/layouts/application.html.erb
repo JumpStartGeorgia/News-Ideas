@@ -100,7 +100,7 @@
 						        <li>
 				 		         <%= link_to t('.notifications'), notifications_path %>
 										</li>
-										<% if current_user.role?(:admin) %>
+										<% if current_user.role?(User::ROLES[:admin]) %>
 						          <li>
 					 		         <%= link_to t('.admin'), admin_path %>
 											</li>
@@ -143,6 +143,14 @@
 						<%= t('activerecord.attributes.idea.explaination') %>
 					</label>
 					<%= text_area_tag 'idea_explaination', nil, :rows => 2, :class => 'span5', :name => 'idea[explaination]' %>
+
+          <% if user_signed_in? && current_user.role?(User::ROLES[:org_admin])%>
+  					<label class="control-label" for="idea_is_private">
+  						<%= t('activerecord.attributes.idea.is_private') %>
+  					</label>
+  					<%= select_tag 'idea_is_private', "<option value='1'>#{t('app.common.yes')}</option><option selected=\"selected\" value='0'>#{t('app.common.no')}</option>".html_safe,  
+  					      :name => 'idea[is_private]' %>
+          <% end %>
 
 					<% if user_signed_in? %>
 						<%= submit_tag t('helpers.links.post_idea'), :class => 'btn btn-primary' %>
