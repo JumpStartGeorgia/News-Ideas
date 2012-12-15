@@ -91,6 +91,12 @@
 						        <li>
 				 		         <%= link_to t('.user_profile'), user_path(current_user.id) %>
 										</li>
+										<% if current_user.organizations && !current_user.organizations.empty? %>
+								      <li>
+					 		         <%= link_to t('.org_profile', :org => current_user.organizations.first.name),
+														organization_path(current_user.organizations.first.id) %>
+											</li>
+										<% end %>
 						        <li>
 				 		         <%= link_to t('.notifications'), notifications_path %>
 										</li>

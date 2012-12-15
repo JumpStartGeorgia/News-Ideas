@@ -171,6 +171,7 @@ en:
     application:
       admin: Admin
       user_profile: Your Profile
+      org_profile: "%{org} Profile"
       notifications: Notification Settings
       sign_out: Sign Out
       js_link_title: "Visit JumpStart Georgia's website"
@@ -180,6 +181,7 @@ en:
     application_home:
       admin: Admin
       user_profile: Your Profile
+      org_profile: "%{org} Profile"
       notifications: Notification Settings
       sign_out: Sign Out
       js_link_title: "Visit JumpStart Georgia's website"

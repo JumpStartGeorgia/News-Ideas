@@ -11,4 +11,6 @@ class Organization < ActiveRecord::Base
   accepts_nested_attributes_for :organization_translations
   attr_accessible :logo, :organization_translations_attributes, :url, :id,
 		:logo_file_name, :logo_content_type, :logo_file_size, :logo_updated_at
+
+	default_scope with_translations(I18n.locale)
 end

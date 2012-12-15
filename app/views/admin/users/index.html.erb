@@ -29,8 +29,8 @@
         <td><%= user.role.humanize %></td>
         <td><%= user.provider.humanize if user.provider %></td>
         <td>
-					<% user.organization_users.each do |org| %>
-						<%= org.organization.name %>
+					<% user.organizations.each do |org| %>
+						<%= org.name %>
 					<% end %>
 				</td>
         <td>
