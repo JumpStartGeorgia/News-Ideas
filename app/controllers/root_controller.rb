@@ -53,29 +53,43 @@ class RootController < ApplicationController
 		@category = @categories.select{|x| x.id.to_s == params[:id]}
 		@category = @category.first if @category.kind_of?(Array)
 
-		new_ideas = Idea.new_ideas.categorized_ideas(params[:id]).appropriate.paginate(:page => params[:page])
-		top_ideas = Idea.top_ideas.categorized_ideas(params[:id]).appropriate.paginate(:page => params[:page])
-		in_progress_ideas = Idea.in_progress_ideas.categorized_ideas(params[:id]).appropriate.paginate(:page => params[:page])
-		realized_ideas = Idea.realized_ideas.categorized_ideas(params[:id]).appropriate.paginate(:page => params[:page])
-		@ideas = {:new => new_ideas, :top => top_ideas, :in_progress => in_progress_ideas, :realized => realized_ideas}
+		if @category
+			new_ideas = Idea.new_ideas.categorized_ideas(params[:id]).appropriate.paginate(:page => params[:page])
+			top_ideas = Idea.top_ideas.categorized_ideas(params[:id]).appropriate.paginate(:page => params[:page])
+			in_progress_ideas = Idea.in_progress_ideas.categorized_ideas(params[:id]).appropriate.paginate(:page => params[:page])
+			realized_ideas = Idea.realized_ideas.categorized_ideas(params[:id]).appropriate.paginate(:page => params[:page])
+			@ideas = {:new => new_ideas, :top => top_ideas, :in_progress => in_progress_ideas, :realized => realized_ideas}
+		else
+			flash[:info] =  t('app.msgs.does_not_exist')
+			redirect_to root_path
+		end
 	end
 
 	def user
 		@user = User.find_by_id(params[:id])
 
-		new_ideas = Idea.new_ideas.user_ideas(params[:id]).appropriate.paginate(:page => params[:page])
-		top_ideas = Idea.top_ideas.user_ideas(params[:id]).appropriate.paginate(:page => params[:page])
-		in_progress_ideas = Idea.in_progress_ideas.user_ideas(params[:id]).appropriate.paginate(:page => params[:page])
-		realized_ideas = Idea.realized_ideas.user_ideas(params[:id]).appropriate.paginate(:page => params[:page])
-		@ideas = {:new => new_ideas, :top => top_ideas, :in_progress => in_progress_ideas, :realized => realized_ideas}
+		if @user
+			new_ideas = Idea.new_ideas.user_ideas(params[:id]).appropriate.paginate(:page => params[:page])
+			top_ideas = Idea.top_ideas.user_ideas(params[:id]).appropriate.paginate(:page => params[:page])
+			in_progress_ideas = Idea.in_progress_ideas.user_ideas(params[:id]).appropriate.paginate(:page => params[:page])
+			realized_ideas = Idea.realized_ideas.user_ideas(params[:id]).appropriate.paginate(:page => params[:page])
+			@ideas = {:new => new_ideas, :top => top_ideas, :in_progress => in_progress_ideas, :realized => realized_ideas}
+		else
+			flash[:info] =  t('app.msgs.does_not_exist')
+			redirect_to root_path
+		end
 	end
 
 	def organization
 		@organization = Organization.find_by_id(params[:id])
-
-		in_progress_ideas = Idea.in_progress_ideas.organization_ideas(params[:id]).appropriate.paginate(:page => params[:page])
-		realized_ideas = Idea.realized_ideas.organization_ideas(params[:id]).appropriate.paginate(:page => params[:page])
-		@ideas = {:new => nil, :top => nil, :in_progress => in_progress_ideas, :realized => realized_ideas}
+		if @organization
+			in_progress_ideas = Idea.in_progress_ideas.organization_ideas(params[:id]).appropriate.paginate(:page => params[:page])
+			realized_ideas = Idea.realized_ideas.organization_ideas(params[:id]).appropriate.paginate(:page => params[:page])
+			@ideas = {:new => nil, :top => nil, :in_progress => in_progress_ideas, :realized => realized_ideas}
+		else
+			flash[:info] =  t('app.msgs.does_not_exist')
+			redirect_to root_path
+		end
 	end
 
 	def search
@@ -89,13 +103,36 @@ class RootController < ApplicationController
 	end
 
   def idea
-    @idea = Idea.find(params[:id])
-		gon.show_fb_comments = true
+    @idea = Idea.find_by_id(params[:id])
+		@can_view = false
 
-    respond_to do |format|
-      format.html # idea.html.erb
-      format.json { render json: @idea }
-    end
+		# if the idea is private and the user does not belong to the org that submitted the idea, redirect
+		if @idea
+			if !@idea.is_private
+				@can_view = true
+			elsif !current_user.organizations.empty?
+				owner_org = @idea.user.organizations.map{|x| x.id}
+				user_org = current_user.organizations.map{|x| x.id}
+				owner_org.each do |org|
+					if user_org.index(org)
+						@can_view = true
+						break
+					end
+				end
+			end
+		end
+
+		if @can_view
+			gon.show_fb_comments = true
+
+		  respond_to do |format|
+		    format.html # idea.html.erb
+		    format.json { render json: @idea }
+		  end
+		else
+			flash[:info] =  t('app.msgs.does_not_exist')
+			redirect_to root_path
+		end
   end
 
   def create
