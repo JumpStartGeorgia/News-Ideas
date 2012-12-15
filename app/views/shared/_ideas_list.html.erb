@@ -15,7 +15,7 @@
 					</div>
 				</div>
 				<div>
-					<%= truncate(idea.explaination, :length => 150, :separator => ' ') %>
+					<%= auto_link(truncate(idea.explaination, :length => 150, :separator => ' '), :urls, :target => "_blank") %>
 				</div>
 				<div class="row">
 					<div class="span3">

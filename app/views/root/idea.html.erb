@@ -57,7 +57,7 @@
 	</div>
 
 	<div id="idea_description_block" style="margin-bottom: 20px">
-		<%= simple_format @idea.explaination %>
+		<%= simple_format auto_link(@idea.explaination, :urls, :target => "_blank") %>
 	</div>
 
 	<div id="idea_social_block" class="row" style="margin-bottom: 10px;">
