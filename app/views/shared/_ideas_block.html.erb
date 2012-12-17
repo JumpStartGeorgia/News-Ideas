@@ -1,11 +1,7 @@
-<%
-	organization_only = false if !organization_only
-%>
 <div id="idea_list" style="margin-top: 20px; border: solid 2px #ccc; padding: 5px 0;">
 
 	<ul id="ideas_tabs" class="nav nav-tabs">
 
-		<% if !organization_only %>
 		<li id="<%= @id_top %>"
 			<%= @initial_tab_id ? @initial_tab_id == @id_top ? "class='active'" : "" : "class='active'" %>>
 		  <a href="#"><%= t('app.common.top_ideas') %></a>
@@ -14,7 +10,6 @@
 			<%= @initial_tab_id && @initial_tab_id == @id_new ? "class='active'" : "" %>>
 		  <a href="#"><%= t('app.common.new_ideas') %></a>
 		</li>
-		<% end %>
 		<li id="<%= @id_in_progress%>"
 			<%= @initial_tab_id && @initial_tab_id == @id_in_progress ? "class='active'" : "" %>>
 		  <a href="#"><%= t('app.common.in_progress') %></a>

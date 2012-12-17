@@ -49,10 +49,7 @@ $(document).ready(function(){
 		$("ul#ideas_tabs li#" + id).addClass('active'); // turn on correct one
 
 		// hide all item blocks
-		$("div#" + gon.id_new).hide();
-		$("div#" + gon.id_top).hide();
-		$("div#" + gon.id_in_progress).hide();
-		$("div#" + gon.id_realized).hide();
+		$("div.idea_list_block").hide();
 
 		// turn on the correct block
 		$("div#" + id).slideDown('300');

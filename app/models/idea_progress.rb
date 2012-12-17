@@ -26,4 +26,15 @@ class IdeaProgress < ActiveRecord::Base
 	end
 
 
+	def self.latest_organization_idea_progress(organization_id)
+		ids = []
+		if organization_id
+			sql = "select p1.idea_id, p1.idea_status_id from idea_progresses as p1 left join idea_progresses as p2 "
+			sql << "on p2.idea_id = p1.idea_id and p2.organization_id = p1.organization_id and "
+			sql << "p1.progress_date < p2.progress_date and p1.updated_at < p2.updated_at "
+			sql << "where p1.organization_id = ? and p2.id is null "
+			ids = find_by_sql([sql, organization_id])
+		end
+		return ids
+	end
 end

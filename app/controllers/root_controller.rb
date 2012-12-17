@@ -84,9 +84,21 @@ class RootController < ApplicationController
 	def organization
 		@organization = Organization.find_by_id(params[:id])
 		if @organization
-			in_progress_ideas = Idea.with_private(current_user).in_progress_ideas.organization_ideas(params[:id]).appropriate.paginate(:page => params[:page])
-			realized_ideas = Idea.with_private(current_user).realized_ideas.organization_ideas(params[:id]).appropriate.paginate(:page => params[:page])
-			@ideas = {:new => nil, :top => nil, :in_progress => in_progress_ideas, :realized => realized_ideas}
+			latest_progress = IdeaProgress.latest_organization_idea_progress(params[:id])
+			@ideas = []
+			# for each idea status, get ideas with this status as the last progress report for this org
+			@idea_statuses.each do |status|
+				hash = Hash.new
+				hash[:id] = status.id
+				hash[:name] = status.name
+				hash[:ideas] = []
+				# if the org has an idea at this stage, get it
+				if !latest_progress.select{|x| x.idea_status_id == status.id}.empty?
+					hash[:ideas] = Idea.with_private(current_user).appropriate
+						.where(:id => latest_progress.select{|x| x.idea_status_id == status.id}.map{|x| x.idea_id})
+				end
+				@ideas << hash
+			end
 		else
 			flash[:info] =  t('app.msgs.does_not_exist')
 			redirect_to root_path

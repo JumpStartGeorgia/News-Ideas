@@ -7,17 +7,5 @@
 </div>
 <% end %>
 
-<% if user_signed_in? && current_user.organizations.index{|x| x.id.to_s == params[:id]} %>
-<div style='margin: 10px 0;'>
-	<ul>
-		<li>
-			# Ideas in Progress: <%= @ideas[:in_progress].length %>
-		</li>
-		<li>
-			# Ideas Realized :  <%= @ideas[:realized].length %>
-		</li>
-	</ul>
-</div>
-<% end %>
 
-<%= render :partial => "shared/ideas_block", :object => @ideas, :locals => {:organization_only => true} %>
+<%= render :partial => "shared/org_ideas_block", :object => @ideas %>

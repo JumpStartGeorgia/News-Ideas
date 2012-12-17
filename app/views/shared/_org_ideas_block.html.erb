@@ -1,0 +1,37 @@
+<div id="idea_list" style="margin-top: 20px; border: solid 2px #ccc; padding: 5px 0;">
+
+	<ul id="ideas_tabs" class="nav nav-tabs">
+
+		<% org_ideas_block.each_with_index do |status, index|
+				if index == 0 %>
+
+				<li id="<%= "org_status_#{status[:id]}"%>"
+					<%= @initial_tab_id ? @initial_tab_id == status[:id] ? "class='active'" : "" : "class='active'" %>>
+
+			<% else %>
+				<li id="<%= "org_status_#{status[:id]}"%>"
+					<%= @initial_tab_id && @initial_tab_id == status[:id] ? "class='active'" : "" %>>
+			<% end %>
+
+					<a href="#"><%= "#{status[:name]} (#{status[:ideas].length})" %></a>
+				</li>
+		<% end %>
+	</ul>
+
+	<% org_ideas_block.each_with_index do |status, index|
+			if index == 0 %>
+
+			<div id="<%= "org_status_#{status[:id]}"%>" class="idea_list_block"
+					<%= @initial_tab_id ? @initial_tab_id == status[:id] ? "" : "style='display: none;'" : "" %>>
+				<%= render :partial => "shared/ideas_list", :object => status[:ideas] %>
+			</div>
+
+		<% else %>
+			<div id="<%= "org_status_#{status[:id]}"%>" class="idea_list_block"
+					<%= @initial_tab_id && @initial_tab_id == status[:id] ? "" : "style='display: none;'" %>>
+				<%= render :partial => "shared/ideas_list", :object => status[:ideas] %>
+			</div>
+		<% end %>
+	<% end %>
+
+</div>
