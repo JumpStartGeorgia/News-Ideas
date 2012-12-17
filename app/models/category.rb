@@ -13,5 +13,6 @@ class Category < ActiveRecord::Base
   accepts_nested_attributes_for :category_translations
   attr_accessible :id, :picture, :icon, :category_translations_attributes
 
+	scope :sorted_by_name, order("category_translations.name asc")
 
 end

@@ -30,8 +30,8 @@
 			<%= f.hidden_field :organization_id, :value => @org.id %>
 
 			<%= f.input :progress_date, :as => :string, :input_html => {:size => 20} %>
+			<%= f.input :idea_status, :collection => IdeaStatus.sorted, :include_blank => false %>
 			<%= f.input :explaination, :as => :text, :input_html => {:rows => 4, :cols => 100} %>
-			<%= f.input :is_completed, :as => :radio %>
 			<%= f.input :url %>
 
 		<% end %>

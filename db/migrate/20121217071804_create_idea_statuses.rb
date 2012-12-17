@@ -5,6 +5,7 @@ class CreateIdeaStatuses < ActiveRecord::Migration
       t.timestamps
     end
 
+		add_index :idea_statuses, :sort
 		IdeaStatus.create_translation_table! :name => :string
 
 		add_column :ideas, :current_status_id, :integer
@@ -12,6 +13,7 @@ class CreateIdeaStatuses < ActiveRecord::Migration
   end
 
 	def self.down
+		remove_index :idea_statuses, :sort
 		remove_column :ideas, :current_status_id
 		remove_column :idea_progresses, :idea_status_id
 		IdeaStatus.drop_translation_table!

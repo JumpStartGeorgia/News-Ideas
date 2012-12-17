@@ -4,8 +4,9 @@ class ApplicationController < ActionController::Base
 
 	before_filter :set_locale
 #	before_filter :is_browser_supported?
-	before_filter :initialize_gon
 	before_filter :load_categories
+	before_filter :load_statuses
+	before_filter :initialize_gon
 	before_filter :initialize_new_idea
 	after_filter :store_location
 
@@ -76,10 +77,16 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 		@id_new = gon.id_new
 		@id_in_progress = gon.id_in_progress
 		@id_realized = gon.id_realized
+
+		gon.idea_status_id_published = @idea_statuses.select{|x| x.is_published}.first.id.to_s
 	end
 
 	def load_categories
-		@categories = Category.with_translations(I18n.locale).order("category_translations.name asc")
+		@categories = Category.with_translations(I18n.locale).sorted_by_name
+	end
+
+	def load_statuses
+		@idea_statuses = IdeaStatus.with_translations(I18n.locale).sorted
 	end
 
 	def initialize_new_idea

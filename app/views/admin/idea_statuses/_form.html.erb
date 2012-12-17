@@ -16,6 +16,8 @@
 	<%= f.inputs do %>
 		<%= f.input :sort, :as => :string, :input_html => {:size => 10},
 			:hint => t('activerecord.attributes.idea_status.sort_hint') %>
+		<%= f.input :is_published, :as => :radio,
+			:hint => t('activerecord.attributes.idea_status.is_published_hint') %>
 	<% end %>
 
   <div class="form-actions">

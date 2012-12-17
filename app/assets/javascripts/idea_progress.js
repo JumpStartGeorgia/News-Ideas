@@ -11,14 +11,14 @@ $(document).ready(function(){
 		}
 
 		// if record is not completed, hide url field by default
-		if (!$('#idea_progress_is_completed_true').is(':checked')) {
+		if ($('select#idea_progress_idea_status_id').val() != gon.idea_status_id_published) {
 			$('#idea_progress_url').attr('value', '');
 			$('#idea_progress_url_input').hide();
 		}
 
 		// if progress is marked as completed, show news url field
-		$("input[type='radio'][name='idea_progress[is_completed]']").click(function(){
-			if ($(this).attr('id') === 'idea_progress_is_completed_true'){
+		$("select#idea_progress_idea_status_id").change(function(){
+			if ($(this).val() === gon.idea_status_id_published){
 				// show url textbox
 				$('#idea_progress_url_input').show(300);
 			} else {

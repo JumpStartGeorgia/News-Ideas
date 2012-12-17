@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121217083047) do
+ActiveRecord::Schema.define(:version => 20121217092555) do
 
   create_table "categories", :force => true do |t|
     t.datetime "created_at"
@@ -86,10 +86,13 @@ ActiveRecord::Schema.define(:version => 20121217083047) do
   add_index "idea_status_translations", ["locale"], :name => "index_idea_status_translations_on_locale"
 
   create_table "idea_statuses", :force => true do |t|
-    t.integer  "sort",       :default => 1
+    t.integer  "sort",         :default => 1
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_published", :default => false
   end
+
+  add_index "idea_statuses", ["sort"], :name => "index_idea_statuses_on_sort"
 
   create_table "ideas", :force => true do |t|
     t.integer  "user_id"

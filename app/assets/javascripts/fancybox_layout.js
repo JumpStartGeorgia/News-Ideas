@@ -5,3 +5,5 @@
 //= require jquery-ui
 //= require fancybox
 //= require fancybox2
+//= require vendor
+//= require idea_progress

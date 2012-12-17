@@ -6,6 +6,8 @@
   <%= @idea_status.name %></p>
   <p><strong><%= model_class.human_attribute_name(:sort) %>:</strong>
   <%= @idea_status.sort %></p>
+  <p><strong><%= model_class.human_attribute_name(:is_published) %>:</strong>
+  <%= @idea_status.is_published %></p>
 
 <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back")),

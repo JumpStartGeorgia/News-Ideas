@@ -31,6 +31,7 @@ ka:
         is_duplicate: დუბლირებული?
         is_inappropriate: არ შეესაბამება
         is_private: Is Private?
+        current_status_id: Current Status
       idea_category:
         idea_id: იდეა
         category_id: კატეგორია
@@ -41,6 +42,8 @@ ka:
         url: სიახლის ბმული
         progress_date: თარიღი
         explaination: განმარტება
+        idea_status_id: Status
+        idea_status: Status
       idea_inappropriate_report:
         user_id: მომხმარებელი
         idea_id: იდეა
@@ -48,6 +51,7 @@ ka:
       idea_status:
         sort: Sort Order
         sort_hint: "1, 2, 3, etc. (ascending order)"
+        is_published: Published?
       idea_status_translation:
         name: Name
       organization:
