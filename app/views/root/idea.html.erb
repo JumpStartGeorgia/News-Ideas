@@ -11,7 +11,7 @@
 			<%= image_tag @idea.user.avatar, :style => 'float:left; padding-right: 5px;' if @idea.user.avatar %>
 			<h2><%= link_to t('.idea_by', :name => @idea.user.nickname), user_path(@idea.user_id)%></h2>
       <% if user_signed_in? && current_user.role?(User::ROLES[:org_admin]) && @idea.is_private %>
-        <span id="private_idea" style="background-color: #f00; color: #fff;"><%= t('app.common.is_private')%></span>
+        <span class="private_item"><%= t('app.common.is_private')%></span>
       <% end %>
 		</div>
 		<div class="span3">
@@ -66,7 +66,7 @@
 		<div class="span3" style="text-align: right;">
 			<% if user_signed_in? && current_user.role?(User::ROLES[:org_admin]) &&
 			      current_user.organization_users && !current_user.organization_users.empty? &&
-						!@idea.organization_claimed_idea?(current_user.organization_users.first.organization_id) %>
+						!@idea.organization_claimed_idea?(current_user.organization_users.first.organization_id, current_user) %>
 
 				<%= link_to t('.take_ownership', :org => current_user.organization_users.first.organization.name),
 						claim_idea_path(:idea_id => @idea.id, :organization_id => current_user.organization_users.first.organization_id),
@@ -82,11 +82,12 @@
 	</div>
 
 	<div id="idea_progress_block" style="margin-bottom: 10px;">
-		<% if !@idea.idea_progresses.empty? %>
+		<% orgs = @idea.claimed_by_organizations(current_user) 
+		  if orgs && !orgs.empty? %>
 			<h3><%= t('.claimed_by') %></h3>
-			<% @idea.claimed_by_organizations.each_with_index do |org, index| %>
+			<% orgs.each_with_index do |org, index| %>
 				<div class="idea_progress_org" style="margin-left: 10px; margin-top: 10px; border: solid 1px #ddd; padding: 5px;">
-					<% progresses = @idea.organization_progress(org.id) %>
+					<% progresses = @idea.organization_progress(org.id, current_user) %>
 					<div class="row" style="border-bottom: dashed 1px #ddd;">
 						<div class="span3">
 							<h4>
@@ -103,8 +104,8 @@
 							<% if user_signed_in? && current_user.role?(User::ROLES[:org_admin]) &&
 							      current_user.organization_users && !current_user.organization_users.empty? &&
 										org.id == current_user.organization_users.first.organization_id &&
-										@idea.organization_claimed_idea?(current_user.organization_users.first.organization_id)  &&
-										!@idea.organization_realized_idea?(current_user.organization_users.first.organization_id) %>
+										@idea.organization_claimed_idea?(current_user.organization_users.first.organization_id, current_user)  &&
+										!@idea.organization_realized_idea?(current_user.organization_users.first.organization_id, current_user) %>
 
 								<%= link_to t('.progress_udpate'),
 										progress_update_path(:idea_id => @idea.id, :organization_id => current_user.organization_users.first.organization_id),
@@ -130,7 +131,7 @@
 
 						</div>
 						<div class="span3" style="text-align: right;">
-							<% if progresses.first.is_completed && !progresses.first.url.empty? %>
+							<% if !progresses.empty? && progresses.first.is_completed && !progresses.first.url.empty? %>
 								<strong><%= "#{t('.finished')}!" %></strong>
 								<%= link_to t('.news_url'), progresses.first.url, :target => :blank, :class => 'btn btn-mini' %>
 							<% end %>
@@ -141,6 +142,9 @@
 							<div class="row">
 								<div class="span3">
 									<strong><%= l progress.progress_date, :format => :long if progress.progress_date %></strong>
+                  <% if user_signed_in? && current_user.role?(User::ROLES[:org_admin]) && progress.is_private %>
+                    <span class="private_item"><%= t('app.common.is_private')%></span>
+                  <% end %>
 								</div>
 								<div class="span3">
 									<strong><%= "#{t('activerecord.attributes.idea_progress.idea_status')}:" %></strong>
@@ -150,7 +154,7 @@
 								<% if user_signed_in? && current_user.role?(User::ROLES[:org_admin]) &&
 								      current_user.organization_users && !current_user.organization_users.empty? &&
 											org.id == current_user.organization_users.first.organization_id &&
-											@idea.organization_claimed_idea?(current_user.organization_users.first.organization_id) %>
+											@idea.organization_claimed_idea?(current_user.organization_users.first.organization_id, current_user) %>
 
 									<%= link_to t('.edit_progress'),
 											edit_progress_path(progress.id),

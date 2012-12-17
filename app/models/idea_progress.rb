@@ -9,11 +9,19 @@ class IdeaProgress < ActiveRecord::Base
       :explaination,
       :is_completed,
 			:url,
+			:is_private,
 			:idea_status_id
 	attr_accessor :is_create
 
   validates :idea_id, :organization_id, :idea_status_id, :progress_date, :explaination, :presence => true
 
+  scope :public_only, where("idea_progresses.is_private = '0'")
+  before_save :set_is_completed
+  
+  def set_is_completed
+    self.is_completed = self.idea_status.is_published
+  end
+  
 	# determine if the explaination is written in the locale
 	def in_locale?(locale)
 		in_locale = false
@@ -23,6 +31,15 @@ class IdeaProgress < ActiveRecord::Base
 			in_locale = true
 		end
 		return in_locale
+	end
+
+	def self.with_private(user=nil)
+	  if user && !user.organizations.empty?
+      # only get private progress if user is from the org that submitted the ideas
+      where("idea_progresses.is_private = 0 or (idea_progresses.is_private = 1 and organization_id in (?))", user.organization_users.map{|x| x.organization_id})
+	  else
+	    public_only
+	  end
 	end
 
 

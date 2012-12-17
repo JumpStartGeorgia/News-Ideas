@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121217092555) do
+ActiveRecord::Schema.define(:version => 20121217171304) do
 
   create_table "categories", :force => true do |t|
     t.datetime "created_at"
@@ -68,10 +68,12 @@ ActiveRecord::Schema.define(:version => 20121217092555) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "idea_status_id"
+    t.boolean  "is_private",      :default => false
   end
 
   add_index "idea_progresses", ["idea_id", "organization_id"], :name => "idea_prog_idea_org"
   add_index "idea_progresses", ["is_completed"], :name => "index_idea_progresses_on_is_completed"
+  add_index "idea_progresses", ["is_private"], :name => "index_idea_progresses_on_is_private"
   add_index "idea_progresses", ["progress_date"], :name => "index_idea_progresses_on_progress_date"
 
   create_table "idea_status_translations", :force => true do |t|

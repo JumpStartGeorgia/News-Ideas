@@ -22,7 +22,7 @@ class Idea < ActiveRecord::Base
 
   validates :user_id, :explaination, :presence => true
 
-  scope :public_only, where("is_private = '0'")
+  scope :public_only, where("ideas.is_private = '0'")
 
   require 'split_votes'
   include SplitVotes
@@ -64,7 +64,7 @@ class Idea < ActiveRecord::Base
 	  if user && !user.organizations.empty?
       # only get private ideas if user is from the org that submitted the ideas
       includes(:user => :organization_users)
-      .where("is_private = 0 or (is_private = 1 and organization_users.organization_id in (?))", user.organization_users.map{|x| x.organization_id})
+      .where("ideas.is_private = 0 or (ideas.is_private = 1 and organization_users.organization_id in (?))", user.organization_users.map{|x| x.organization_id})
 	  else
 	    public_only
 	  end
@@ -82,15 +82,22 @@ class Idea < ActiveRecord::Base
 
 	# get ideas that have been claimed and have not been completed
 	# - if > 1 or has claimed idea and one is not finished, still show idea
-	def self.in_progress_ideas
-		completed_ideas = IdeaProgress.select("distinct idea_id, organization_id").where(:is_completed => true)
+	def self.in_progress_ideas(user=nil)
+		completed_ideas = IdeaProgress.select("distinct idea_id, organization_id").where(:is_completed => true).with_private(user)
 		if completed_ideas.nil? || completed_ideas.empty?
-			select("distinct ideas.*")
-			.joins(:idea_progresses)
-			.order("idea_progresses.progress_date desc, ideas.created_at desc")
+      progress_records = IdeaProgress.select("distinct idea_id, organization_id").with_private(user)
+		  if progress_records && !progress_records.empty?
+  			select("distinct ideas.*")
+  			.joins(:idea_progresses)
+  			.with_private(user)
+  			.where("idea_progresses.idea_id in (?)",
+  				progress_records.map{|x| x.idea_id}.uniq)
+  			.order("idea_progresses.progress_date desc, ideas.created_at desc")
+  		end
 		else
 			select("distinct ideas.*")
 			.joins(:idea_progresses)
+			.with_private(user)
 			.where("idea_progresses.idea_id not in (?) or idea_progresses.organization_id not in (?)",
 				completed_ideas.map{|x| x.idea_id}, completed_ideas.map{|x| x.organization_id})
 			.order("idea_progresses.progress_date desc, ideas.created_at desc")
@@ -99,19 +106,15 @@ class Idea < ActiveRecord::Base
 
 	# get ideas that have only been completed
 	# - if > 1 or has claimed idea and one is not finished, still show idea
-	def self.realized_ideas
-		completed_ideas = IdeaProgress.select("distinct idea_id").where(:is_completed => true)
+	def self.realized_ideas(user=nil)
+		completed_ideas = IdeaProgress.select("distinct idea_id").where(:is_completed => true).with_private(user)
 
 		select("distinct ideas.*")
 		.joins(:idea_progresses)
+		.with_private(user)
 		.where("ideas.id in (?)",
 			completed_ideas.map{|x| x.idea_id})
 		.order("idea_progresses.progress_date desc, ideas.created_at desc")
-	end
-
-	# get last progress report
-	def last_progress_report
-		IdeaProgress.where(:idea_id => self.id).order("progress_date desc").limit(1).first
 	end
 
 
@@ -139,34 +142,37 @@ class Idea < ActiveRecord::Base
 		end
 	end
 
-	def self.organization_ideas(organization_id)
+	def claimed_by_organizations(user=nil)
+    x = IdeaProgress.select("distinct organization_id").where(:idea_id => self.id).with_private(user)
+		return Organization.where(:id => x.map{|x| x.organization_id})
+	end
+
+	def organization_progress(organization_id, user=nil)
 		if organization_id
-			joins(:idea_progresses).where(:idea_progresses => {:organization_id => organization_id})
+	    IdeaProgress.where(:idea_id => self.id, :organization_id => organization_id).with_private(user).order("progress_date desc")
 		end
 	end
 
-	def claimed_by_organizations
-		x = self.idea_progresses.map{|x| x.organization_id}.uniq
-		return Organization.where(:id => x)
+	# get last progress report
+	def last_progress_report(user=nil)
+	  IdeaProgress.where(:idea_id => self.id).with_private(user).order("progress_date desc").limit(1).first
 	end
 
-	def organization_progress(organization_id)
-		if organization_id
-			self.idea_progresses.select{|x| x.organization_id == organization_id}.sort{|a,b| b.progress_date <=> a.progress_date}
-		end
-	end
-
-	def organization_claimed_idea?(organization_id)
-		if organization_id && !self.claimed_by_organizations.index{|x| x.id == organization_id}.nil?
+	def organization_claimed_idea?(organization_id, user=nil)
+		if organization_id && !self.claimed_by_organizations(user).index{|x| x.id == organization_id}.nil?
 			return true
 		end
 		return false
 	end
 
-	def organization_realized_idea?(organization_id)
-		if organization_id && !self.idea_progresses.index{|x| x.organization_id == organization_id && x.is_completed}.nil?
-			return true
-		end
-		return false
+	def organization_realized_idea?(organization_id, user=nil)
+    realized = false
+    if organization_id
+      x = organization_progress(organization_id, user).where(:is_completed => true)
+      if x && !x.empty?
+        realized = true
+      end
+    end
+    return realized
 	end
 end

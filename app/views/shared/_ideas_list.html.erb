@@ -20,9 +20,13 @@
 				<div>
 					<%= auto_link(truncate(idea.explaination, :length => 150, :separator => ' '), :urls, :target => "_blank") %>
 				</div>
-				<% if idea.last_progress_report %>
+				<% last_report = idea.last_progress_report(current_user)
+				  if last_report %>
   				<div>
-  				  <%= "#{t('app.common.last_update')}: #{idea.last_progress_report.explaination} (#{l idea.last_progress_report.progress_date, :format => :default})" %>
+  				  <%= "#{t('app.common.last_update')}: #{last_report.explaination} (#{l last_report.progress_date, :format => :default})" %>
+            <% if user_signed_in? && current_user.role?(User::ROLES[:org_admin]) && last_report.is_private %>
+              <span class="private_item"><%= t('app.common.is_private')%></span>
+            <% end %>
   				</div>
 				<% end %>
 				<div class="row">
