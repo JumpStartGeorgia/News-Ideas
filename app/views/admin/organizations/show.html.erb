@@ -2,14 +2,12 @@
 <%- model_class_trans = OrganizationTranslation -%>
 <% title t '.title', :default => model_class.model_name.human %>
 
-<dl class="dl-horizontal">
-  <dt><strong><%= model_class_trans.human_attribute_name(:name) %>:</strong></dt>
-  <dd><%= @organization.name %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:url) %>:</strong></dt>
-  <dd><%= link_to t('helpers.links.website'), @organization.url, :target => "blank", :class => 'btn btn-mini' if @organization.url %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:logo) %>:</strong></dt>
-  <dd><%= image_tag @organization.logo.url if @organization.logo_file_name %></dd>
-</dl>
+  <p><strong><%= model_class_trans.human_attribute_name(:name) %>:</strong>
+  <%= @organization.name %></p>
+  <p><strong><%= model_class.human_attribute_name(:url) %>:</strong>
+  <%= link_to t('helpers.links.website'), @organization.url, :target => "blank", :class => 'btn btn-mini' if @organization.url %></p>
+  <p><strong><%= model_class.human_attribute_name(:logo) %>:</strong>
+  <%= image_tag @organization.logo.url if @organization.logo_file_name %></p>
 
 <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back")),

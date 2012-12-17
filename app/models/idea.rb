@@ -7,6 +7,7 @@ class Idea < ActiveRecord::Base
 	has_many :user_favorites, :dependent => :destroy
 	has_many :idea_inappropriate_reports, :dependent => :destroy
 	belongs_to :user
+	belongs_to :current_status, :class_name => IdeaStatus, :foreign_key => :current_status_id
 
 	attr_accessible :user_id,
       :explaination,
@@ -15,7 +16,8 @@ class Idea < ActiveRecord::Base
       :is_inappropriate,
       :is_duplicate,
 			:category_ids,
-			:is_private
+			:is_private,
+			:current_status_id
 	attr_accessor :is_create
 
   validates :user_id, :explaination, :presence => true

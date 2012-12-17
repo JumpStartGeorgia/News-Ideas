@@ -7,6 +7,7 @@ en:
       idea: Idea
       organization: Organization
       idea_inappropriate_report: Report
+      idea_status: Idea Status
     attributes:
       user:
         email: Email Address
@@ -44,6 +45,11 @@ en:
         user_id: User
         idea_id: Idea
         reason: Why is Idea Inappropriate?
+      idea_status:
+        sort: Sort Order
+        sort_hint: "1, 2, 3, etc. (ascending order)"
+      idea_status_translation:
+        name: Name
       organization:
         logo: Logo
         url: Website
@@ -212,6 +218,7 @@ en:
       organizations: Organizations
       categories: Categories
       users: Users
+      idea_statuses: Idea Status
     users:
       edit:
         title: Editing User
@@ -233,7 +240,7 @@ en:
       claimed_by: "Idea Being Worked On"
       finished: Finished
       news_url: View News Article
-      take_ownership: "Claim Idea for %{org}"
+      take_ownership: "Work on Idea (%{org})"
       progress_udpate: Add Progress Update
       edit_progress: Edit Progress
       translate_idea: Translate the Idea

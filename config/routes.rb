@@ -1,4 +1,5 @@
 BootstrapStarter::Application.routes.draw do
+
 	#--------------------------------
 	# all resources should be within the scope block below
 	#--------------------------------
@@ -12,6 +13,7 @@ BootstrapStarter::Application.routes.draw do
 			resources :users
 			resources :organizations
 			resources :categories
+		  resources :idea_statuses
 		end
 
 		match '/idea/:id', :to => 'root#idea', :as => :idea, :via => :get

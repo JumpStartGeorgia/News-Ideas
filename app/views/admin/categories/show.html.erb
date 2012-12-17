@@ -2,14 +2,12 @@
 <%- model_class_trans = CategoryTranslation -%>
 <% title t '.title', :default => model_class.model_name.human %>
 
-<dl class="dl-horizontal">
-  <dt><strong><%= model_class_trans.human_attribute_name(:name) %>:</strong></dt>
-  <dd><%= @category.name %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:icon) %>:</strong></dt>
-  <dd><%= image_tag @category.icon.url if @category.icon_file_name %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:picture) %>:</strong></dt>
-  <dd><%= image_tag @category.picture.url if @category.picture_file_name %></dd>
-</dl>
+<p><strong><%= model_class_trans.human_attribute_name(:name) %>:</strong>
+<%= @category.name %></p>
+<p><strong><%= model_class.human_attribute_name(:icon) %>:</strong>
+<%= image_tag @category.icon.url if @category.icon_file_name %></p>
+<p><strong><%= model_class.human_attribute_name(:picture) %>:</strong>
+<%= image_tag @category.picture.url if @category.picture_file_name %></p>
 
 <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back")),

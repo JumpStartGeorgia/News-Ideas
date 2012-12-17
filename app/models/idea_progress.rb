@@ -1,16 +1,18 @@
 class IdeaProgress < ActiveRecord::Base
 	belongs_to :idea
 	belongs_to :organization
+	belongs_to :idea_status
 
 	attr_accessible :idea_id,
       :organization_id,
       :progress_date,
       :explaination,
       :is_completed,
-			:url
+			:url,
+			:idea_status_id
 	attr_accessor :is_create
 
-  validates :idea_id, :organization_id, :progress_date, :explaination, :presence => true
+  validates :idea_id, :organization_id, :idea_status_id, :progress_date, :explaination, :presence => true
 
 	# determine if the explaination is written in the locale
 	def in_locale?(locale)

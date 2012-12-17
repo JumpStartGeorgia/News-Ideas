@@ -7,6 +7,7 @@ ka:
       idea: იდეა
       organization: ორგანიზაცია
       idea_inappropriate_report: რეპორტი
+      idea_status: Idea Status
     attributes:
       user:
         email: ელ.ფოსტა
@@ -44,6 +45,11 @@ ka:
         user_id: მომხმარებელი
         idea_id: იდეა
         reason: რატომ არ შეესაბამება იდეა?
+      idea_status:
+        sort: Sort Order
+        sort_hint: "1, 2, 3, etc. (ascending order)"
+      idea_status_translation:
+        name: Name
       organization:
         logo: ლოგო
         url: ვებ-გვერდი
@@ -169,9 +175,9 @@ ka:
       success_updated: "%{obj} განახლებულია."
       notification_yes: თქვენ მიიღებთ შეტყობინებებს.
       notification_no: თქვენ არ მიიღებთ შეტყობინებებს.
-      notification_all_success: თქვენ მიიღებთ შეტყობინებას ყოველი  ახალ იდეის დამატებაზე.
-      notification_none_success: თქვენ არ მიიღებთ შეტყობინებას ყოველი  ახალ იდეის დამატებაზე.
-      notification_by_category_success: "თქვენ მიიღებთ შეტყობინებას ამ კატეგორიები ამორჩევის შემთხვევაში: %{categories}."
+      notification_new_idea_all_success: თქვენ მიიღებთ შეტყობინებას ყოველი  ახალ იდეის დამატებაზე.
+      notification_new_idea_none_success: თქვენ არ მიიღებთ შეტყობინებას ყოველი  ახალ იდეის დამატებაზე.
+      notification_new_idea_by_category_success: "თქვენ მიიღებთ შეტყობინებას ამ კატეგორიები ამორჩევის შემთხვევაში: %{categories}."
   layouts:
     application:
       admin: ადმინისტრატო
@@ -212,6 +218,7 @@ ka:
       organizations: ორგანიზაციები
       categories: კატეგორიები
       users: მომხმარებლების
+      idea_statuses: Idea Status
     users:
       edit:
         title: ცვლილებების შეტანა მომხმარებლის გვერდზე
@@ -233,7 +240,7 @@ ka:
       claimed_by: "იდეა შეიმუშავა"
       finished: დასრულებული
       news_url: იხილე სიახლეები
-      take_ownership: "იდეაზე პასუხისმგებლობას იღებს %{org}"
+      take_ownership: "დაიწყე მუშაობა იდეაზე (%{org})"
       progress_udpate: დაამატე პროგრესი
       edit_progress: შეცვალე პროგრესი
       translate_idea: იდეის თარგმნა

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121213181444) do
+ActiveRecord::Schema.define(:version => 20121217083047) do
 
   create_table "categories", :force => true do |t|
     t.datetime "created_at"
@@ -67,22 +67,41 @@ ActiveRecord::Schema.define(:version => 20121213181444) do
     t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "idea_status_id"
   end
 
   add_index "idea_progresses", ["idea_id", "organization_id"], :name => "idea_prog_idea_org"
   add_index "idea_progresses", ["is_completed"], :name => "index_idea_progresses_on_is_completed"
   add_index "idea_progresses", ["progress_date"], :name => "index_idea_progresses_on_progress_date"
 
+  create_table "idea_status_translations", :force => true do |t|
+    t.integer  "idea_status_id"
+    t.string   "locale"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "idea_status_translations", ["idea_status_id"], :name => "index_idea_status_translations_on_idea_status_id"
+  add_index "idea_status_translations", ["locale"], :name => "index_idea_status_translations_on_locale"
+
+  create_table "idea_statuses", :force => true do |t|
+    t.integer  "sort",       :default => 1
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "ideas", :force => true do |t|
     t.integer  "user_id"
     t.text     "explaination"
     t.string   "individual_votes"
-    t.integer  "overall_votes",    :default => 0
-    t.boolean  "is_inappropriate", :default => false
-    t.boolean  "is_duplicate",     :default => false
+    t.integer  "overall_votes",     :default => 0
+    t.boolean  "is_inappropriate",  :default => false
+    t.boolean  "is_duplicate",      :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "is_private",       :default => false
+    t.boolean  "is_private",        :default => false
+    t.integer  "current_status_id"
   end
 
   add_index "ideas", ["is_inappropriate", "is_duplicate"], :name => "idea_must_hide"
