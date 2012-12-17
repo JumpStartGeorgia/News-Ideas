@@ -64,7 +64,7 @@
 						:target => "_blank") %>
 		</div>
 		<div class="span3" style="text-align: right;">
-			<% if user_signed_in? && current_user.role?(User::ROLES[:org_admin]) && 
+			<% if user_signed_in? && current_user.role?(User::ROLES[:org_admin]) &&
 			      current_user.organization_users && !current_user.organization_users.empty? &&
 						!@idea.organization_claimed_idea?(current_user.organization_users.first.organization_id) %>
 
@@ -100,7 +100,7 @@
 							</h4>
 						</div>
 						<div class="span2">
-							<% if user_signed_in? && current_user.role?(User::ROLES[:org_admin]) && 
+							<% if user_signed_in? && current_user.role?(User::ROLES[:org_admin]) &&
 							      current_user.organization_users && !current_user.organization_users.empty? &&
 										org.id == current_user.organization_users.first.organization_id &&
 										@idea.organization_claimed_idea?(current_user.organization_users.first.organization_id)  &&
@@ -138,9 +138,16 @@
 					</div>
 					<div id="<%= "org_progress_#{index}" %>">
 						<% progresses.each do |progress| %>
-							<div>
-								<strong><%= l progress.progress_date, :format => :long if progress.progress_date %></strong>
-								<% if user_signed_in? && current_user.role?(User::ROLES[:org_admin]) && 
+							<div class="row">
+								<div class="span3">
+									<strong><%= l progress.progress_date, :format => :long if progress.progress_date %></strong>
+								</div>
+								<div class="span3">
+									<strong><%= "#{t('activerecord.attributes.idea_progress.idea_status')}:" %></strong>
+									<%= progress.idea_status.name if progress.idea_status_id %>
+								</div>
+								<div class="span2">
+								<% if user_signed_in? && current_user.role?(User::ROLES[:org_admin]) &&
 								      current_user.organization_users && !current_user.organization_users.empty? &&
 											org.id == current_user.organization_users.first.organization_id &&
 											@idea.organization_claimed_idea?(current_user.organization_users.first.organization_id) %>
@@ -148,10 +155,14 @@
 									<%= link_to t('.edit_progress'),
 											edit_progress_path(progress.id),
 											:class => 'btn btn-mini btn-primary fancybox' %>
+								<% else %>
+									&nbsp;
 								<% end %>
-
-								<%= simple_format progress.explaination %>
+								</div>
 							</div>
+
+							<%= simple_format progress.explaination %>
+
 						<% end %>
 					</div>
 				</div>

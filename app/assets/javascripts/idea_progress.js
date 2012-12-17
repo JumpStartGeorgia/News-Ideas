@@ -10,10 +10,9 @@ $(document).ready(function(){
 			$("#idea_progress_progress_date").datepicker("setDate", new Date(gon.progress_date));
 		}
 
-		// if record is not completed, hide url field by default
-		if ($('select#idea_progress_idea_status_id').val() != gon.idea_status_id_published) {
-			$('#idea_progress_url').attr('value', '');
-			$('#idea_progress_url_input').hide();
+		// if record is completed, show url field by default
+		if ($('select#idea_progress_idea_status_id').val() === gon.idea_status_id_published) {
+			$('#idea_progress_url_input').show();
 		}
 
 		// if progress is marked as completed, show news url field
