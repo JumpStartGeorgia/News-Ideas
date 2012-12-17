@@ -63,7 +63,7 @@ class Idea < ActiveRecord::Base
 	def self.with_private(user=nil)
 	  if user && !user.organizations.empty?
       # only get private ideas if user is from the org that submitted the ideas
-      joins(:user => :organization_users)
+      includes(:user => :organization_users)
       .where("is_private = 0 or (is_private = 1 and organization_users.organization_id in (?))", user.organization_users.map{|x| x.organization_id})
 	  else
 	    public_only
@@ -72,12 +72,12 @@ class Idea < ActiveRecord::Base
 
 	# get the top ideas based off of overall votes
 	def self.top_ideas
-		order("overall_votes desc, created_at desc")
+		order("overall_votes desc, ideas.created_at desc")
 	end
 
 	# get the new ideas based off of the date the record was created
 	def self.new_ideas
-		order("created_at desc")
+		order("ideas.created_at desc")
 	end
 
 	# get ideas that have been claimed and have not been completed

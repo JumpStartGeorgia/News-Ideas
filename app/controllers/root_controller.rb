@@ -3,10 +3,10 @@ class RootController < ApplicationController
   def index
     respond_to do |format|
       format.html {
-				new_ideas = Idea.with_private(current_user).new_ideas.appropriate.paginate(:page => params[:page])
-				top_ideas = Idea.with_private(current_user).top_ideas.appropriate.paginate(:page => params[:page])
-				in_progress_ideas = Idea.with_private(current_user).in_progress_ideas.appropriate.paginate(:page => params[:page])
-				realized_ideas = Idea.with_private(current_user).realized_ideas.appropriate.paginate(:page => params[:page])
+				new_ideas = Idea.with_private(current_user).new_ideas.appropriate#.paginate(:page => params[:page])
+				top_ideas = Idea.with_private(current_user).top_ideas.appropriate#.paginate(:page => params[:page])
+				in_progress_ideas = Idea.with_private(current_user).in_progress_ideas.appropriate#.paginate(:page => params[:page])
+				realized_ideas = Idea.with_private(current_user).realized_ideas.appropriate#.paginate(:page => params[:page])
 				@ideas = {:new => new_ideas, :top => top_ideas, :in_progress => in_progress_ideas, :realized => realized_ideas}
 				render :layout => 'application_home'
       }
@@ -15,13 +15,13 @@ class RootController < ApplicationController
 				@ideas = nil
 				case params[:tab]
 					when @id_new
-						@ideas = Idea.with_private(current_user).new_ideas.appropriate.paginate(:page => params[:page])
+						@ideas = Idea.with_private(current_user).new_ideas.appropriate#.paginate(:page => params[:page])
 					when @id_top
-						@ideas = Idea.with_private(current_user).top_ideas.appropriate.paginate(:page => params[:page])
+						@ideas = Idea.with_private(current_user).top_ideas.appropriate#.paginate(:page => params[:page])
 					when @id_in_progress
-						@ideas = Idea.with_private(current_user).in_progress_ideas.appropriate.paginate(:page => params[:page])
+						@ideas = Idea.with_private(current_user).in_progress_ideas.appropriate#.paginate(:page => params[:page])
 					when @id_realized
-						@ideas = Idea.with_private(current_user).realized_ideas.appropriate.paginate(:page => params[:page])
+						@ideas = Idea.with_private(current_user).realized_ideas.appropriate#.paginate(:page => params[:page])
 				end
 			}
     end
@@ -43,10 +43,10 @@ class RootController < ApplicationController
 		end
 		gon.initial_tab_id = @initial_tab_id
 
-		new_ideas = Idea.with_private(current_user).new_ideas.appropriate.paginate(:page => params[:page])
-		top_ideas = Idea.with_private(current_user).top_ideas.appropriate.paginate(:page => params[:page])
-		in_progress_ideas = Idea.with_private(current_user).in_progress_ideas.appropriate.paginate(:page => params[:page])
-		realized_ideas = Idea.with_private(current_user).realized_ideas.appropriate.paginate(:page => params[:page])
+		new_ideas = Idea.with_private(current_user).new_ideas.appropriate#.paginate(:page => params[:page])
+		top_ideas = Idea.with_private(current_user).top_ideas.appropriate#.paginate(:page => params[:page])
+		in_progress_ideas = Idea.with_private(current_user).in_progress_ideas.appropriate#.paginate(:page => params[:page])
+		realized_ideas = Idea.with_private(current_user).realized_ideas.appropriate#.paginate(:page => params[:page])
 		@ideas = {:new => new_ideas, :top => top_ideas, :in_progress => in_progress_ideas, :realized => realized_ideas}
 	end
 
@@ -55,10 +55,10 @@ class RootController < ApplicationController
 		@category = @category.first if @category.kind_of?(Array)
 
 		if @category
-			new_ideas = Idea.with_private(current_user).new_ideas.categorized_ideas(params[:id]).appropriate.paginate(:page => params[:page])
-			top_ideas = Idea.with_private(current_user).top_ideas.categorized_ideas(params[:id]).appropriate.paginate(:page => params[:page])
-			in_progress_ideas = Idea.with_private(current_user).in_progress_ideas.categorized_ideas(params[:id]).appropriate.paginate(:page => params[:page])
-			realized_ideas = Idea.with_private(current_user).realized_ideas.categorized_ideas(params[:id]).appropriate.paginate(:page => params[:page])
+			new_ideas = Idea.with_private(current_user).new_ideas.categorized_ideas(params[:id]).appropriate#.paginate(:page => params[:page])
+			top_ideas = Idea.with_private(current_user).top_ideas.categorized_ideas(params[:id]).appropriate#.paginate(:page => params[:page])
+			in_progress_ideas = Idea.with_private(current_user).in_progress_ideas.categorized_ideas(params[:id]).appropriate#.paginate(:page => params[:page])
+			realized_ideas = Idea.with_private(current_user).realized_ideas.categorized_ideas(params[:id]).appropriate#.paginate(:page => params[:page])
 			@ideas = {:new => new_ideas, :top => top_ideas, :in_progress => in_progress_ideas, :realized => realized_ideas}
 		else
 			flash[:info] =  t('app.msgs.does_not_exist')
@@ -70,10 +70,10 @@ class RootController < ApplicationController
 		@user = User.find_by_id(params[:id])
 
 		if @user
-			new_ideas = Idea.with_private(current_user).new_ideas.user_ideas(params[:id]).appropriate.paginate(:page => params[:page])
-			top_ideas = Idea.with_private(current_user).top_ideas.user_ideas(params[:id]).appropriate.paginate(:page => params[:page])
-			in_progress_ideas = Idea.with_private(current_user).in_progress_ideas.user_ideas(params[:id]).appropriate.paginate(:page => params[:page])
-			realized_ideas = Idea.with_private(current_user).realized_ideas.user_ideas(params[:id]).appropriate.paginate(:page => params[:page])
+			new_ideas = Idea.with_private(current_user).new_ideas.user_ideas(params[:id]).appropriate#.paginate(:page => params[:page])
+			top_ideas = Idea.with_private(current_user).top_ideas.user_ideas(params[:id]).appropriate#.paginate(:page => params[:page])
+			in_progress_ideas = Idea.with_private(current_user).in_progress_ideas.user_ideas(params[:id]).appropriate#.paginate(:page => params[:page])
+			realized_ideas = Idea.with_private(current_user).realized_ideas.user_ideas(params[:id]).appropriate#.paginate(:page => params[:page])
 			@ideas = {:new => new_ideas, :top => top_ideas, :in_progress => in_progress_ideas, :realized => realized_ideas}
 		else
 			flash[:info] =  t('app.msgs.does_not_exist')
@@ -107,10 +107,10 @@ class RootController < ApplicationController
 
 	def search
 		if params[:q]
-			new_ideas = Idea.with_private(current_user).new_ideas.search_by(params[:q]).appropriate.paginate(:page => params[:page])
-			top_ideas = Idea.with_private(current_user).top_ideas.search_by(params[:q]).appropriate.paginate(:page => params[:page])
-			in_progress_ideas = Idea.with_private(current_user).in_progress_ideas.search_by(params[:q]).appropriate.paginate(:page => params[:page])
-			realized_ideas = Idea.with_private(current_user).realized_ideas.search_by(params[:q]).appropriate.paginate(:page => params[:page])
+			new_ideas = Idea.with_private(current_user).new_ideas.search_by(params[:q]).appropriate#.paginate(:page => params[:page])
+			top_ideas = Idea.with_private(current_user).top_ideas.search_by(params[:q]).appropriate#.paginate(:page => params[:page])
+			in_progress_ideas = Idea.with_private(current_user).in_progress_ideas.search_by(params[:q]).appropriate#.paginate(:page => params[:page])
+			realized_ideas = Idea.with_private(current_user).realized_ideas.search_by(params[:q]).appropriate#.paginate(:page => params[:page])
 			@ideas = {:new => new_ideas, :top => top_ideas, :in_progress => in_progress_ideas, :realized => realized_ideas}
 		end
 	end
