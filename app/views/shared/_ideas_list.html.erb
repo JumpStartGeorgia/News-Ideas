@@ -23,7 +23,7 @@
 				<% last_report = idea.last_progress_report(current_user)
 				  if last_report %>
   				<div>
-  				  <%= "#{t('app.common.last_update')}: #{last_report.explaination} (#{l last_report.progress_date, :format => :default})" %>
+  				  <%= "#{t('app.common.last_update')}: #{last_report.idea_status.name} (#{l last_report.progress_date, :format => :default})" %>
             <% if user_signed_in? && last_report.organization_wrote_progress?(current_user) && last_report.is_private %>
               <span class="private_item"><%= t('app.common.is_private')%></span>
             <% end %>
