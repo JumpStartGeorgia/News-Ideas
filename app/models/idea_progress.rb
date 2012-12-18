@@ -13,7 +13,7 @@ class IdeaProgress < ActiveRecord::Base
 			:idea_status_id
 	attr_accessor :is_create
 
-  validates :idea_id, :organization_id, :idea_status_id, :progress_date, :explaination, :presence => true
+  validates :idea_id, :organization_id, :idea_status_id, :progress_date, :presence => true
 
   scope :public_only, where("idea_progresses.is_private = '0'")
   before_save :set_is_completed
