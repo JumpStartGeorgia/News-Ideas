@@ -86,14 +86,13 @@ class Idea < ActiveRecord::Base
 		completed_ideas = IdeaProgress.select("distinct idea_id, organization_id").where(:is_completed => true).with_private(user)
 		if completed_ideas.nil? || completed_ideas.empty?
       progress_records = IdeaProgress.select("distinct idea_id, organization_id").with_private(user)
-		  if progress_records && !progress_records.empty?
-  			select("distinct ideas.*")
-  			.joins(:idea_progresses)
-  			.with_private(user)
-  			.where("idea_progresses.idea_id in (?)",
-  				progress_records.map{|x| x.idea_id}.uniq)
-  			.order("idea_progresses.progress_date desc, ideas.created_at desc")
-  		end
+
+			select("distinct ideas.*")
+			.joins(:idea_progresses)
+			.with_private(user)
+			.where("idea_progresses.idea_id in (?)",
+				progress_records.map{|x| x.idea_id}.uniq)
+			.order("idea_progresses.progress_date desc, ideas.created_at desc")
 		else
 			select("distinct ideas.*")
 			.joins(:idea_progresses)
