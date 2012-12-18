@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
     where("role != ?", ROLES[:admin])
   end
 
-  # use role inheritence 
+  # use role inheritence
   # - a role with a larger number can do everything that smaller numbers can do
 #  ROLES = %w[author organization_admin admin]
   ROLES = {:user => 0, :org_admin => 50, :admin => 99}
@@ -54,6 +54,14 @@ class User < ActiveRecord::Base
 				return true
 			end
 		end
+	end
+
+	def organization_ids
+		ids = []
+		if !self.organization_users.empty?
+			ids = self.organization_users.map{|x| x.organization_id}
+		end
+		return ids
 	end
 
 	##############################

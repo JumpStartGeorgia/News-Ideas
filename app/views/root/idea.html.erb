@@ -10,7 +10,7 @@
 		<div class="span4">
 			<%= image_tag @idea.user.avatar, :style => 'float:left; padding-right: 5px;' if @idea.user.avatar %>
 			<h2><%= link_to t('.idea_by', :name => @idea.user.nickname), user_path(@idea.user_id)%></h2>
-      <% if user_signed_in? && current_user.role?(User::ROLES[:org_admin]) && @idea.is_private %>
+      <% if user_signed_in? && @idea.organization_claimed_idea?(current_user) && @idea.is_private %>
         <span class="private_item"><%= t('app.common.is_private')%></span>
       <% end %>
 		</div>
@@ -65,8 +65,7 @@
 		</div>
 		<div class="span3" style="text-align: right;">
 			<% if user_signed_in? && current_user.role?(User::ROLES[:org_admin]) &&
-			      current_user.organization_users && !current_user.organization_users.empty? &&
-						!@idea.organization_claimed_idea?(current_user.organization_users.first.organization_id, current_user) %>
+						!@idea.organization_claimed_idea?(current_user) %>
 
 				<%= link_to t('.take_ownership', :org => current_user.organization_users.first.organization.name),
 						claim_idea_path(:idea_id => @idea.id, :organization_id => current_user.organization_users.first.organization_id),
@@ -82,7 +81,7 @@
 	</div>
 
 	<div id="idea_progress_block" style="margin-bottom: 10px;">
-		<% orgs = @idea.claimed_by_organizations(current_user) 
+		<% orgs = @idea.claimed_by_organizations(current_user)
 		  if orgs && !orgs.empty? %>
 			<h3><%= t('.claimed_by') %></h3>
 			<% orgs.each_with_index do |org, index| %>
@@ -103,9 +102,8 @@
 						<div class="span2">
 							<% if user_signed_in? && current_user.role?(User::ROLES[:org_admin]) &&
 							      current_user.organization_users && !current_user.organization_users.empty? &&
-										org.id == current_user.organization_users.first.organization_id &&
-										@idea.organization_claimed_idea?(current_user.organization_users.first.organization_id, current_user)  &&
-										!@idea.organization_realized_idea?(current_user.organization_users.first.organization_id, current_user) %>
+										@idea.organization_claimed_idea?(current_user) &&
+										!@idea.organization_realized_idea?(current_user) %>
 
 								<%= link_to t('.progress_udpate'),
 										progress_update_path(:idea_id => @idea.id, :organization_id => current_user.organization_users.first.organization_id),
@@ -142,7 +140,7 @@
 							<div class="row">
 								<div class="span3">
 									<strong><%= l progress.progress_date, :format => :long if progress.progress_date %></strong>
-                  <% if user_signed_in? && current_user.role?(User::ROLES[:org_admin]) && progress.is_private %>
+			            <% if user_signed_in? && progress.organization_wrote_progress?(current_user) && progress.is_private %>
                     <span class="private_item"><%= t('app.common.is_private')%></span>
                   <% end %>
 								</div>
@@ -153,8 +151,7 @@
 								<div class="span2">
 								<% if user_signed_in? && current_user.role?(User::ROLES[:org_admin]) &&
 								      current_user.organization_users && !current_user.organization_users.empty? &&
-											org.id == current_user.organization_users.first.organization_id &&
-											@idea.organization_claimed_idea?(current_user.organization_users.first.organization_id, current_user) %>
+											@idea.organization_claimed_idea?(current_user) %>
 
 									<%= link_to t('.edit_progress'),
 											edit_progress_path(progress.id),

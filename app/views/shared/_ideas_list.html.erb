@@ -8,8 +8,8 @@
 				<div class="row">
 					<div class="span5">
 						<%= link_to l(idea.created_at, :format => :long), idea_path(idea) %>
-            <% if user_signed_in? && current_user.role?(User::ROLES[:org_admin]) && idea.is_private %>
-              <span id="private_idea" style="background-color: #f00; color: #fff;"><%= t('app.common.is_private')%></span>
+            <% if user_signed_in? && idea.organization_claimed_idea?(current_user) && idea.is_private %>
+			        <span class="private_item"><%= t('app.common.is_private')%></span>
             <% end %>
 					</div>
 					<div class="span3">
@@ -24,7 +24,7 @@
 				  if last_report %>
   				<div>
   				  <%= "#{t('app.common.last_update')}: #{last_report.explaination} (#{l last_report.progress_date, :format => :default})" %>
-            <% if user_signed_in? && current_user.role?(User::ROLES[:org_admin]) && last_report.is_private %>
+            <% if user_signed_in? && last_report.organization_wrote_progress?(current_user) && last_report.is_private %>
               <span class="private_item"><%= t('app.common.is_private')%></span>
             <% end %>
   				</div>

@@ -1,7 +1,7 @@
 <% if @idea && @org %>
 	<% if params[:action].downcase == "claim" %>
 		<% title t('.title_claim') %>
-	<% elsif params[:action].downcase == "edit" %>
+	<% elsif params[:action].downcase == "edit" || params[:action].downcase == 'update' %>
 		<% title t('.title_edit_progress') %>
 	<% else %>
 		<% title t('.title_progress_update') %>
@@ -15,7 +15,7 @@
 		<% end %>
 	</p>
 
-	<% if params[:action].downcase == 'edit'
+	<% if params[:action].downcase == 'edit' || params[:action].downcase == 'update'
 			url = update_progress_path(@idea_progress.id)
 			method = 'put'
 	   else

@@ -17,11 +17,13 @@ class IdeaProgress < ActiveRecord::Base
 
   scope :public_only, where("idea_progresses.is_private = '0'")
   before_save :set_is_completed
-  
+
   def set_is_completed
+Rails.logger.debug "------- is completed was #{self.is_completed}"
     self.is_completed = self.idea_status.is_published
+Rails.logger.debug "------- is completed is now #{self.is_completed}"
   end
-  
+
 	# determine if the explaination is written in the locale
 	def in_locale?(locale)
 		in_locale = false
@@ -54,4 +56,18 @@ class IdeaProgress < ActiveRecord::Base
 		end
 		return ids
 	end
+
+	def organization_wrote_progress?(user=nil)
+		wrote = false
+		# continue if user is assigned to org
+		if user && user.organization_ids
+			if !user.organization_ids.index(self.organization_id).nil?
+				# found match
+				wrote = true
+			end
+		end
+		return wrote
+	end
+
+
 end
