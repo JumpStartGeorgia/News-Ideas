@@ -157,13 +157,29 @@ class Idea < ActiveRecord::Base
 	  IdeaProgress.where(:idea_id => self.id).with_private(user).order("progress_date desc").limit(1).first
 	end
 
+	def organization_submitted_idea?(user=nil)
+		org_submitted = false
+		# continue if user is assigned to org
+		if user && user.organization_ids
+			# get org of user that submitted this idea, if exists
+			self.user.organization_ids.each do |org_id|
+				if user.organization_ids.index(org_id)
+					# found match
+					org_submitted = true
+					break
+				end
+			end
+		end
+		return org_submitted
+	end
+
 	def organization_claimed_idea?(user=nil)
 		claimed = false
 		# continue if user is assigned to org
 		if user && user.organization_ids
 			# get orgs that have progress records for this idea
 	    IdeaProgress.select("distinct organization_id").where(:idea_id => self.id).with_private(user).each do |progress|
-				if !user.organization_ids.index(progress.organization_id).nil?
+				if user.organization_ids.index(progress.organization_id)
 					# found match
 					claimed = true
 					break
@@ -179,7 +195,7 @@ class Idea < ActiveRecord::Base
 		if user && user.organization_ids
 			# get orgs that have completed progress records for this idea
 	    IdeaProgress.select("distinct organization_id").where(:idea_id => self.id, :is_completed => true).with_private(user).each do |progress|
-				if !user.organization_ids.index(progress.organization_id).nil?
+				if user.organization_ids.index(progress.organization_id)
 					# found match
 					realized = true
 					break

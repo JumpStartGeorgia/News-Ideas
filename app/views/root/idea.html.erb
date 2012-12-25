@@ -10,7 +10,8 @@
 		<div class="span4">
 			<%= image_tag @idea.user.avatar, :style => 'float:left; padding-right: 5px;' if @idea.user.avatar %>
 			<h2><%= link_to t('.idea_by', :name => @idea.user.nickname), user_path(@idea.user_id)%></h2>
-      <% if user_signed_in? && @idea.organization_claimed_idea?(current_user) && @idea.is_private %>
+      <% if user_signed_in? && @idea.is_private &&
+							(@idea.organization_submitted_idea?(current_user) || @idea.organization_claimed_idea?(current_user)) %>
         <span class="private_item"><%= t('app.common.is_private')%></span>
       <% end %>
 		</div>
