@@ -209,9 +209,7 @@ class RootController < ApplicationController
 
       if params[:status] == 'up'
         ups = ups + 1
-        downs = downs - 1
       elsif params[:status] == 'down'
-        ups = ups - 1
         downs = downs + 1
       end
 

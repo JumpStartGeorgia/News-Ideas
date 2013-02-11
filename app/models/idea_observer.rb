@@ -1,7 +1,7 @@
 class IdeaObserver < ActiveRecord::Observer
 
 	def after_create(idea)
-		idea.is_create = true
+		idea.is_create = true if !idea.is_private
 	end
 
 	# after an idea has been created, notify subscribers
